@@ -1,51 +1,41 @@
-const {isFuture} = require('date-fns')
-/**
- * Implement Gatsby's Node APIs in this file.
- *
- * See: https://www.gatsbyjs.org/docs/node-apis/
- */
+exports.createPages = async ({ graphql, actions }) => {
+    const { createPage } = actions;
 
-const {format} = require('date-fns')
-
-async function createBlogPostPages (graphql, actions) {
-  const {createPage} = actions
-  const result = await graphql(`
-    {
-      allSanityPost(
-        filter: { slug: { current: { ne: null } }, publishedAt: { ne: null } }
-      ) {
-        edges {
-          node {
-            id
-            publishedAt
-            slug {
-              current
+    const result = await graphql(`
+        {
+            allSanityProject(filter: { slug: { current: { ne: null } } }) {
+                edges {
+                    node {
+                        title
+                        description
+                        tags
+                        launchDate(format: "DD.MM.YYYY")
+                        slug {
+                            current
+                        }
+                        image {
+                            asset {
+                                url
+                            }
+                        }
+                    }
+                }
             }
-          }
         }
-      }
+    `);
+
+    if (result.errors) {
+        throw result.errors;
     }
-  `)
 
-  if (result.errors) throw result.errors
+    const projects = result.data.allSanityProject.edges || [];
+    projects.forEach((edge, index) => {
+        const path = `/project/${edge.node.slug.current}`;
 
-  const postEdges = (result.data.allSanityPost || {}).edges || []
-
-  postEdges
-    .filter(edge => !isFuture(edge.node.publishedAt))
-    .forEach((edge, index) => {
-      const {id, slug = {}, publishedAt} = edge.node
-      const dateSegment = format(publishedAt, 'YYYY/MM')
-      const path = `/blog/${dateSegment}/${slug.current}/`
-
-      createPage({
-        path,
-        component: require.resolve('./src/templates/blog-post.js'),
-        context: {id}
-      })
-    })
-}
-
-exports.createPages = async ({graphql, actions}) => {
-  await createBlogPostPages(graphql, actions)
-}
+        createPage({
+            path,
+            component: require.resolve("./src/templates/project.js"),
+            context: { slug: edge.node.slug.current },
+        });
+    });
+};

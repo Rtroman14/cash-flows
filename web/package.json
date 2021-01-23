@@ -36,6 +36,13 @@
     "react-helmet": "^5.2.1"
   },
   "dependencies": {
-    "gatsby-image": "^2.0.41"
+    "@material-ui/core": "^4.11.2",
+    "@material-ui/icons": "^4.11.2",
+    "fontsource-montserrat": "^4.0.0",
+    "gatsby-image": "^2.9.0",
+    "gatsby-plugin-sharp": "^2.12.2",
+    "gatsby-source-filesystem": "^2.9.1",
+    "gatsby-transformer-sharp": "^2.10.1",
+    "react-swipeable-views": "^0.13.9"
   }
 }
