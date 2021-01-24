@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import PropTypes from "prop-types";
-import SwipeableViews from "react-swipeable-views";
 import { useTheme } from "@material-ui/core/styles";
 import AppBar from "@material-ui/core/AppBar";
 import Tabs from "@material-ui/core/Tabs";
@@ -42,15 +41,10 @@ function a11yProps(index) {
 }
 
 export default function FullWidthTabs() {
-    const theme = useTheme();
     const [value, setValue] = useState(0);
 
     const handleChange = (event, newValue) => {
         setValue(newValue);
-    };
-
-    const handleChangeIndex = index => {
-        setValue(index);
     };
 
     return (
@@ -69,24 +63,6 @@ export default function FullWidthTabs() {
                     <Tab label="Passive Income" {...a11yProps(3)} />
                 </Tabs>
             </AppBar>
-            <SwipeableViews
-                axis={theme.direction === "rtl" ? "x-reverse" : "x"}
-                index={value}
-                onChangeIndex={handleChangeIndex}
-            >
-                <TabPanel value={value} index={0} dir={theme.direction}>
-                    All
-                </TabPanel>
-                <TabPanel value={value} index={1} dir={theme.direction}>
-                    Rules
-                </TabPanel>
-                <TabPanel value={value} index={2} dir={theme.direction}>
-                    Investing
-                </TabPanel>
-                <TabPanel value={value} index={3} dir={theme.direction}>
-                    Passive Income
-                </TabPanel>
-            </SwipeableViews>
         </div>
     );
 }
