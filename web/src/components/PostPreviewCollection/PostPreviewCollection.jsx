@@ -6,7 +6,7 @@ import styles from "./PostPreviewCollection.module.scss";
 
 const PostPreviewCollection = ({ posts, category, numPosts }) => {
     const filteredPosts = posts
-        .filter(node => node.categories[0].title !== category)
+        .filter(node => node.categories[0].title === category)
         .filter((node, index) => index < numPosts)
         .map(node => <PostPreview key={node._id} post={node} />);
 

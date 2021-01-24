@@ -6,8 +6,17 @@ import PostPreviewCollection from "../components/PostPreviewCollection/PostPrevi
 import TabPanel from "../components/TabPanel/TabPanel";
 import Button from "@material-ui/core/Button";
 
+import SwipeableViews from "react-swipeable-views";
+import { useTheme } from "@material-ui/core/styles";
+
 const BlogPage = ({ data }) => {
     const { nodes } = data.allSanityPost;
+
+    const theme = useTheme();
+    const [value, setValue] = useState(0);
+    const handleChangeIndex = index => {
+        setValue(index);
+    };
 
     const [posts, setPosts] = useState({ numPosts: 4, category: "All" });
 
@@ -19,13 +28,29 @@ const BlogPage = ({ data }) => {
         <Layout>
             <h1>Blog Page!</h1>
             <TabPanel />
-            <PostPreviewCollection posts={nodes} category="All" numPosts={posts.numPosts} />
+            <SwipeableViews
+                axis={theme.direction === "rtl" ? "x-reverse" : "x"}
+                index={value}
+                onChangeIndex={handleChangeIndex}
+            >
+                <PostPreviewCollection posts={nodes} category="Rules" numPosts={posts.numPosts} />
+                <PostPreviewCollection
+                    posts={nodes}
+                    category="Investing"
+                    numPosts={posts.numPosts}
+                />
+                <PostPreviewCollection
+                    posts={nodes}
+                    category="Passive Income"
+                    numPosts={posts.numPosts}
+                />
+            </SwipeableViews>
             {nodes.length >= posts.numPosts && (
                 <div style={{ width: "100%" }}>
                     <Button
                         style={{
                             display: "block",
-                            margin: "35px auto",
+                            margin: "0 auto 35px auto",
                             backgroundColor: "#74c947",
                             color: "white",
                         }}
