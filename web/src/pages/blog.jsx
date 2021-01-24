@@ -9,20 +9,35 @@ import Button from "@material-ui/core/Button";
 const BlogPage = ({ data }) => {
     const { nodes } = data.allSanityPost;
 
-    const [numPosts, setNumPosts] = useState(4);
+    const [posts, setPosts] = useState({ numPosts: 4, category: "All" });
 
-    const handleChange = () => {
-        setNumPosts(numPosts + 4);
+    const handleClick = () => {
+        setPosts({ ...posts, numPosts: posts.numPosts + 4 });
     };
 
     return (
         <Layout>
             <h1>Blog Page!</h1>
             <TabPanel />
-            <PostPreviewCollection posts={nodes} category="all" numPosts={numPosts} />
-            <Button onClick={handleChange} variant="contained" disableElevation>
-                Show More
-            </Button>
+            <PostPreviewCollection posts={nodes} category="All" numPosts={posts.numPosts} />
+            {nodes.length >= posts.numPosts && (
+                <div style={{ width: "100%" }}>
+                    <Button
+                        style={{
+                            display: "block",
+                            margin: "35px auto",
+                            backgroundColor: "#74c947",
+                            color: "white",
+                        }}
+                        onClick={handleClick}
+                        variant="contained"
+                        disableElevation
+                    >
+                        Show More
+                    </Button>
+                </div>
+            )}
+            {/* SUBSCRIBE FOR MONTHLY NEWSLETTER WHICH SENDS YOU NEW POSTS YOU MISSED */}
         </Layout>
     );
 };

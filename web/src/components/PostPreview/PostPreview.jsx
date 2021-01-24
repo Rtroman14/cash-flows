@@ -5,8 +5,6 @@ import { Link } from "gatsby";
 import styles from "./PostPreview.module.scss";
 
 const Blog = ({ post }) => {
-    console.log(post);
-
     return (
         <article className={styles.blogContainer}>
             <div className={styles.imageContainer}>
