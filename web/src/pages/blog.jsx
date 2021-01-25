@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { graphql } from "gatsby";
 
 import Layout from "../components/layout";
@@ -14,11 +14,32 @@ const BlogPage = ({ data }) => {
     const { nodes } = data.allSanityPost;
 
     const theme = useTheme();
-    const [value, setValue] = useState(0);
 
+    const [value, setValue] = useState(0);
     const handleChange = (event, newValue) => {
         setValue(newValue);
     };
+
+    const [showNumPosts, setShowNumPosts] = useState({
+        all: 8,
+        rules: 8,
+        investing: 8,
+        passiveIncome: 8,
+    });
+    const handeShowMore = () => {
+        const categories = ["all", "rules", "investing", "passiveIncome"];
+
+        setShowNumPosts({
+            ...showNumPosts,
+            [categories[value]]: showNumPosts[categories[value]] + 4,
+        });
+    };
+
+    // Similar to componentDidMount and componentDidUpdate:
+    useEffect(() => {
+        // Update the document title using the browser API
+        SwipeableViews.swipeableActions.updateHeight();
+    });
 
     return (
         <Layout>
@@ -28,20 +49,37 @@ const BlogPage = ({ data }) => {
                 axis={theme.direction === "rtl" ? "x-reverse" : "x"}
                 index={value}
                 onChangeIndex={handleChange}
+                action={actions => {
+                    SwipeableViews.swipeableActions = actions;
+                }}
+                animateHeight
             >
-                <PostPreviewCollection posts={nodes} category="Rules" numPosts={4} />
-                <PostPreviewCollection posts={nodes} category="Investing" numPosts={4} />
-                <PostPreviewCollection posts={nodes} category="Passive Income" numPosts={4} />
+                <PostPreviewCollection posts={nodes} category="All" numPosts={showNumPosts.all} />
+                <PostPreviewCollection
+                    posts={nodes}
+                    category="Rules"
+                    numPosts={showNumPosts.rules}
+                />
+                <PostPreviewCollection
+                    posts={nodes}
+                    category="Investing"
+                    numPosts={showNumPosts.investing}
+                />
+                <PostPreviewCollection
+                    posts={nodes}
+                    category="Passive Income"
+                    numPosts={showNumPosts.passiveIncome}
+                />
             </SwipeableViews>
             <div style={{ width: "100%" }}>
                 <Button
                     style={{
                         display: "block",
-                        margin: "0 auto 35px auto",
+                        margin: "35px auto 35px auto",
                         backgroundColor: "#74c947",
                         color: "white",
                     }}
-                    // onClick={handleClick}
+                    onClick={handeShowMore}
                     variant="contained"
                     disableElevation
                 >

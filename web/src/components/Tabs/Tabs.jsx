@@ -5,13 +5,14 @@ import Tab from "@material-ui/core/Tab";
 
 export default function CenteredTabs({ value, handleChange }) {
     return (
-        <Paper>
+        <Paper style={{ marginBottom: "35px" }}>
             <Tabs
                 value={value}
                 onChange={handleChange}
                 indicatorColor="primary"
                 textColor="primary"
             >
+                <Tab label="All" />
                 <Tab label="Rules" />
                 <Tab label="Investing" />
                 <Tab label="Passive Income" />
