@@ -1,10 +1,14 @@
-import React from "react";
+import React, { useContext } from "react";
 import Img from "gatsby-image";
 import { Link } from "gatsby";
 
 import styles from "./PostPreview.module.scss";
 
-const Blog = ({ post }) => {
+import { PostContext } from "../../context/PostContext";
+
+export default function Blog({ post }) {
+    const { handleClickCategory } = useContext(PostContext);
+
     return (
         <article className={styles.blogContainer}>
             <div className={styles.imageContainer}>
@@ -47,11 +51,11 @@ const Blog = ({ post }) => {
                     </div>
                 </div>
                 <div>
-                    <span className={styles.category}>{post.categories[0].title}</span>
+                    <span onClick={handleClickCategory} className={styles.category}>
+                        {post.categories[0].title}
+                    </span>
                 </div>
             </div>
         </article>
     );
-};
-
-export default Blog;
+}

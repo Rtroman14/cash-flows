@@ -1,17 +1,20 @@
-import React from "react";
+import React, { useContext } from "react";
 
 import PostPreview from "../PostPreview/PostPreview";
+import { PostContext } from "../../context/PostContext";
 
 import styles from "./PostPreviewCollection.module.scss";
 
-const PostPreviewCollection = ({ posts, category, numPosts, handeShowMore }) => {
-    const filteredPosts = posts
+const PostPreviewCollection = ({ nodes }) => {
+    const { posts } = useContext(PostContext);
+
+    const filteredPosts = nodes
         .filter(node =>
-            category === "All"
-                ? node.categories[0].title !== category
-                : node.categories[0].title === category
+            posts.category === "All"
+                ? node.categories[0].title !== posts.category
+                : node.categories[0].title === posts.category
         )
-        .filter((node, index) => index < numPosts)
+        .filter((node, i) => i < posts[posts.category])
         .map(node => <PostPreview key={node._id} post={node} />);
 
     return (
