@@ -1,0 +1,16 @@
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    height: 80px;
+
+    &__menu-items {
+        display: flex;
+        align-items: center;
+        list-style: none;
+
+        a {
+            text-decoration: none;
+            padding: 8px 16px;
+        }
+    }
+}

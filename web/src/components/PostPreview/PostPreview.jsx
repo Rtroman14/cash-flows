@@ -2,7 +2,7 @@ import React, { useContext } from "react";
 import Img from "gatsby-image";
 import { Link } from "gatsby";
 
-import styles from "./PostPreview.module.scss";
+import "./PostPreview.scss";
 
 import { PostContext } from "../../context/PostContext";
 
@@ -10,26 +10,26 @@ export default function Blog({ post }) {
     const { handleClickCategory } = useContext(PostContext);
 
     return (
-        <article className={styles.blogContainer}>
-            <div className={styles.imageContainer}>
+        <article className="post">
+            <div>
                 <Link to={`/blog/${post.slug.current}`}>
-                    <Img fluid={post.mainImage.asset.fluid} />
+                    <Img className="post__image" fluid={post.mainImage.asset.fluid} />
                 </Link>
             </div>
-            <div className={styles.content}>
+            <div className="post__content">
                 <div>
-                    <p className={styles.date}>{post._createdAt}</p>
+                    <p className="post__date">{post._createdAt}</p>
                 </div>
                 <div>
                     <Link
                         style={{ textDecoration: "none", color: "black" }}
                         to={`/blog/${post.slug.current}`}
                     >
-                        <h4 className={styles.title}>{post.title}</h4>
+                        <h4 className="post__title">{post.title}</h4>
                     </Link>
                 </div>
                 <div>
-                    <p className={styles.excerpt}>
+                    <p className="post__excerpt">
                         Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean accumsan
                         dolor sed quam elementum porta. Sed risus nunc, commodo pulvinar iaculis
                         vel, interdum et augue. Curabitur tincidunt neque blandit metus feugiat
@@ -37,7 +37,7 @@ export default function Blog({ post }) {
                         auctor lectus.
                     </p>
                 </div>
-                <div className={styles.author}>
+                <div className="post__author">
                     <div style={{ paddingRight: "10px" }}>
                         <Img
                             style={{ borderRadius: "50%", display: "flex" }}
@@ -51,7 +51,7 @@ export default function Blog({ post }) {
                     </div>
                 </div>
                 <div>
-                    <span onClick={handleClickCategory} className={styles.category}>
+                    <span onClick={handleClickCategory} className="post__category">
                         {post.categories[0].title}
                     </span>
                 </div>

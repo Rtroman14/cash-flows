@@ -1,0 +1,31 @@
+import React from "react";
+import { Button, Paper, Divider, TextField } from "@material-ui/core";
+
+import "./Subscribe.scss";
+
+export default function Subscribe() {
+    return (
+        <Paper className="subscribe">
+            <h3>Join Our Monthly Newsletter So You Never Miss a New Post!</h3>
+            <Divider style={{ margin: "10px 0" }} />
+            <div>
+                <form
+                    noValidate
+                    autoComplete="off"
+                    style={{ display: "flex", alignItems: "baseline" }}
+                >
+                    <TextField
+                        id="subscribe"
+                        label="Email"
+                        variant="outlined"
+                        fullWidth
+                        margin="dense"
+                    />
+                    <div style={{ marginLeft: "15px" }}>
+                        <Button className="btn-cta">Subscribe</Button>
+                    </div>
+                </form>
+            </div>
+        </Paper>
+    );
+}

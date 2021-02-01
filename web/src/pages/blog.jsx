@@ -1,11 +1,11 @@
 import React from "react";
 import { graphql } from "gatsby";
-import Button from "@material-ui/core/Button";
 
 import Layout from "../components/layout";
 import PostPreviewCollection from "../components/PostPreviewCollection/PostPreviewCollection";
 import Tabs from "../components/Tabs/Tabs";
 import ShowMorePosts from "../components/ShowMorePosts/ShowMorePosts";
+import Subscribe from "../components/Subscribe/Subscribe";
 
 import { PostProvider } from "../context/PostContext";
 
@@ -14,7 +14,17 @@ const BlogPage = ({ data }) => {
 
     return (
         <Layout>
-            <h1>Blog Page!</h1>
+            <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center" }}>
+                <div style={{ width: "500px", margin: "35px 0" }}>
+                    <h1>"Website Name" Blog</h1>
+                    <p>
+                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque
+                        suscipit sagittis risus, vel convallis purus dictum in. Nulla accumsan id
+                        nibh eu auctor. Fusce non condimentum ipsum.
+                    </p>
+                </div>
+                <Subscribe />
+            </div>
             <PostProvider>
                 <Tabs />
                 <PostPreviewCollection nodes={nodes} />

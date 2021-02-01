@@ -11,11 +11,11 @@ export function PostProvider(props) {
     };
 
     // Posts
-    const categories = ["All", "Rules", "Investing", "Passive Income"];
+    const categories = ["All", "Budgeting", "Investing", "Passive Income"];
     const [posts, setPosts] = useState({
         category: categories[index],
         All: 8,
-        Rules: 8,
+        Budgeting: 8,
         Investing: 8,
         "Passive Income": 8,
     });

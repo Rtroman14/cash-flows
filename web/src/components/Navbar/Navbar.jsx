@@ -2,10 +2,9 @@ import React from "react";
 import { Link } from "gatsby";
 import Img from "gatsby-image";
 
-import { withStyles } from "@material-ui/styles";
 import Button from "@material-ui/core/Button";
 
-import styles from "./Navbar.module.scss";
+import "./Navbar.scss";
 
 import { useStaticQuery, graphql } from "gatsby";
 
@@ -21,12 +20,12 @@ const getImage = graphql`
     }
 `;
 
-const Navbar = props => {
+export default function Navbar() {
     const data = useStaticQuery(getImage);
 
     return (
-        <nav className={styles.navbar}>
-            <ul className={styles.menuItems}>
+        <nav className="navbar">
+            <ul className="navbar__menu-items">
                 <li>
                     <Link to="/">
                         <Img fixed={data.fixed.childImageSharp.fixed} />
@@ -34,24 +33,24 @@ const Navbar = props => {
                 </li>
                 <li>
                     <Link to="/blog/">
-                        <Button style={{ color: "#74C947" }}>Blog</Button>
+                        <Button>Blog</Button>
                     </Link>
                 </li>
                 <li>
                     <Link to="/dashboard/">
-                        <Button style={{ color: "#74C947" }}>Dashboard</Button>
+                        <Button>Dashboard</Button>
                     </Link>
                 </li>
             </ul>
-            <ul className={styles.menuItems}>
+            <ul className="navbar__menu-items">
                 <li>
                     <Link to="/">
-                        <Button style={{ color: "#74C947" }}>Login</Button>
+                        <Button>Login</Button>
                     </Link>
                 </li>
                 <li>
                     <Link to="/">
-                        <Button className={styles.ctaBtn} variant="contained" disableElevation>
+                        <Button className="btn-cta" variant="contained" disableElevation>
                             Sign Up
                         </Button>
                     </Link>
@@ -59,6 +58,4 @@ const Navbar = props => {
             </ul>
         </nav>
     );
-};
-
-export default withStyles(styles)(Navbar);
+}

@@ -3,7 +3,7 @@ import React, { useContext } from "react";
 import PostPreview from "../PostPreview/PostPreview";
 import { PostContext } from "../../context/PostContext";
 
-import styles from "./PostPreviewCollection.module.scss";
+import "./PostPreviewCollection.scss";
 
 const PostPreviewCollection = ({ nodes }) => {
     const { posts } = useContext(PostContext);
@@ -19,7 +19,7 @@ const PostPreviewCollection = ({ nodes }) => {
 
     return (
         <div>
-            <div className={styles.collection}>{filteredPosts}</div>
+            <div className="collection">{filteredPosts}</div>
         </div>
     );
 };

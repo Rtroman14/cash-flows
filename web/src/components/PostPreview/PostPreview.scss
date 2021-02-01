@@ -1,0 +1,56 @@
+@import "../../styles/global.scss";
+
+.post {
+    display: inline-block;
+    width: 312px;
+    overflow: hidden;
+    box-shadow: 1px 2px 20px rgba(0, 0, 0, 0.1);
+    border-radius: 2px;
+    align-self: start;
+
+    &__image {
+        height: 13rem;
+    }
+
+    &__content {
+        padding: 25px;
+        display: grid;
+        gap: 15px;
+    }
+
+    &__date {
+        font-size: 12px;
+        font-weight: 200;
+    }
+
+    &__title {
+        line-height: 1.4;
+        font-weight: 600;
+    }
+
+    &__excerpt {
+        font-size: 14px;
+        line-height: 1.5;
+        font-weight: 200;
+    }
+
+    &__author {
+        display: flex;
+        align-items: center;
+    }
+
+    &__category {
+        font-size: 13px;
+        background-color: $color-grey;
+        border-radius: 5px;
+        padding: 4px 8px;
+        border: 1px solid $color-grey;
+        color: $color-primary;
+        cursor: pointer;
+        transition: all 0.1s;
+
+        &:hover {
+            border: 1px solid $color-primary;
+        }
+    }
+}

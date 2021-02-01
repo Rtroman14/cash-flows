@@ -17,7 +17,7 @@ export default function CenteredTabs() {
                 textColor="primary"
             >
                 <Tab label="All" />
-                <Tab label="Rules" />
+                <Tab label="Budgeting" />
                 <Tab label="Investing" />
                 <Tab label="Passive Income" />
             </Tabs>
