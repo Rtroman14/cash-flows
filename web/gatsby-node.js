@@ -2,22 +2,11 @@ exports.createPages = async ({ graphql, actions }) => {
     const { createPage } = actions;
 
     const result = await graphql(`
-        {
-            allSanityProject(filter: { slug: { current: { ne: null } } }) {
-                edges {
-                    node {
-                        title
-                        description
-                        tags
-                        launchDate(format: "DD.MM.YYYY")
-                        slug {
-                            current
-                        }
-                        image {
-                            asset {
-                                url
-                            }
-                        }
+        query GetPosts {
+            posts: allSanityPost {
+                nodes {
+                    slug {
+                        current
                     }
                 }
             }
@@ -28,14 +17,12 @@ exports.createPages = async ({ graphql, actions }) => {
         throw result.errors;
     }
 
-    const projects = result.data.allSanityProject.edges || [];
-    projects.forEach((edge, index) => {
-        const path = `/project/${edge.node.slug.current}`;
-
+    const projects = result.data.posts.nodes || [];
+    projects.forEach((post, index) => {
         createPage({
-            path,
-            component: require.resolve("./src/templates/project.js"),
-            context: { slug: edge.node.slug.current },
+            path: `/blog/${post.slug.current}`,
+            component: require.resolve("./src/templates/post-template.jsx"),
+            context: { slug: post.slug.current },
         });
     });
 };

@@ -9,6 +9,10 @@ import { PostContext } from "../../context/PostContext";
 export default function Blog({ post }) {
     const { handleClickCategory } = useContext(PostContext);
 
+    const excerpt = post._rawExcerpt[0].children[0].text;
+
+    console.log(`Post Title: ${post.title} --- Post Excerpt: ${excerpt}`);
+
     return (
         <article className="post">
             <div>
@@ -29,13 +33,7 @@ export default function Blog({ post }) {
                     </Link>
                 </div>
                 <div>
-                    <p className="post__excerpt">
-                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean accumsan
-                        dolor sed quam elementum porta. Sed risus nunc, commodo pulvinar iaculis
-                        vel, interdum et augue. Curabitur tincidunt neque blandit metus feugiat
-                        iaculis. Nunc eu rutrum dolor. Ut lectus lectus, ornare sed sem ac, cursus
-                        auctor lectus.
-                    </p>
+                    <p className="post__excerpt">{excerpt}</p>
                 </div>
                 <div className="post__author">
                     <div style={{ paddingRight: "10px" }}>

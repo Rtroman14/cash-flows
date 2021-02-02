@@ -37,7 +37,7 @@ const BlogPage = ({ data }) => {
 
 export const query = graphql`
     {
-        allSanityPost {
+        allSanityPost(sort: { fields: _createdAt, order: DESC }) {
             nodes {
                 mainImage {
                     asset {
@@ -67,6 +67,7 @@ export const query = graphql`
                         }
                     }
                 }
+                _rawExcerpt
             }
         }
     }
