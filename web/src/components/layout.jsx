@@ -3,15 +3,12 @@ import Navbar from "./Navbar/Navbar";
 import Footer from "./Footer/Footer";
 
 const layout = ({ children }) => {
+    const height = "80px";
+
     return (
-        <div
-            style={{
-                width: "1340px",
-                margin: "0 auto",
-            }}
-        >
-            <Navbar />
-            <main>{children}</main>
+        <div>
+            <Navbar height={height} />
+            <main style={{ marginTop: height }}>{children}</main>
             <Footer />
         </div>
     );

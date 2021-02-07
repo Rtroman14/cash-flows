@@ -2,6 +2,8 @@ import React, { useContext } from "react";
 import Img from "gatsby-image";
 import { Link } from "gatsby";
 
+import Author from "../Author/Author";
+
 import "./PostPreview.scss";
 
 import { PostContext } from "../../context/PostContext";
@@ -10,8 +12,6 @@ export default function Blog({ post }) {
     const { handleClickCategory } = useContext(PostContext);
 
     const excerpt = post._rawExcerpt[0].children[0].text;
-
-    console.log(`Post Title: ${post.title} --- Post Excerpt: ${excerpt}`);
 
     return (
         <article className="post">
@@ -33,21 +33,11 @@ export default function Blog({ post }) {
                     </Link>
                 </div>
                 <div>
-                    <p className="post__excerpt">{excerpt}</p>
+                    <p className="post__excerpt">
+                        <p className="post__excerpt">{excerpt.substring(0, 400)}</p>
+                    </p>
                 </div>
-                <div className="post__author">
-                    <div style={{ paddingRight: "10px" }}>
-                        <Img
-                            style={{ borderRadius: "50%", display: "flex" }}
-                            fixed={post.authors[0].author.image.asset.fixed}
-                        />
-                    </div>
-                    <div>
-                        <p style={{ fontSize: "14px", fontWeight: "300" }}>
-                            {post.authors[0].author.name}
-                        </p>
-                    </div>
-                </div>
+                <Author authors={post.authors} dimensions="40px" />
                 <div>
                     <span onClick={handleClickCategory} className="post__category">
                         {post.categories[0].title}

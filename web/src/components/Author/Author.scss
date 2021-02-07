@@ -1,0 +1,9 @@
+.author {
+    display: flex;
+    align-items: center;
+
+    &__name {
+        font-size: 14px;
+        font-weight: 300;
+    }
+}

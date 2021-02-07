@@ -1,7 +1,15 @@
+@import "../../styles/global.scss";
+
 .navbar {
     display: flex;
     justify-content: space-between;
-    height: 80px;
+
+    background-color: white;
+    position: fixed;
+    width: 100%;
+    top: 0;
+    box-shadow: $box-shadow;
+    z-index: 999;
 
     &__menu-items {
         display: flex;

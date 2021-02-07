@@ -1,0 +1,47 @@
+@import "../styles/global.scss";
+
+.blog {
+    padding: 2em 15em;
+    display: grid;
+    grid-template-columns: 4fr 1fr;
+    grid-column-gap: 3em;
+
+    &__meta {
+        & > div {
+            padding: 2em 0;
+        }
+
+        &-date {
+            color: rgba(0, 0, 0, 0.4);
+        }
+
+        &-authors {
+            border-top: 1px solid #e7ebed;
+            border-bottom: 1px solid #e7ebed;
+        }
+    }
+
+    &__title {
+        font-size: 40px;
+        margin-bottom: 1em;
+    }
+
+    &__body {
+        & p {
+            margin: 1em 0;
+        }
+
+        & ul {
+            margin: 0 2em;
+        }
+
+        & div > ul {
+            margin: 1em 2em;
+        }
+
+        & a {
+            text-decoration: none;
+            color: $color-primary;
+        }
+    }
+}

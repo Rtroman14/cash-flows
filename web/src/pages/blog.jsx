@@ -14,23 +14,31 @@ const BlogPage = ({ data }) => {
 
     return (
         <Layout>
-            <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center" }}>
-                <div style={{ width: "500px", margin: "35px 0" }}>
-                    <h1>"Website Name" Blog</h1>
-                    <p>
-                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque
-                        suscipit sagittis risus, vel convallis purus dictum in. Nulla accumsan id
-                        nibh eu auctor. Fusce non condimentum ipsum.
-                    </p>
+            <div style={{ width: "1340px", margin: "0 auto" }}>
+                <div
+                    style={{
+                        display: "flex",
+                        justifyContent: "space-between",
+                        alignItems: "center",
+                    }}
+                >
+                    <div style={{ width: "500px", margin: "35px 0" }}>
+                        <h1>Cash Flows Blog</h1>
+                        <p>
+                            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque
+                            suscipit sagittis risus, vel convallis purus dictum in. Nulla accumsan
+                            id nibh eu auctor. Fusce non condimentum ipsum.
+                        </p>
+                    </div>
+                    <Subscribe />
                 </div>
-                <Subscribe />
+                <PostProvider>
+                    <Tabs />
+                    <PostPreviewCollection nodes={nodes} />
+                    <ShowMorePosts />
+                </PostProvider>
+                {/* SUBSCRIBE FOR MONTHLY NEWSLETTER WHICH SENDS YOU NEW POSTS YOU MISSED */}
             </div>
-            <PostProvider>
-                <Tabs />
-                <PostPreviewCollection nodes={nodes} />
-                <ShowMorePosts />
-            </PostProvider>
-            {/* SUBSCRIBE FOR MONTHLY NEWSLETTER WHICH SENDS YOU NEW POSTS YOU MISSED */}
         </Layout>
     );
 };

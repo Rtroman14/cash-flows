@@ -1,12 +1,10 @@
 import React from "react";
-import { Link } from "gatsby";
+import { Link, useStaticQuery, graphql } from "gatsby";
 import Img from "gatsby-image";
 
 import Button from "@material-ui/core/Button";
 
 import "./Navbar.scss";
-
-import { useStaticQuery, graphql } from "gatsby";
 
 const getImage = graphql`
     {
@@ -20,11 +18,11 @@ const getImage = graphql`
     }
 `;
 
-export default function Navbar() {
+export default function Navbar({ height }) {
     const data = useStaticQuery(getImage);
 
     return (
-        <nav className="navbar">
+        <nav className="navbar" style={{ height }}>
             <ul className="navbar__menu-items">
                 <li>
                     <Link to="/">
