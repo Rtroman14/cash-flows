@@ -1,10 +1,11 @@
 import React from "react";
-import { graphql, Link } from "gatsby";
+import { graphql } from "gatsby";
 import Img from "gatsby-image";
 import PortableText from "../components/PortableText";
 
 import Layout from "../components/layout";
 import Author from "../components/Author/Author";
+import RecommendedPosts from "../components/RecommendedPosts/RecommendedPosts";
 
 import "./post-template.scss";
 
@@ -13,10 +14,11 @@ export default function postTemplate({
         post: { authors, categories, mainImage, publishedAt, title, _rawBody },
     },
 }) {
+    const displayCategories = categories.map(category => <div>{category.title}</div>);
     return (
         <Layout>
             <div>
-                <Img style={{ height: "70vh" }} fluid={mainImage.asset.fluid} />
+                <Img style={{ height: "75vh" }} fluid={mainImage.asset.fluid} />
             </div>
             <div className="blog">
                 <div className="blog__body">
@@ -25,18 +27,21 @@ export default function postTemplate({
                 </div>
                 <aside className="blog__meta">
                     <div className="blog__meta-date">{publishedAt}</div>
-                    <div className="blog__meta-authors">
-                        <h4>Authors</h4>
-                        <Author authors={authors} dimensions="55px" />
+                    <div className="blog__meta-author">
+                        <h4>Author</h4>
+                        <div style={{ padding: "1em 0 2em" }}>
+                            <Author authors={authors} dimensions="55px" />
+                        </div>
                     </div>
-                    <div>
-                        <h4>Categors</h4>
-                        <div>{categories[0].title}</div>
+                    <div className="blog__meta-categories">
+                        <h4>Categories</h4>
+                        {displayCategories}
                     </div>
                 </aside>
             </div>
             <div>
                 <h1>You may also like</h1>
+                <RecommendedPosts categories={categories} />
             </div>
         </Layout>
     );

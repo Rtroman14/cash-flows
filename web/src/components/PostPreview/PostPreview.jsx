@@ -13,6 +13,12 @@ export default function Blog({ post }) {
 
     const excerpt = post._rawExcerpt[0].children[0].text;
 
+    const categories = post.categories.map(category => (
+        <span onClick={handleClickCategory} className="post__category">
+            {category.title}
+        </span>
+    ));
+
     return (
         <article className="post">
             <div>
@@ -38,11 +44,7 @@ export default function Blog({ post }) {
                     </p>
                 </div>
                 <Author authors={post.authors} dimensions="40px" />
-                <div>
-                    <span onClick={handleClickCategory} className="post__category">
-                        {post.categories[0].title}
-                    </span>
-                </div>
+                <div>{categories}</div>
             </div>
         </article>
     );

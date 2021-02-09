@@ -3,18 +3,15 @@ import Button from "@material-ui/core/Button";
 
 import { PostContext } from "../../context/PostContext";
 
+import "./ShowMorePosts.scss";
+
 export default function ShowMorePosts(props) {
     const { handeShowMorePosts } = useContext(PostContext);
 
     return (
         <div style={{ width: "100%" }}>
             <Button
-                style={{
-                    display: "block",
-                    margin: "35px auto 35px auto",
-                    backgroundColor: "#74c947",
-                    color: "white",
-                }}
+                className="btn-cta btn-show-more"
                 onClick={handeShowMorePosts}
                 variant="contained"
                 disableElevation

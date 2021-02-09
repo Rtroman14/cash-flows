@@ -17,8 +17,5 @@
     "@sanity/cli": "^2.0.0",
     "lerna": "^3.13.1"
   },
-  "dependencies": {
-    "gatsby-plugin-sass": "^3.1.0",
-    "sass": "^1.32.5"
-  }
+  "dependencies": {}
 }

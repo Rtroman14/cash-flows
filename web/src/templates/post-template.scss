@@ -7,17 +7,24 @@
     grid-column-gap: 3em;
 
     &__meta {
-        & > div {
-            padding: 2em 0;
-        }
-
         &-date {
             color: rgba(0, 0, 0, 0.4);
+            padding: 1em 0 2em;
+            font-size: 15px;
         }
 
-        &-authors {
+        &-author {
+            & h4 {
+                padding-top: 0.5em;
+            }
             border-top: 1px solid #e7ebed;
             border-bottom: 1px solid #e7ebed;
+        }
+
+        &-categories {
+            & h4 {
+                padding: 0.5em 0 1em;
+            }
         }
     }
 
