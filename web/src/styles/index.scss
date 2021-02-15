@@ -1,1 +1,10 @@
 @import "./global.scss";
+
+.section {
+    height: 80vh;
+    padding: 0 10em;
+
+    &-grey {
+        background-color: #f5f5f5;
+    }
+}

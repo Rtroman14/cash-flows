@@ -8,8 +8,8 @@ import "./PostPreview.scss";
 
 import { PostContext } from "../../context/PostContext";
 
-export default function Blog({ post }) {
-    const { handleClickCategory } = useContext(PostContext);
+export default function PostPreview({ post }) {
+    const { handleClickCategory } = useContext(PostContext) || "";
 
     const excerpt = post._rawExcerpt[0].children[0].text;
 

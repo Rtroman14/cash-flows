@@ -27,6 +27,7 @@ body {
 .btn-cta {
     background-color: $color-primary !important;
     color: white !important;
+    padding: 6px 14px !important;
 
     &:hover {
         background-color: darken($color-primary, 8%) !important;

@@ -9,7 +9,7 @@ export default function ShowMorePosts(props) {
     const { handeShowMorePosts } = useContext(PostContext);
 
     return (
-        <div style={{ width: "100%" }}>
+        <div style={{ width: "100%", marginBottom: "5em" }}>
             <Button
                 className="btn-cta btn-show-more"
                 onClick={handeShowMorePosts}

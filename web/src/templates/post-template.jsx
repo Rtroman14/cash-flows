@@ -39,10 +39,7 @@ export default function postTemplate({
                     </div>
                 </aside>
             </div>
-            <div>
-                <h1>You may also like</h1>
-                <RecommendedPosts categories={categories} />
-            </div>
+            <RecommendedPosts categories={categories} currentTitle={title} />
         </Layout>
     );
 }

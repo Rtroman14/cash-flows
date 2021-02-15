@@ -47,7 +47,7 @@ export default function Navbar({ height }) {
                     </Link>
                 </li>
                 <li>
-                    <Link to="/">
+                    <Link to="/signup">
                         <Button className="btn-cta" variant="contained" disableElevation>
                             Sign Up
                         </Button>

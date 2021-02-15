@@ -10,7 +10,7 @@ const isProd = process.env.NODE_ENV === "production";
 module.exports = {
     /* Your site config here */
     siteMetadata: {
-        title: `Cash Flows`,
+        title: `Cash Money`,
         description: `Work Towards Financial Freedom`,
     },
 
