@@ -9,7 +9,7 @@ const layout = ({ children }) => {
         <div>
             <Navbar height={height} />
             <main style={{ marginTop: height }}>{children}</main>
-            <Footer />
+            {/* <Footer /> */}
         </div>
     );
 };

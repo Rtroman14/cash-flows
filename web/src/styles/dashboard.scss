@@ -1,0 +1,41 @@
+@import "./global.scss";
+
+.dashboard {
+    display: grid;
+    grid-template-columns: 260px 1fr;
+    // min-height: calc(100vh - 70px);
+    min-height: 100vh;
+
+    &__sidebar {
+        background-color: #293042;
+        padding-top: 1.5em;
+
+        & li {
+            padding: 0.5em 2em;
+            color: #adb5bd;
+            cursor: pointer;
+            transition: all 0.2s;
+            border-radius: 8px;
+            font-size: 16px;
+
+            &:hover {
+                color: white;
+            }
+        }
+    }
+
+    &__logo {
+        @include flex-center;
+        padding-bottom: 0.5em;
+    }
+
+    &__graph {
+        padding: 4em 0;
+        background-color: #f6f9fc;
+        @include flex-center;
+    }
+}
+
+.active {
+    color: white !important;
+}

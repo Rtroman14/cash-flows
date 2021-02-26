@@ -1,7 +1,7 @@
 @import "./global.scss";
 
 .section {
-    height: 80vh;
+    min-height: calc(70vh + 80px);
     padding: 0 10em;
 
     &-grey {

@@ -36,20 +36,21 @@ const Home = () => {
                 <div
                     style={{
                         width: "50%",
-                        display: "flex",
+                        display: "grid",
+                        gap: "25px",
                         justifyContent: "center",
-                        flexDirection: "column",
-                        paddingBottom: "10em",
+                        height: "min-content",
+                        paddingTop: "9em",
                     }}
                 >
-                    <h1 style={{ fontSize: "55px" }}>{title}</h1>
+                    <h1 style={{ fontSize: "55px", lineHeight: "1" }}>{title}</h1>
                     <p style={{ fontSize: "22px", fontWeight: "300" }}>{description}</p>
                     <div>
                         <Button className="btn-cta">Learn More</Button>
                     </div>
                 </div>
                 <div style={{ width: "50%" }}>
-                    <Investing style={{ width: "100%" }} />
+                    <Investing style={{ width: "100%", height: "100%" }} />
                 </div>
             </section>
             <section className="section">

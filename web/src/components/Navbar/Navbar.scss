@@ -10,6 +10,7 @@
     top: 0;
     box-shadow: $box-shadow;
     z-index: 999;
+    overflow: hidden;
 
     &__menu-items {
         display: flex;

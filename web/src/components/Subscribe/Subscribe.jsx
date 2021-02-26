@@ -6,7 +6,10 @@ import "./Subscribe.scss";
 export default function Subscribe() {
     return (
         <Paper className="subscribe">
-            <h3>Join Our Monthly Newsletter So You Never Miss a New Post!</h3>
+            <h3>
+                Join Our Monthly Newsletter :] You Never Know If Our Next Post Will Change Your Life
+                Financially!
+            </h3>
             <Divider style={{ margin: "10px 0" }} />
             <div>
                 <form
