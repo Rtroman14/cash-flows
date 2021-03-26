@@ -3,6 +3,8 @@ import React from "react";
 import Highcharts from "highcharts/highstock";
 import HighchartsReact from "highcharts-react-official";
 
+import "./PieChart.scss";
+
 require("highcharts/modules/exporting")(Highcharts);
 
 const options = {
@@ -24,7 +26,7 @@ const options = {
         plotBorderWidth: null,
         plotShadow: false,
         type: "pie",
-        backgroundColor: "rgba(0,0,0,0)",
+        // backgroundColor: "rgba(0,0,0,0)",
     },
     title: {
         // text: "50/30/20 Rule",
@@ -68,10 +70,8 @@ const options = {
     },
 };
 
-const PieChart = () => {
+export default function PieChart() {
     return <HighchartsReact highcharts={Highcharts} options={options} />;
-};
-
-export default PieChart;
+}
 
 // https://stackoverflow.com/questions/31970780/highcharts-pie-chart-specify-pie-slice-gradient-color

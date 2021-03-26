@@ -1,0 +1,21 @@
+@import "../../styles/global.scss";
+
+.card {
+    background-color: white;
+    padding: 1.2em;
+    display: inline-block;
+    box-shadow: $box-shadow;
+    border-radius: $graph-radius;
+
+    width: 280px;
+    height: 150px;
+
+    &__content {
+        display: flex;
+        gap: 1em;
+    }
+
+    &__icon {
+        height: min-content;
+    }
+}

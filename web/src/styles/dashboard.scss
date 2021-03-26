@@ -7,32 +7,47 @@
     min-height: 100vh;
 
     &__sidebar {
-        background-color: #293042;
+        // background-color: #293042;
+        background-color: #111927;
         padding-top: 1.5em;
 
         & li {
-            padding: 0.5em 2em;
+            display: flex;
+            list-style: none;
+            padding: 0.8em 1.6em;
             color: #adb5bd;
+            font-size: 16px;
             cursor: pointer;
             transition: all 0.2s;
-            border-radius: 8px;
-            font-size: 16px;
 
             &:hover {
                 color: white;
+                background-color: rgba(255, 255, 255, 0.1);
             }
         }
     }
 
     &__logo {
         @include flex-center;
-        padding-bottom: 0.5em;
+        margin-bottom: 1em;
+        text-decoration: none;
+
+        & > h2 {
+            font-size: 26px;
+        }
     }
 
     &__graph {
-        padding: 4em 0;
-        background-color: #f6f9fc;
-        @include flex-center;
+        padding: 3em;
+        background-color: #f7f8fb;
+        // @include flex-center;
+    }
+
+    &__piechart {
+        width: min-content;
+        box-shadow: $box-shadow;
+        border-radius: $graph-radius;
+        margin: 2em auto;
     }
 }
 
