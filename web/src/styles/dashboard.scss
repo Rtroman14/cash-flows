@@ -41,13 +41,32 @@
         padding: 3em;
         background-color: #f7f8fb;
         // @include flex-center;
+
+        &-container {
+            display: grid;
+            grid-template-rows: auto;
+            grid-template-columns: repeat(4, 1fr);
+            grid-gap: 20px;
+
+            grid-template-areas:
+                "card-1 card-2 card-3 card-4"
+                "pie-chart pie-chart pie-chart pie-chart"
+                // ". pie-chart pie-chart ."
+                "table table table table";
+        }
     }
 
     &__piechart {
         width: min-content;
         box-shadow: $box-shadow;
         border-radius: $graph-radius;
-        margin: 2em auto;
+        margin: 0 auto;
+
+        grid-area: pie-chart;
+    }
+
+    &__table {
+        grid-area: table;
     }
 }
 

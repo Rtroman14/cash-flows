@@ -16,7 +16,7 @@ import DashboardLayout from "../../components/layout-dashboard";
 export default function BudgetPie() {
     return (
         <DashboardLayout>
-            <div style={{ display: "flex", justifyContent: "space-around" }}>
+            <div className="dashboard__graph-container">
                 <Card
                     title="Gross Income"
                     amount="$5,000"
@@ -37,12 +37,12 @@ export default function BudgetPie() {
                     amount="$500"
                     icon={<BsGraphUp color="black" size="2.5em" />}
                 />
-            </div>
-            <div className="dashboard__piechart">
-                <PieChart />
-            </div>
-            <div>
-                <Table />
+                <div className="dashboard__piechart">
+                    <PieChart />
+                </div>
+                <div className="dashboard__table">
+                    <Table />
+                </div>
             </div>
         </DashboardLayout>
     );
