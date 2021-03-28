@@ -1,7 +1,12 @@
-import React, { useState, useRef, useEffect } from "react";
-import ContentEditable from "react-contenteditable";
+import React, { useState } from "react";
 
-import Checkbox from "@material-ui/core/Checkbox";
+import Fab from "@material-ui/core/Fab";
+import AddIcon from "@material-ui/icons/Add";
+import Tooltip from "@material-ui/core/Tooltip";
+import Chip from "@material-ui/core/Chip";
+import ArrowDownwardIcon from "@material-ui/icons/ArrowDownward";
+
+import Row from "./components/Row";
 
 import "./Table.scss";
 
@@ -10,6 +15,7 @@ const rowData = [
         id: 1,
         name: "Rent",
         cost: 825,
+        category: "Needs",
         percentIncome: 25,
         percentCategory: 80,
     },
@@ -17,6 +23,7 @@ const rowData = [
         id: 2,
         name: "Renters Insurance",
         cost: 15,
+        category: "Needs",
         percentIncome: 5,
         percentCategory: 10,
     },
@@ -24,6 +31,7 @@ const rowData = [
         id: 3,
         name: "Car Loan",
         cost: 230,
+        category: "Needs",
         percentIncome: 15,
         percentCategory: 18,
     },
@@ -31,95 +39,78 @@ const rowData = [
         id: 4,
         name: "Car Insurance",
         cost: 150,
+        category: "Needs",
         percentIncome: 11,
         percentCategory: 13,
     },
 ];
 
-export default function Table(props) {
+export default function Table() {
     const [tableData, setTableData] = useState(rowData);
 
-    // useEffect(() => {
-    //     createTableRow(row);
-    // }, [tableData]);
-
-    const text = useRef("");
-
-    const handleChange = evt => {
-        text.current = evt.target.value;
-    };
-
-    const handleBlur = () => {
-        console.log(text.current);
-    };
-
-    const handleFocus = evt => {
-        console.log(evt.currentTarget.textContent);
-    };
-
-    const updateCell = (field, e, row) => {
-        const updatedTableData = tableData.map(data =>
-            data.id === row.id ? { ...data, [field]: e.currentTarget.textContent } : data
-        );
-
-        setTableData(updatedTableData);
-    };
-
-    const handleSort = () => {
-        // sort by cost
-        const sortedData = tableData.sort((a, b) => {
-            return a.cost - b.cost;
+    const sortRows = field => {
+        const sortedRows = rowData.sort((a, b) => {
+            return b[field] - a[field];
         });
 
-        setTableData(sortedData);
+        setTableData([...sortedRows]);
     };
 
-    const createTableRow = row => (
-        <tr key={row.id}>
-            <td>
-                <Checkbox onChange={() => console.log(row.id)} />
-            </td>
-            <td>
-                <ContentEditable html={`${row.name}`} onChange={e => updateCell("name", e, row)} />
-            </td>
-            <td>
-                <ContentEditable html={`${row.cost}`} onChange={e => updateCell("cost", e, row)} />
-                {/* <ContentEditable
-                    html={`$${row.cost}`}
-                    onBlur={handleBlur}
-                    onChange={handleChange}
-                    onFocus={handleFocus}
-                /> */}
-            </td>
-            <td>
-                <div className="table__category">Needs</div>
-            </td>
-            <td>{row.percentIncome}%</td>
-            <td>{row.percentCategory}%</td>
-        </tr>
-    );
+    const addNewRow = () => {
+        let rows = tableData;
+
+        const newRow = {
+            id: tableData.length + 1,
+            name: "",
+            cost: "",
+            category: "",
+            percentIncome: "",
+            percentCategory: "",
+        };
+
+        rows.push(newRow);
+
+        setTableData([...rows]);
+    };
 
     return (
         <table className="table">
             <thead>
                 <tr style={{ backgroundColor: "#F2F2F2" }}>
-                    <th style={{ width: "20px" }}></th>
-                    <th style={{ width: "18em" }}>Expense</th>
-                    <th onClick={handleSort}>Cost</th>
+                    <th></th>
+                    <th>Expense</th>
+                    <th onClick={() => sortRows("cost")}>
+                        Cost
+                        <ArrowDownwardIcon fontSize="inherit" />
+                    </th>
                     <th>Category</th>
                     <th>% of Income</th>
                     <th>% of Category</th>
                 </tr>
             </thead>
             <tbody>
-                {tableData.map(row => createTableRow(row))}
+                {tableData.map(row => (
+                    <Row row={row} key={row.id} />
+                ))}
                 <tr>
                     <td></td>
-                    <td>Add Expense</td>
+                    <td>
+                        <Tooltip title="Add Row" placement="bottom" arrow>
+                            <Fab onClick={addNewRow} size="small" color="primary" aria-label="add">
+                                <AddIcon />
+                            </Fab>
+                        </Tooltip>
+                    </td>
                     <td></td>
                     <td></td>
                     <td></td>
-                    <td>Categories</td>
+                    <td>
+                        <div>
+                            <Chip label="Needs" component="span" clickable variant="outlined" />
+                            <Chip label="Wants" component="span" clickable variant="outlined" />
+                            <Chip label="Savings" component="span" clickable variant="outlined" />
+                        </div>
+                    </td>
                 </tr>
             </tbody>
         </table>

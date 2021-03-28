@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import ContentEditable from "react-contenteditable";
 import TextField from "@material-ui/core/TextField";
 import InputAdornment from "@material-ui/core/InputAdornment";
 import { makeStyles } from "@material-ui/core/styles";
@@ -7,8 +6,8 @@ import { makeStyles } from "@material-ui/core/styles";
 const useStyles = makeStyles(theme => ({
     root: {
         "& > *": {
-            margin: theme.spacing(1),
-            width: "25ch",
+            // margin: theme.spacing(1),
+            // width: "25ch",
         },
     },
     root: {
@@ -22,30 +21,20 @@ const useStyles = makeStyles(theme => ({
         marginTop: theme.spacing(3),
     },
     textField: {
-        width: "25ch",
+        // width: "25ch",
     },
 }));
 
-export default function Cell({ value, type }) {
+export default function Cell({ value, type, edit }) {
     const classes = useStyles();
-    const [isClicked, setIsClicked] = useState(false);
-
-    const toggleCell = () => {
-        setIsClicked(!isClicked);
-    };
 
     return (
         <>
-            {isClicked ? (
+            {edit ? (
                 <td>
-                    <form
-                        onMouseLeave={toggleCell}
-                        className={classes.root}
-                        noValidate
-                        autoComplete="off"
-                    >
+                    <form className={classes.root} noValidate autoComplete="off">
                         <TextField
-                            id="standard-basic"
+                            // id="standard-basic"
                             type={type}
                             value={value}
                             fullWidth
@@ -60,7 +49,8 @@ export default function Cell({ value, type }) {
                     </form>
                 </td>
             ) : (
-                <td onClick={() => console.log("Clicked")} onDoubleClick={toggleCell}>
+                <td>
+                    {type === "number" ? <span>$ </span> : null}
                     {value}
                 </td>
             )}

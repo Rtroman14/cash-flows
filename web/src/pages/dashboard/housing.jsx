@@ -1,9 +1,9 @@
 import React from "react";
 import Typical from "react-typical";
 
-import DashboardLayout from "../components/layout-dashboard";
+import DashboardLayout from "../../components/layout-dashboard";
 
-export default function Dashboard() {
+export default function Housing() {
     return (
         <DashboardLayout>
             <div

@@ -2,7 +2,7 @@ import React from "react";
 import Navbar from "./Navbar/Navbar";
 import Footer from "./Footer/Footer";
 
-const layout = ({ children }) => {
+export default function layout({ children }) {
     const height = "70px";
 
     return (
@@ -12,6 +12,4 @@ const layout = ({ children }) => {
             <Footer />
         </div>
     );
-};
-
-export default layout;
+}
