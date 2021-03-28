@@ -52,6 +52,11 @@ const options = (needs, wants, savings) => {
                     connectorColor: "silver",
                 },
             },
+            // series: {
+            //     animation: {
+            //         duration: 1000,
+            //     },
+            // },
         },
         series: [
             {
@@ -73,7 +78,7 @@ const options = (needs, wants, savings) => {
 };
 
 export default function PieChart() {
-    return <HighchartsReact highcharts={Highcharts} options={options(40, 30, 30)} />;
+    return <HighchartsReact highcharts={Highcharts} options={options(50, 30, 20)} />;
 }
 
 // https://stackoverflow.com/questions/31970780/highcharts-pie-chart-specify-pie-slice-gradient-color

@@ -73,7 +73,7 @@ const options = () => {
             },
         },
         tooltip: {
-            pointFormat: "{series.name} returned <b>{point.y:,.0f}</b><br/> in {point.x}",
+            pointFormat: "{series.name} returned <b>{point.y:,.0f}</b><br/> at age {point.x}",
         },
         plotOptions: {
             area: {
@@ -89,6 +89,11 @@ const options = () => {
                     },
                 },
             },
+            // series: {
+            //     animation: {
+            //         duration: 1000,
+            //     },
+            // },
         },
         credits: {
             enabled: false,
