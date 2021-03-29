@@ -39,6 +39,10 @@ th {
 tbody > tr {
     border-bottom: 1px solid rgba(81, 81, 81, 0.3);
 
+    &:last-child {
+        border-bottom: none;
+    }
+
     &:hover {
         background-color: darken(white, 5%);
     }

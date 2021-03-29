@@ -52,11 +52,16 @@ const options = (needs, wants, savings) => {
                     connectorColor: "silver",
                 },
             },
-            // series: {
-            //     animation: {
-            //         duration: 1000,
-            //     },
-            // },
+            series: {
+                // animation: {
+                //     duration: 1000,
+                // },
+                events: {
+                    click: function (event) {
+                        alert(`Filter table to show: ${event.point.name}`);
+                    },
+                },
+            },
         },
         series: [
             {

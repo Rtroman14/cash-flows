@@ -2,6 +2,8 @@ import React, { useContext } from "react";
 import Img from "gatsby-image";
 import { Link } from "gatsby";
 
+import Divider from "@material-ui/core/Divider";
+
 import Author from "../Author/Author";
 
 import "./PostPreview.scss";
@@ -40,10 +42,12 @@ export default function PostPreview({ post }) {
                 </div>
                 <div>
                     <p className="post__excerpt">
-                        <p className="post__excerpt">{excerpt.substring(0, 400)}</p>
+                        <p className="post__excerpt">{excerpt.substring(0, 200)}...</p>
                     </p>
                 </div>
+                {/* <Divider /> */}
                 <Author authors={post.authors} dimensions="40px" />
+                {/* <Divider /> */}
                 <div>{categories}</div>
             </div>
         </article>

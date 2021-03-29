@@ -4,7 +4,8 @@ import Fab from "@material-ui/core/Fab";
 import AddIcon from "@material-ui/icons/Add";
 import Tooltip from "@material-ui/core/Tooltip";
 import Chip from "@material-ui/core/Chip";
-import ArrowDownwardIcon from "@material-ui/icons/ArrowDownward";
+import { HiArrowNarrowUp } from "@react-icons/all-files/hi/HiArrowNarrowUp";
+import { HiArrowNarrowDown } from "@react-icons/all-files/hi/HiArrowNarrowDown";
 
 import Row from "./components/Row";
 
@@ -47,10 +48,16 @@ const rowData = [
 
 export default function Table() {
     const [tableData, setTableData] = useState(rowData);
+    const [sortCost, setSortCost] = useState("");
 
     const sortRows = field => {
         const sortedRows = rowData.sort((a, b) => {
-            return b[field] - a[field];
+            if (sortCost === "DESC" || "") {
+                setSortCost("ASC");
+                return b[field] - a[field];
+            }
+            setSortCost("DESC");
+            return a[field] - b[field];
         });
 
         setTableData([...sortedRows]);
@@ -79,9 +86,28 @@ export default function Table() {
                 <tr style={{ backgroundColor: "#F2F2F2" }}>
                     <th></th>
                     <th>Expense</th>
-                    <th onClick={() => sortRows("cost")}>
-                        Cost
-                        <ArrowDownwardIcon fontSize="inherit" />
+                    <th>
+                        <div
+                            style={{
+                                display: "flex",
+                                alignItems: "center",
+                                justifyContent: "space-between",
+                            }}
+                        >
+                            <span
+                                style={{ cursor: "pointer", marginRight: "3px" }}
+                                onClick={() => sortRows("cost")}
+                            >
+                                Cost
+                            </span>
+                            <div>
+                                <HiArrowNarrowUp
+                                    style={{ marginRight: "-7px" }}
+                                    color={sortCost === "ASC" ? "black" : "grey"}
+                                />
+                                <HiArrowNarrowDown color={sortCost === "DESC" ? "black" : "grey"} />
+                            </div>
+                        </div>
                     </th>
                     <th>Category</th>
                     <th>% of Income</th>

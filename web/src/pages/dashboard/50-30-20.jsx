@@ -37,10 +37,10 @@ export default function BudgetPie() {
                     amount="$500"
                     icon={<BsGraphUp color="black" size="2.5em" />}
                 />
-                <div className="dashboard__piechart">
+                <div className="dashboard__graph-piechart">
                     <PieChart />
                 </div>
-                <div className="dashboard__table">
+                <div className="dashboard__graph-table">
                     <Table />
                 </div>
             </div>

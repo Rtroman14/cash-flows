@@ -54,19 +54,32 @@
                 // ". pie-chart pie-chart ."
                 "table table table table";
         }
-    }
 
-    &__piechart {
-        width: min-content;
-        box-shadow: $box-shadow;
-        border-radius: $graph-radius;
-        margin: 0 auto;
+        &-piechart {
+            grid-area: pie-chart;
 
-        grid-area: pie-chart;
-    }
+            & > div {
+                border-radius: $graph-radius;
+                width: min-content;
+                box-shadow: $box-shadow;
+                margin: 0 auto;
+            }
+        }
 
-    &__table {
-        grid-area: table;
+        &-table {
+            grid-area: table;
+        }
+
+        &-chart {
+            grid-area: chart;
+
+            & > div {
+                border-radius: $graph-radius;
+                width: min-content;
+                box-shadow: $box-shadow;
+                margin: 0 auto;
+            }
+        }
     }
 }
 

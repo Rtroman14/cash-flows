@@ -1,6 +1,6 @@
 import React from "react";
 
-import Highcharts, { Point } from "highcharts/highstock";
+import Highcharts from "highcharts/highstock";
 import HighchartsReact from "highcharts-react-official";
 
 require("highcharts/modules/exporting")(Highcharts);
@@ -36,10 +36,18 @@ for (let year = 0; year < numYears; year++) {
     market.push(annualInvestment + capitalGains + market[year]);
 }
 
+Highcharts.setOptions({
+    lang: {
+        thousandsSep: ",",
+    },
+});
+
 const options = () => {
     return {
         chart: {
             type: "areaspline",
+            zoomBySingleTouch: true,
+            zoomType: "x",
         },
         title: {
             text: "Investing Money in The Market vs. Savings Account",
@@ -48,27 +56,8 @@ const options = () => {
             text:
                 "What are you waiting for? Invest now with <a href='https://www.acorns.com/invite/NB3R3H' target='_blank'>Acorns!</a>",
         },
-        // legend: {
-        //     layout: "vertical",
-        //     align: "left",
-        //     verticalAlign: "top",
-        //     x: 150,
-        //     y: 100,
-        //     floating: true,
-        //     borderWidth: 1,
-        //     backgroundColor: Highcharts.defaultOptions.legend.backgroundColor || "#FFFFFF",
-        // },
         xAxis: {
             categories,
-            // plotBands: [
-            //     {
-            //         // visualize the weekend
-            //         from: 4.5,
-            //         to: 6.5,
-            //         color: "rgba(68, 170, 213, .2)",
-            //     },
-            // ],
-
             title: {
                 text: "Age",
             },
@@ -84,15 +73,7 @@ const options = () => {
             // },
         },
         tooltip: {
-            // formatter: function () {
-            //     return this.points.reduce((s, point) => {
-            //         console.log("S = ", s);
-            //         console.log("Point = ", point);
-            //         return s + "<br/>" + point.series.name + ": " + "$" + point.y;
-            //     }, "<b>" + this.x + "</b>");
-            // },
             shared: true,
-            // valueSuffix: " Dollars",
             valuePrefix: "$",
             // pointFormat: "{series.name}: $<b>{point.y:,.0f}</b><br/>",
         },
@@ -115,11 +96,13 @@ const options = () => {
         },
         series: [
             {
-                name: "Market",
+                name:
+                    "Market <span style='font-weight:100;color:#666666;fill:#666666;'>(7% Growth/Year)</span>",
                 data: market,
             },
             {
-                name: "Savings",
+                name:
+                    "Savings <span style='font-weight:100;color:#666666;fill:#666666;'>(2% Growth/Year)</span>",
                 data: savings,
             },
         ],
