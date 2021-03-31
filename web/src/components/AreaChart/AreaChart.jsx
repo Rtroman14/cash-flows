@@ -14,7 +14,7 @@ const retireAge = 65;
 const numYears = retireAge - startAge;
 const annualInvestment = 5000;
 const MARKET_GAIN = 0.02;
-const SAVINGS_GAIN = 0.002;
+const SAVINGS_GAIN = 0.005;
 
 for (let age = startAge; age < retireAge; age++) {
     categories.push(age);
@@ -102,7 +102,7 @@ const options = () => {
             },
             {
                 name:
-                    "Savings <span style='font-weight:100;color:#666666;fill:#666666;'>(2% Growth/Year)</span>",
+                    "Savings <span style='font-weight:100;color:#666666;fill:#666666;'>(0.05% Growth/Year)</span>",
                 data: savings,
             },
         ],

@@ -46,7 +46,7 @@
             display: grid;
             grid-template-rows: auto;
             grid-template-columns: repeat(4, 1fr);
-            grid-gap: 20px;
+            grid-gap: 25px;
 
             grid-template-areas:
                 "card-1 card-2 card-3 card-4"
@@ -70,12 +70,12 @@
             grid-area: table;
         }
 
-        &-chart {
+        &-investing {
             grid-area: chart;
 
             & > div {
                 border-radius: $graph-radius;
-                width: min-content;
+                // width: min-content;
                 box-shadow: $box-shadow;
                 margin: 0 auto;
             }

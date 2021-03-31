@@ -1,5 +1,7 @@
 import React from "react";
 
+import Input from "../../components/Input/Input";
+
 import DashboardLayout from "../../components/layout-dashboard";
 
 import AreaChart from "../../components/AreaChart/AreaChart";
@@ -9,6 +11,9 @@ export default function Investing() {
         <DashboardLayout>
             <div className="dashboard__graph-investing">
                 <AreaChart />
+            </div>
+            <div>
+                <Input />
             </div>
         </DashboardLayout>
     );
