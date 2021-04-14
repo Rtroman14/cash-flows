@@ -1,53 +1,54 @@
-@import "../../styles/global.scss";
+// @import "../../styles/global.scss";
 
-.table {
-    box-shadow: $box-shadow;
-    border-radius: $graph-radius;
-    background-color: white;
-    width: 100%;
-    border-collapse: collapse;
+// .table {
+//     box-shadow: $box-shadow;
+//     border-radius: $graph-radius;
+//     background-color: white;
+//     width: 100%;
+//     border-collapse: collapse;
 
-    &__category {
-        background-color: #66c252;
-        color: white;
-        width: min-content;
-        padding: 3px 6px;
-        border-radius: 8px;
-        text-transform: uppercase;
-        font-size: 12px;
-    }
+//     &__category {
+//         background-color: #66c252;
+//         color: white;
+//         width: min-content;
+//         padding: 3px 6px;
+//         border-radius: 8px;
+//         text-transform: uppercase;
+//         font-size: 12px;
+//     }
 
-    & th:nth-child(1) {
-        width: 18px;
-    }
+//     & th:nth-child(1) {
+//         width: 18px;
+//     }
 
-    & th:nth-child(2) {
-        width: 300px;
-    }
+//     & th:nth-child(2) {
+//         width: 300px;
+//     }
 
-    & th:nth-child(3) {
-        width: 140px;
-    }
-}
+//     & th:nth-child(3) {
+//         width: 140px;
+//     }
+// }
 
-th {
-    text-align: inherit;
-    border-bottom: 1px solid rgba(81, 81, 81, 0.3);
-    padding: 0.75em 0.5em 0.75em 1em;
-}
+// th {
+//     text-align: inherit;
+//     border-bottom: 1px solid rgba(81, 81, 81, 0.3);
+//     padding: 0.75em 0.5em 0.75em 1em;
+//     user-select: none;
+// }
 
-tbody > tr {
-    border-bottom: 1px solid rgba(81, 81, 81, 0.3);
+// tbody > tr {
+//     border-bottom: 1px solid rgba(81, 81, 81, 0.3);
 
-    &:last-child {
-        border-bottom: none;
-    }
+//     &:last-child {
+//         border-bottom: none;
+//     }
 
-    &:hover {
-        background-color: darken(white, 5%);
-    }
-}
+//     &:hover {
+//         background-color: darken(white, 5%);
+//     }
+// }
 
-td {
-    padding: 0.5em 0.5em 0.5em 1em;
-}
+// td {
+//     padding: 0.5em 0.5em 0.5em 1em;
+// }

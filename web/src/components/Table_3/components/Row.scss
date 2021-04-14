@@ -1,0 +1,30 @@
+@import "../../../styles/global.scss";
+
+.dashboard__graph-table {
+    & input.MuiInputBase-input,
+    input.MuiOutlinedInput-input {
+        padding: 19px !important;
+    }
+
+    & .MuiInputBase-input,
+    .MuiTableCell-root {
+        font-family: "Montserrat", sans-serif;
+        font-size: 15px;
+    }
+
+    & .MuiTableCell-head:nth-child(2) {
+        width: 8em;
+    }
+
+    & .MuiSelect-outlined.MuiSelect-outlined {
+        padding-right: 0;
+    }
+
+    & td.MuiTableCell-root {
+        padding: 0;
+    }
+
+    & .MuiTableHead-root {
+        background-color: $color-grey;
+    }
+}

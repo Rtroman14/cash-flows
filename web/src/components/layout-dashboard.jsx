@@ -8,6 +8,54 @@ import { MdDirectionsCar } from "@react-icons/all-files/md/MdDirectionsCar";
 import { BsFillHouseDoorFill } from "@react-icons/all-files/bs/BsFillHouseDoorFill";
 
 import "../styles/dashboard.scss";
+import "../styles/global.scss";
+
+import { FinancialProvider } from "../context/FinancialContext";
+
+import { createMuiTheme, ThemeProvider } from "@material-ui/core/styles";
+
+const theme = createMuiTheme({
+    typography: {
+        fontFamily: ["'Baloo 2'"].join(","),
+    },
+    overrides: {
+        MuiTooltip: {
+            tooltip: {
+                fontSize: "12.5px",
+                fontFamily: "inherit",
+            },
+        },
+        MuiTableCell: {
+            head: {
+                fontSize: "17px",
+            },
+        },
+        MuiTextField: {
+            root: {
+                width: "100%",
+            },
+        },
+        MuiOutlinedInput: {
+            input: {
+                padding: "0",
+            },
+        },
+        MuiSelect: {
+            select: {
+                paddingRight: "0",
+            },
+            outlined: {
+                paddingRight: "0",
+            },
+        },
+        MuiMenuItem: {
+            root: {
+                fontFamily: "inherit",
+                fontSize: "15px",
+            },
+        },
+    },
+});
 
 export default function DashboardLayout({ children }) {
     const location = useLocation();
@@ -101,7 +149,11 @@ export default function DashboardLayout({ children }) {
                 </div>
             </div>
             <div className="dashboard__graph">
-                <main>{children}</main>
+                <ThemeProvider theme={theme}>
+                    <FinancialProvider>
+                        <main>{children}</main>
+                    </FinancialProvider>
+                </ThemeProvider>
             </div>
         </div>
     );

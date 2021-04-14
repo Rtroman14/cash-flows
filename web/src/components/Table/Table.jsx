@@ -7,7 +7,8 @@ import Chip from "@material-ui/core/Chip";
 import { HiArrowNarrowUp } from "@react-icons/all-files/hi/HiArrowNarrowUp";
 import { HiArrowNarrowDown } from "@react-icons/all-files/hi/HiArrowNarrowDown";
 
-import Row from "./components/Row";
+import Row from "./components/Row_2";
+// import Row from "./components/Row";
 
 import "./Table.scss";
 
