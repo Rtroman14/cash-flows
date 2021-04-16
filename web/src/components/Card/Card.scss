@@ -13,6 +13,10 @@
     &__content {
         display: flex;
         gap: 1em;
+
+        input.MuiInputBase-input {
+            font-family: "Baloo 2", cursive;
+        }
     }
 
     &__icon {

@@ -3,6 +3,7 @@
 .dashboard__graph-table {
     & input.MuiInputBase-input,
     input.MuiOutlinedInput-input {
+        // padding: 9px !important;
         padding: 19px !important;
     }
 
@@ -26,5 +27,9 @@
 
     & .MuiTableHead-root {
         background-color: $color-grey;
+    }
+
+    & .MuiOutlinedInput-input {
+        padding: 0;
     }
 }

@@ -8,19 +8,12 @@ import { BsGraphUp } from "@react-icons/all-files/bs/BsGraphUp";
 import PieChart from "../../components/PieChart/PieChart";
 import Card from "../../components/Card/Card";
 
-import Table from "../../components/Table/Table";
 import Table3 from "../../components/Table_3/Table";
 
 import "../../styles/dashboard.scss";
 import DashboardLayout from "../../components/layout-dashboard";
 
 import { FinancialContext } from "../../context/FinancialContext";
-
-// TABLE
-// have checkbox on each row
-// checkbox shows edit and delete icons in upper right of table
-// onEdit - edit cells. Edit icon turns into checkmark icon to save changes
-// click outside or uncheck cancels actions
 
 export default function BudgetPie(props) {
     const { needs, income } = useContext(FinancialContext);
@@ -65,7 +58,6 @@ export default function BudgetPie(props) {
                 </div>
                 <div className="dashboard__graph-table">
                     <Table3 />
-                    {/* <Table /> */}
                 </div>
             </div>
         </DashboardLayout>

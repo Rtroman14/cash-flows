@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 
 import { makeStyles } from "@material-ui/core/styles";
 
@@ -10,11 +10,11 @@ import TableContainer from "@material-ui/core/TableContainer";
 import TableHead from "@material-ui/core/TableHead";
 import Paper from "@material-ui/core/Paper";
 import Chip from "@material-ui/core/Chip";
-import Fab from "@material-ui/core/Fab";
-import AddIcon from "@material-ui/icons/Add";
-import Tooltip from "@material-ui/core/Tooltip";
 
 import Row from "./components/Row";
+import Dialog from "./components/Dialog";
+
+import { FinancialContext } from "../../context/FinancialContext";
 
 const useStyles = makeStyles({
     table: {
@@ -22,57 +22,14 @@ const useStyles = makeStyles({
     },
 });
 
-const rowData = [
-    {
-        id: 1,
-        expense: "Rent",
-        cost: 825,
-        category: "Needs",
-        percentIncome: 25,
-        percentCategory: 80,
-    },
-    {
-        id: 2,
-        expense: "Renters Insurance",
-        cost: 15,
-        category: "Needs",
-        percentIncome: 5,
-        percentCategory: 10,
-    },
-    {
-        id: 3,
-        expense: "Car Loan",
-        cost: 230,
-        category: "Needs",
-        percentIncome: 15,
-        percentCategory: 18,
-    },
-    {
-        id: 4,
-        expense: "Car Insurance",
-        cost: 150,
-        category: "Needs",
-        percentIncome: 11,
-        percentCategory: 13,
-    },
-    {
-        id: 5,
-        expense: "Gym",
-        cost: 100,
-        category: "Needs",
-        percentIncome: 11,
-        percentCategory: 13,
-    },
-];
-
 export default function BudgetTable() {
-    const classes = useStyles();
+    const { tableData, filterByCategory } = useContext(FinancialContext);
 
-    const [tableData, setTableData] = useState(rowData);
+    const classes = useStyles();
 
     return (
         <TableContainer component={Paper}>
-            <Table className={classes.table} aria-label="simple table">
+            <Table className={classes.table} aria-label="simple table" dense>
                 <TableHead>
                     <TableRow>
                         <TableCell>Expense</TableCell>
@@ -80,50 +37,29 @@ export default function BudgetTable() {
                         <TableCell align="center">Category</TableCell>
                         <TableCell align="center">% of Income</TableCell>
                         <TableCell align="center">% of Category</TableCell>
+                        <TableCell align="center"></TableCell>
                     </TableRow>
                 </TableHead>
                 <TableBody>
-                    {tableData.map(row => (
-                        <Row key={row.id} row={row} />
+                    {tableData.table.map(row => (
+                        <Row row={row} />
                     ))}
-                    <TableRow>
+                    <TableRow key="addRow">
                         <TableCell style={{ padding: "10px" }}>
-                            <Tooltip title="Add Row" placement="bottom" arrow>
-                                <Fab
-                                    // onClick={addNewRow}
-                                    size="small"
-                                    color="primary"
-                                    aria-label="add"
-                                >
-                                    <AddIcon />
-                                </Fab>
-                            </Tooltip>
+                            <Dialog />
                         </TableCell>
                         <TableCell></TableCell>
                         <TableCell></TableCell>
-                        <TableCell></TableCell>
-                        <TableCell>
-                            <Chip
-                                label="Needs"
-                                component="span"
-                                clickable
-                                variant="outlined"
-                                onClick={() => alert("Display this category")}
-                            />
-                            <Chip
-                                label="Wants"
-                                component="span"
-                                clickable
-                                variant="outlined"
-                                onClick={() => alert("Display this category")}
-                            />
-                            <Chip
-                                label="Savings"
-                                component="span"
-                                clickable
-                                variant="outlined"
-                                onClick={() => alert("Display this category")}
-                            />
+                        <TableCell colSpan="2" style={{ textAlign: "center" }}>
+                            {["All", "Needs", "Wants", "Savings"].map(category => (
+                                <Chip
+                                    label={category}
+                                    component="span"
+                                    clickable
+                                    variant="outlined"
+                                    onClick={() => filterByCategory(category)}
+                                />
+                            ))}
                         </TableCell>
                     </TableRow>
                 </TableBody>

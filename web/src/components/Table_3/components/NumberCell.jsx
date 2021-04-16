@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 
-import TableCell from "@material-ui/core/TableCell";
 import TextField from "@material-ui/core/TextField";
 import PropTypes from "prop-types";
 import NumberFormat from "react-number-format";
@@ -33,7 +32,7 @@ NumberFormatCustom.propTypes = {
     onChange: PropTypes.func.isRequired,
 };
 
-export default function Cell({ value }) {
+export default function Cell({ value, add }) {
     const [values, setValues] = useState({
         numberformat: value,
     });
@@ -46,16 +45,31 @@ export default function Cell({ value }) {
     };
 
     return (
-        <TableCell align="center">
-            <TextField
-                variant="outlined"
-                value={values.numberformat}
-                onChange={handleChange}
-                name="numberformat"
-                InputProps={{
-                    inputComponent: NumberFormatCustom,
-                }}
-            />
-        </TableCell>
+        <>
+            {add ? (
+                <TextField
+                    variant="outlined"
+                    onChange={handleChange}
+                    margin="dense"
+                    fullWidth
+                    autoFocus
+                    label="Cost"
+                    name="numberformat"
+                    InputProps={{
+                        inputComponent: NumberFormatCustom,
+                    }}
+                />
+            ) : (
+                <TextField
+                    variant="outlined"
+                    value={values.numberformat}
+                    onChange={handleChange}
+                    name="numberformat"
+                    InputProps={{
+                        inputComponent: NumberFormatCustom,
+                    }}
+                />
+            )}
+        </>
     );
 }

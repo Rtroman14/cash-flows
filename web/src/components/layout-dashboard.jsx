@@ -15,9 +15,6 @@ import { FinancialProvider } from "../context/FinancialContext";
 import { createMuiTheme, ThemeProvider } from "@material-ui/core/styles";
 
 const theme = createMuiTheme({
-    typography: {
-        fontFamily: ["'Baloo 2'"].join(","),
-    },
     overrides: {
         MuiTooltip: {
             tooltip: {
@@ -35,11 +32,11 @@ const theme = createMuiTheme({
                 width: "100%",
             },
         },
-        MuiOutlinedInput: {
-            input: {
-                padding: "0",
-            },
-        },
+        // MuiOutlinedInput: {
+        //     input: {
+        //         padding: "0",
+        //     },
+        // },
         MuiSelect: {
             select: {
                 paddingRight: "0",
@@ -54,100 +51,149 @@ const theme = createMuiTheme({
                 fontSize: "15px",
             },
         },
+        // MuiInputBase: {
+        //     base: {
+        //         fontFamily: '"Montserrat", sans-serif',
+        //     },
+        // },
     },
 });
 
+// ------------------------------
+import { makeStyles } from "@material-ui/core/styles";
+import Drawer from "@material-ui/core/Drawer";
+import List from "@material-ui/core/List";
+import Divider from "@material-ui/core/Divider";
+import ListItem from "@material-ui/core/ListItem";
+import ListItemIcon from "@material-ui/core/ListItemIcon";
+import ListItemText from "@material-ui/core/ListItemText";
+
+const drawerWidth = 260;
+
+const useStyles = makeStyles(theme => ({
+    root: {
+        display: "flex",
+    },
+    drawer: {
+        width: drawerWidth,
+        flexShrink: 0,
+    },
+    drawerPaper: {
+        width: drawerWidth,
+        backgroundColor: "#111927",
+    },
+    // necessary for content to be below app bar
+    toolbar: {
+        marginTop: "2em",
+    },
+    content: {
+        flexGrow: 1,
+        backgroundColor: theme.palette.background.default,
+        padding: theme.spacing(3),
+    },
+    font: {
+        color: "#adb5bd",
+    },
+}));
+
 export default function DashboardLayout({ children }) {
+    const classes = useStyles();
+
     const location = useLocation();
 
     return (
         <div className="dashboard">
-            <div className="dashboard__sidebar">
-                <div style={{ position: "fixed", width: "260px" }}>
-                    <div>
-                        <Link className="dashboard__logo" to="/">
-                            {/* <Img fixed={data.fixed.childImageSharp.fixed} /> */}
-                            <h2 style={{ textAlign: "center", color: "white" }}>Cash Money</h2>
-                        </Link>
-                    </div>
-                    <nav>
-                        <ul>
-                            <Link style={{ textDecoration: "none" }} to="/dashboard/50-30-20">
-                                <li
-                                    className={
-                                        location.pathname.includes("50-30-20") ? "active" : ""
-                                    }
-                                >
-                                    <GiPieChart
-                                        style={{ marginRight: "10px" }}
-                                        color={
-                                            location.pathname.includes("50-30-20")
-                                                ? "white"
-                                                : "#adb5bd"
-                                        }
-                                        size="1.5em"
-                                    />
-                                    50/30/20
-                                </li>
-                            </Link>
-                            <Link style={{ textDecoration: "none" }} to="/dashboard/car-buying">
-                                <li
-                                    className={
-                                        location.pathname.includes("car-buying") ? "active" : ""
-                                    }
-                                >
-                                    <MdDirectionsCar
-                                        style={{ marginRight: "10px" }}
-                                        color={
-                                            location.pathname.includes("car-buying")
-                                                ? "white"
-                                                : "#adb5bd"
-                                        }
-                                        size="1.5em"
-                                    />
-                                    <span>Car Buying</span>
-                                </li>
-                            </Link>
-                            <Link style={{ textDecoration: "none" }} to="/dashboard/housing">
-                                <li
-                                    className={
-                                        location.pathname.includes("housing") ? "active" : ""
-                                    }
-                                >
-                                    <BsFillHouseDoorFill
-                                        style={{ marginRight: "10px" }}
-                                        color={
-                                            location.pathname.includes("housing")
-                                                ? "white"
-                                                : "#adb5bd"
-                                        }
-                                        size="1.5em"
-                                    />
-                                    Housing
-                                </li>
-                            </Link>
-                            <Link style={{ textDecoration: "none" }} to="/dashboard/investing">
-                                <li
-                                    className={
-                                        location.pathname.includes("investing") ? "active" : ""
-                                    }
-                                >
-                                    <AiOutlineAreaChart
-                                        style={{ marginRight: "10px" }}
-                                        color={
-                                            location.pathname.includes("investing")
-                                                ? "white"
-                                                : "#adb5bd"
-                                        }
-                                        size="1.5em"
-                                    />
-                                    Investing
-                                </li>
-                            </Link>
-                        </ul>
-                    </nav>
+            <Drawer
+                className={classes.drawer}
+                variant="permanent"
+                classes={{
+                    paper: classes.drawerPaper,
+                }}
+                anchor="left"
+            >
+                <div className={classes.toolbar} />
+                <div>
+                    <Link className="dashboard__logo" to="/">
+                        {/* <Img fixed={data.fixed.childImageSharp.fixed} /> */}
+                        <h2 style={{ textAlign: "center", color: "white" }}>Cash Money</h2>
+                    </Link>
                 </div>
-            </div>
+                <Divider light variant="middle" />
+                <List>
+                    <Link style={{ textDecoration: "none" }} to="/dashboard/50-30-20/">
+                        <ListItem
+                            className={location.pathname.includes("50-30-20") && "selected"}
+                            button
+                            key="50/30/20"
+                        >
+                            <ListItemIcon>
+                                <GiPieChart color="white" size="1.5em" />
+                            </ListItemIcon>
+                            <ListItemText
+                                className={
+                                    location.pathname.includes("50-30-20") ? "active" : classes.font
+                                }
+                                primary="50/30/20"
+                            />
+                        </ListItem>
+                    </Link>
+                    <Link style={{ textDecoration: "none" }} to="/dashboard/">
+                        <ListItem
+                            className={location.pathname.includes("car-buying") && "selected"}
+                            button
+                            key="Car Buying"
+                        >
+                            <ListItemIcon>
+                                <MdDirectionsCar color="#adb5bd" size="1.5em" />
+                            </ListItemIcon>
+                            <ListItemText
+                                className={
+                                    location.pathname.includes("car-buying")
+                                        ? "active"
+                                        : classes.font
+                                }
+                                primary="Car Buying"
+                            />
+                        </ListItem>
+                    </Link>
+                    <Link style={{ textDecoration: "none" }} to="/dashboard/">
+                        <ListItem
+                            className={location.pathname.includes("housing") && "selected"}
+                            button
+                            key="Housing"
+                        >
+                            <ListItemIcon>
+                                <BsFillHouseDoorFill color="#adb5bd" size="1.5em" />
+                            </ListItemIcon>
+                            <ListItemText
+                                className={
+                                    location.pathname.includes("housing") ? "active" : classes.font
+                                }
+                                primary="Housing"
+                            />
+                        </ListItem>
+                    </Link>
+                    <Link style={{ textDecoration: "none" }} to="/dashboard/investing/">
+                        <ListItem
+                            className={location.pathname.includes("investing") && "selected"}
+                            button
+                            key="Investing"
+                        >
+                            <ListItemIcon>
+                                <AiOutlineAreaChart color="#adb5bd" size="1.5em" />
+                            </ListItemIcon>
+                            <ListItemText
+                                className={
+                                    location.pathname.includes("investing")
+                                        ? "active"
+                                        : classes.font
+                                }
+                                primary="Investing"
+                            />
+                        </ListItem>
+                    </Link>
+                </List>
+            </Drawer>
             <div className="dashboard__graph">
                 <ThemeProvider theme={theme}>
                     <FinancialProvider>

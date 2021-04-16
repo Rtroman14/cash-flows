@@ -6,27 +6,6 @@
     // min-height: calc(100vh - 70px);
     min-height: 100vh;
 
-    &__sidebar {
-        // background-color: #293042;
-        background-color: #111927;
-        padding-top: 1.5em;
-
-        & li {
-            display: flex;
-            list-style: none;
-            padding: 0.8em 1.6em;
-            color: #adb5bd;
-            font-size: 16px;
-            cursor: pointer;
-            transition: all 0.2s;
-
-            &:hover {
-                color: white;
-                background-color: rgba(255, 255, 255, 0.1);
-            }
-        }
-    }
-
     &__logo {
         @include flex-center;
         margin-bottom: 1em;
@@ -103,4 +82,21 @@
 
 .active {
     color: white !important;
+}
+
+.selected {
+    background-color: rgba(255, 255, 255, 0.1) !important;
+}
+
+span.MuiTypography-body1 {
+    font-family: "Montserrat", sans-serif;
+    transition: all 0.2s;
+}
+
+div.MuiListItem-root:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+
+    span.MuiTypography-body1 {
+        color: white;
+    }
 }
