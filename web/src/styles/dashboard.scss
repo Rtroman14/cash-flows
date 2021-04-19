@@ -100,3 +100,25 @@ div.MuiListItem-root:hover {
         color: white;
     }
 }
+
+.needs {
+    background-color: #92e97f;
+    border: 1px solid black;
+    // border-radius: 5px;
+    padding: 3px;
+}
+
+.wants {
+    background-color: #151517;
+    border: 1px solid black;
+    // border-radius: 5px;
+    padding: 3px;
+    color: white;
+}
+
+.savings {
+    background-color: #83bced;
+    border: 1px solid black;
+    // border-radius: 5px;
+    padding: 3px;
+}

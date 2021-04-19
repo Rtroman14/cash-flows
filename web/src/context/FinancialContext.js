@@ -1,115 +1,82 @@
 import React, { createContext, useState } from "react";
 
+import { data } from "./data";
+
 export const FinancialContext = createContext();
 
-let data = [
-    {
-        id: 1,
-        expense: "Rent",
-        cost: 825,
-        category: "Needs",
-    },
-    {
-        id: 2,
-        expense: "Renters Insurance",
-        cost: 15,
-        category: "Needs",
-    },
-    {
-        id: 3,
-        expense: "Car Loan",
-        cost: 230,
-        category: "Needs",
-    },
-    {
-        id: 4,
-        expense: "Car Insurance",
-        cost: 130,
-        category: "Needs",
-    },
-    {
-        id: 5,
-        expense: "Life Insurance",
-        cost: 19,
-        category: "Needs",
-    },
-    {
-        id: 6,
-        expense: "Internet",
-        cost: 25,
-        category: "Needs",
-    },
-    {
-        id: 7,
-        expense: "Utils",
-        cost: 60,
-        category: "Needs",
-    },
-    {
-        id: 8,
-        expense: "Haircut",
-        cost: 40,
-        category: "Needs",
-    },
-    {
-        id: 9,
-        expense: "Phone",
-        cost: 75,
-        category: "Needs",
-    },
-    {
-        id: 10,
-        expense: "Gas",
-        cost: 100,
-        category: "Needs",
-    },
-    {
-        id: 11,
-        expense: "Food",
-        cost: 300,
-        category: "Needs",
-    },
-    {
-        id: 12,
-        expense: "Roth IRA",
-        cost: 500,
-        category: "Savings",
-    },
-    {
-        id: 13,
-        expense: "Emergency Fund",
-        cost: 200,
-        category: "Savings",
-    },
-];
-
 export function FinancialProvider(props) {
-    const [tableData, setTable] = useState({
-        allData: data,
+    const [userData, setUserData] = useState(data);
+    const [tableData, setTableData] = useState({
         table: data,
+        category: "All",
+        sortCost: "",
     });
+    const [emergencyFund, setEmergencyFund] = useState(
+        userData.filter(row => row.category === "needs").reduce((a, b) => a + b.cost, 0) * 6
+    );
 
-    const deleteRow = id => {
-        const removedRow = tableData.allData.filter(row => row.id !== id);
+    const editCell = (id, field, newValue) => {
+        let value = field === "cost" ? Number(newValue) : newValue;
 
-        setTable({
+        const editedRow = tableData.table.map(row =>
+            row.id === id ? { ...row, [field]: value } : row
+        );
+        const editedRow2 = userData.map(row => (row.id === id ? { ...row, [field]: value } : row));
+
+        setUserData(editedRow2);
+        setTableData({
             ...tableData,
-            table: removedRow,
+            table: editedRow,
         });
     };
 
-    const [needs, setNeeds] = useState({
-        total: 1500,
-        items: [],
-    });
-    const [wants, setWants] = useState({
-        total: 2000,
-        items: [],
-    });
-    const [savings, setSavings] = useState({
-        total: 2000,
-        items: [],
-    });
+    const deleteRow = id => {
+        const removedRow = userData.filter(row => row.id !== id);
+        const removedRow2 = tableData.table.filter(row => row.id !== id);
+
+        setUserData(removedRow);
+
+        setTableData({
+            ...tableData,
+            table: removedRow2,
+        });
+    };
+
+    const sortRows = () => {
+        let sortCost;
+
+        const sortedRows = userData.sort((a, b) => {
+            if (tableData.sortCost === "DESC" || "") {
+                sortCost = "ASC";
+
+                return b.cost - a.cost;
+            }
+
+            sortCost = "DESC";
+            return a.cost - b.cost;
+        });
+
+        setTableData({
+            ...tableData,
+            sortCost,
+            table: sortedRows,
+        });
+    };
+
+    const filterByCategory = category => {
+        const showCategory =
+            category === "all" ? userData : userData.filter(row => row.category === category);
+
+        setTableData({
+            ...tableData,
+            category,
+            table: showCategory,
+        });
+    };
+
+    const addRow = () => {
+        console.log("Add Row");
+    };
 
     const [income, setIncome] = useState({
         net: 3580,
@@ -123,18 +90,18 @@ export function FinancialProvider(props) {
         });
     };
 
-    const filterByCategory = category => {
-        const tableDataCategory = tableData.allData.filter(row => row.category === category);
-
-        setTable({
-            ...tableData,
-            table: tableDataCategory,
-        });
-    };
-
     return (
         <FinancialContext.Provider
-            value={{ needs, income, handleIncomeChange, tableData, deleteRow, filterByCategory }}
+            value={{
+                emergencyFund,
+                income,
+                handleIncomeChange,
+                tableData,
+                deleteRow,
+                filterByCategory,
+                sortRows,
+                editCell,
+            }}
         >
             {props.children}
         </FinancialContext.Provider>

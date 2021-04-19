@@ -1,86 +1,80 @@
-const data = [
+export const data = [
     {
         id: 1,
         expense: "Rent",
         cost: 825,
-        category: "Needs",
+        category: "needs",
     },
     {
         id: 2,
         expense: "Renters Insurance",
         cost: 15,
-        category: "Needs",
+        category: "needs",
     },
     {
         id: 3,
         expense: "Car Loan",
         cost: 230,
-        category: "Needs",
+        category: "needs",
     },
     {
         id: 4,
         expense: "Car Insurance",
         cost: 130,
-        category: "Needs",
+        category: "needs",
     },
     {
         id: 5,
         expense: "Life Insurance",
         cost: 19,
-        category: "Needs",
+        category: "needs",
     },
     {
         id: 6,
         expense: "Internet",
         cost: 25,
-        category: "Needs",
+        category: "needs",
     },
     {
         id: 7,
         expense: "Utils",
         cost: 60,
-        category: "Needs",
+        category: "needs",
     },
     {
         id: 8,
         expense: "Haircut",
         cost: 40,
-        category: "Needs",
+        category: "needs",
     },
     {
         id: 9,
         expense: "Phone",
         cost: 75,
-        category: "Needs",
+        category: "needs",
     },
     {
         id: 10,
         expense: "Gas",
         cost: 100,
-        category: "Needs",
+        category: "needs",
     },
     {
         id: 11,
         expense: "Food",
         cost: 300,
-        category: "Needs",
+        category: "needs",
     },
     {
         id: 12,
         expense: "Roth IRA",
         cost: 500,
-        category: "Savings",
+        category: "savings",
     },
     {
         id: 13,
         expense: "Emergency Fund",
         cost: 200,
-        category: "Savings",
+        category: "savings",
     },
 ];
-
-const newValue = "1300";
-
-let value = typeof newValue === "number" ? newValue : Number(newValue);
-
-console.log(typeof value);

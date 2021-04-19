@@ -8,7 +8,7 @@ import { BsGraphUp } from "@react-icons/all-files/bs/BsGraphUp";
 import PieChart from "../../components/PieChart/PieChart";
 import Card from "../../components/Card/Card";
 
-import Table3 from "../../components/Table_3/Table";
+import Table from "../../components/Table/Table";
 
 import "../../styles/dashboard.scss";
 import DashboardLayout from "../../components/layout-dashboard";
@@ -16,7 +16,7 @@ import DashboardLayout from "../../components/layout-dashboard";
 import { FinancialContext } from "../../context/FinancialContext";
 
 export default function BudgetPie(props) {
-    const { needs, income } = useContext(FinancialContext);
+    const { income, emergencyFund } = useContext(FinancialContext);
 
     return (
         <DashboardLayout>
@@ -40,7 +40,7 @@ export default function BudgetPie(props) {
                 <Card
                     name="fund"
                     title="Emergency Fund"
-                    amount={needs.total * 6}
+                    amount={emergencyFund}
                     icon={<FaPiggyBank color="black" size="3em" />}
                     tooltip="6 month's worth of expenses"
                     edit={false}
@@ -57,7 +57,7 @@ export default function BudgetPie(props) {
                     <PieChart needs={50} wants={30} savings={20} />
                 </div>
                 <div className="dashboard__graph-table">
-                    <Table3 />
+                    <Table />
                 </div>
             </div>
         </DashboardLayout>

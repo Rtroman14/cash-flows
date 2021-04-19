@@ -58,6 +58,7 @@ export default function FormDialog() {
                         label="Expense"
                         type="text"
                         fullWidth
+                        required
                     />
                     <NumberCell add />
                     <Select value="" add />

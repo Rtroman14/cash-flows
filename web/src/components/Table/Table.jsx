@@ -1,150 +1,76 @@
-import React, { useState } from "react";
+import React, { useContext } from "react";
 
-import Fab from "@material-ui/core/Fab";
-import AddIcon from "@material-ui/icons/Add";
-import Tooltip from "@material-ui/core/Tooltip";
+import { makeStyles } from "@material-ui/core/styles";
+
+import Table from "@material-ui/core/Table";
+import TableBody from "@material-ui/core/TableBody";
+import TableRow from "@material-ui/core/TableRow";
+import TableCell from "@material-ui/core/TableCell";
+import TableContainer from "@material-ui/core/TableContainer";
+import TableHead from "@material-ui/core/TableHead";
+import Paper from "@material-ui/core/Paper";
 import Chip from "@material-ui/core/Chip";
-import { HiArrowNarrowUp } from "@react-icons/all-files/hi/HiArrowNarrowUp";
-import { HiArrowNarrowDown } from "@react-icons/all-files/hi/HiArrowNarrowDown";
 
-import Row from "./components/Row_2";
-// import Row from "./components/Row";
+import Row from "./components/Row";
+import Dialog from "./components/Dialog";
 
-import "./Table.scss";
+import { FinancialContext } from "../../context/FinancialContext";
 
-const rowData = [
-    {
-        id: 1,
-        name: "Rent",
-        cost: 825,
-        category: "Needs",
-        percentIncome: 25,
-        percentCategory: 80,
+const useStyles = makeStyles({
+    table: {
+        minWidth: 650,
     },
-    {
-        id: 2,
-        name: "Renters Insurance",
-        cost: 15,
-        category: "Needs",
-        percentIncome: 5,
-        percentCategory: 10,
-    },
-    {
-        id: 3,
-        name: "Car Loan",
-        cost: 230,
-        category: "Needs",
-        percentIncome: 15,
-        percentCategory: 18,
-    },
-    {
-        id: 4,
-        name: "Car Insurance",
-        cost: 150,
-        category: "Needs",
-        percentIncome: 11,
-        percentCategory: 13,
-    },
-];
+});
 
-export default function Table() {
-    const [tableData, setTableData] = useState(rowData);
-    const [sortCost, setSortCost] = useState("");
+export default function BudgetTable() {
+    const { tableData, filterByCategory, sortRows } = useContext(FinancialContext);
 
-    const sortRows = field => {
-        const sortedRows = rowData.sort((a, b) => {
-            if (sortCost === "DESC" || "") {
-                setSortCost("ASC");
-                return b[field] - a[field];
-            }
-            setSortCost("DESC");
-            return a[field] - b[field];
-        });
-
-        setTableData([...sortedRows]);
-    };
-
-    const addNewRow = () => {
-        let rows = tableData;
-
-        const newRow = {
-            id: tableData.length + 1,
-            name: "",
-            cost: "",
-            category: "",
-            percentIncome: "",
-            percentCategory: "",
-        };
-
-        rows.push(newRow);
-
-        setTableData([...rows]);
-    };
+    const classes = useStyles();
 
     return (
-        <table className="table">
-            <thead>
-                <tr style={{ backgroundColor: "#F2F2F2" }}>
-                    <th></th>
-                    <th>Expense</th>
-                    <th>
-                        <div
-                            style={{
-                                display: "flex",
-                                alignItems: "center",
-                                justifyContent: "space-between",
-                            }}
-                        >
-                            <span
-                                style={{ cursor: "pointer", marginRight: "3px" }}
-                                onClick={() => sortRows("cost")}
-                            >
-                                Cost
-                            </span>
-                            <div>
-                                <HiArrowNarrowUp
-                                    style={{ marginRight: "-7px" }}
-                                    color={sortCost === "ASC" ? "black" : "grey"}
+        <TableContainer component={Paper}>
+            <Table className={classes.table} aria-label="simple table" dense>
+                <TableHead>
+                    <TableRow>
+                        <TableCell>Expense</TableCell>
+                        <TableCell onClick={sortRows} align="center">
+                            Cost
+                        </TableCell>
+                        <TableCell align="center">Category</TableCell>
+                        <TableCell align="center">% of Income</TableCell>
+                        <TableCell align="center">% of Category</TableCell>
+                        <TableCell align="center"></TableCell>
+                    </TableRow>
+                </TableHead>
+                <TableBody>
+                    {tableData.table.map(row => (
+                        <Row row={row} />
+                    ))}
+                    <TableRow key="addRow">
+                        <TableCell style={{ padding: "10px" }}>
+                            <Dialog />
+                        </TableCell>
+                        <TableCell></TableCell>
+                        <TableCell></TableCell>
+                        <TableCell colSpan="2" style={{ textAlign: "center" }}>
+                            {["All", "Needs", "Wants", "Savings"].map(category => (
+                                <Chip
+                                    className={
+                                        tableData.category === category.toLowerCase() &&
+                                        "chip-selected"
+                                    }
+                                    label={category}
+                                    component="span"
+                                    clickable
+                                    // variant="outlined"
+                                    onClick={() => filterByCategory(category.toLowerCase())}
                                 />
-                                <HiArrowNarrowDown color={sortCost === "DESC" ? "black" : "grey"} />
-                            </div>
-                        </div>
-                    </th>
-                    <th>Category</th>
-                    <th>% of Income</th>
-                    <th>% of Category</th>
-                </tr>
-            </thead>
-            <tbody>
-                {tableData.map(row => (
-                    <Row row={row} key={row.id} />
-                ))}
-                <tr>
-                    <td></td>
-                    <td>
-                        <Tooltip title="Add Row" placement="bottom" arrow>
-                            <Fab onClick={addNewRow} size="small" color="primary" aria-label="add">
-                                <AddIcon />
-                            </Fab>
-                        </Tooltip>
-                    </td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td>
-                        <div>
-                            <Chip label="Needs" component="span" clickable variant="outlined" />
-                            <Chip label="Wants" component="span" clickable variant="outlined" />
-                            <Chip label="Savings" component="span" clickable variant="outlined" />
-                        </div>
-                    </td>
-                </tr>
-            </tbody>
-        </table>
+                            ))}
+                        </TableCell>
+                        <TableCell></TableCell>
+                    </TableRow>
+                </TableBody>
+            </Table>
+        </TableContainer>
     );
 }
-
-// https://www.youtube.com/watch?v=t2ypzz6gJm0
-// https://material-ui.com/api/checkbox/
-
-// https://material-ui.com/components/cards/ - for PostPreview component

@@ -32,4 +32,18 @@
     & .MuiOutlinedInput-input {
         padding: 0;
     }
+
+    & tr {
+        &:hover {
+            background-color: $color-grey;
+        }
+    }
+
+    & .chip-selected {
+        // background-color: #3f51b5;
+        // background-color: $color-grey;
+
+        // color: white;
+        border: 1px solid black;
+    }
 }

@@ -56,6 +56,11 @@ const theme = createMuiTheme({
         //         fontFamily: '"Montserrat", sans-serif',
         //     },
         // },
+        MuiChip: {
+            label: {
+                fontFamily: '"Montserrat", sans-serif',
+            },
+        },
     },
 });
 

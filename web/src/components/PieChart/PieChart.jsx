@@ -1,11 +1,13 @@
-import React from "react";
+import React, { useContext } from "react";
 
 import Highcharts from "highcharts/highstock";
 import HighchartsReact from "highcharts-react-official";
 
 require("highcharts/modules/exporting")(Highcharts);
 
-const options = (needs, wants, savings) => {
+import { FinancialContext } from "../../context/FinancialContext";
+
+const options = (needs, wants, savings, filterByCategory) => {
     return {
         colors: Highcharts.map(Highcharts.getOptions().colors, function (color) {
             return {
@@ -56,7 +58,7 @@ const options = (needs, wants, savings) => {
                 // },
                 events: {
                     click: function (event) {
-                        alert(`Filter table to show: ${event.point.name}`);
+                        filterByCategory(event.point.name.toLowerCase());
                     },
                 },
             },
@@ -81,7 +83,14 @@ const options = (needs, wants, savings) => {
 };
 
 export default function PieChart({ needs, wants, savings }) {
-    return <HighchartsReact highcharts={Highcharts} options={options(needs, wants, savings)} />;
+    const { filterByCategory } = useContext(FinancialContext);
+
+    return (
+        <HighchartsReact
+            highcharts={Highcharts}
+            options={options(needs, wants, savings, filterByCategory)}
+        />
+    );
 }
 
 // https://stackoverflow.com/questions/31970780/highcharts-pie-chart-specify-pie-slice-gradient-color

@@ -1,8 +1,10 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 
 import TextField from "@material-ui/core/TextField";
 import PropTypes from "prop-types";
 import NumberFormat from "react-number-format";
+
+import { FinancialContext } from "../../../context/FinancialContext";
 
 function NumberFormatCustom(props) {
     const { inputRef, onChange, ...other } = props;
@@ -32,7 +34,9 @@ NumberFormatCustom.propTypes = {
     onChange: PropTypes.func.isRequired,
 };
 
-export default function Cell({ value, add }) {
+export default function Cell({ value, add, id }) {
+    const { editCell } = useContext(FinancialContext);
+
     const [values, setValues] = useState({
         numberformat: value,
     });
@@ -55,6 +59,7 @@ export default function Cell({ value, add }) {
                     autoFocus
                     label="Cost"
                     name="numberformat"
+                    required
                     InputProps={{
                         inputComponent: NumberFormatCustom,
                     }}
@@ -64,6 +69,7 @@ export default function Cell({ value, add }) {
                     variant="outlined"
                     value={values.numberformat}
                     onChange={handleChange}
+                    onBlur={() => editCell(id, "cost", values.numberformat)}
                     name="numberformat"
                     InputProps={{
                         inputComponent: NumberFormatCustom,
