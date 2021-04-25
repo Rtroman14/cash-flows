@@ -20,6 +20,7 @@ export function FinancialProvider(props) {
         // always filter userData based on tableData.category and sortCost
         // if stall time when updating database before changes are reflected to interface then render loading component
 
+        // financialContext
         console.log(`tableData changed!`);
     }, [tableData]);
 
