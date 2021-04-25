@@ -11,6 +11,9 @@ import TableHead from "@material-ui/core/TableHead";
 import Paper from "@material-ui/core/Paper";
 import Chip from "@material-ui/core/Chip";
 
+import { HiOutlineArrowUp } from "@react-icons/all-files/hi/HiOutlineArrowUp";
+import { HiOutlineArrowDown } from "@react-icons/all-files/hi/HiOutlineArrowDown";
+
 import Row from "./components/Row";
 import Dialog from "./components/Dialog";
 
@@ -33,8 +36,20 @@ export default function BudgetTable() {
                 <TableHead>
                     <TableRow>
                         <TableCell>Expense</TableCell>
-                        <TableCell onClick={sortRows} align="center">
-                            Cost
+                        <TableCell align="center">
+                            <div
+                                onClick={sortRows}
+                                style={{ display: "inline-block", cursor: "pointer" }}
+                            >
+                                Cost
+                            </div>
+                            <div style={{ display: "inline-block" }}>
+                                {tableData.sortCost === "" ? null : tableData.sortCost === "ASC" ? (
+                                    <HiOutlineArrowUp />
+                                ) : (
+                                    <HiOutlineArrowDown />
+                                )}
+                            </div>
                         </TableCell>
                         <TableCell align="center">Category</TableCell>
                         <TableCell align="center">% of Income</TableCell>

@@ -1,4 +1,6 @@
-import React, { createContext, useState } from "react";
+import React, { createContext, useState, useEffect } from "react";
+import { v4 as uuidv4 } from "uuid";
+// uuidv4(); // ⇨ '9b1deb4d-3b7d-4bad-9bdd-2b0d7b3dcb6d'
 
 import { data } from "./data";
 
@@ -8,9 +10,15 @@ export function FinancialProvider(props) {
     const [userData, setUserData] = useState(data);
     const [tableData, setTableData] = useState({
         table: data,
-        category: "All",
+        category: "all",
         sortCost: "",
     });
+
+    useEffect(() => {
+        // Update the document title using the browser API
+        console.log(`tableData changed!`);
+    }, [tableData]);
+
     const [emergencyFund, setEmergencyFund] = useState(
         userData.filter(row => row.category === "needs").reduce((a, b) => a + b.cost, 0) * 6
     );
@@ -74,8 +82,13 @@ export function FinancialProvider(props) {
         });
     };
 
-    const addRow = () => {
-        console.log("Add Row");
+    const addRow = (expense, cost, category) => {
+        const newRow = { id: uuidv4(), expense, cost: Number(cost), category };
+        setUserData([...userData, newRow]);
+        setTableData({
+            ...tableData,
+            table: [...tableData.table, newRow],
+        });
     };
 
     const [income, setIncome] = useState({
@@ -101,6 +114,7 @@ export function FinancialProvider(props) {
                 filterByCategory,
                 sortRows,
                 editCell,
+                addRow,
             }}
         >
             {props.children}
