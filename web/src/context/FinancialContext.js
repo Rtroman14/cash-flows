@@ -1,6 +1,5 @@
 import React, { createContext, useState, useEffect } from "react";
 import { v4 as uuidv4 } from "uuid";
-// uuidv4(); // ⇨ '9b1deb4d-3b7d-4bad-9bdd-2b0d7b3dcb6d'
 
 import { data } from "./data";
 
@@ -15,7 +14,12 @@ export function FinancialProvider(props) {
     });
 
     useEffect(() => {
-        // Update the document title using the browser API
+        // watch userData for changes
+        // make changes to userData, then update tableData
+
+        // always filter userData based on tableData.category and sortCost
+        // if stall time when updating database before changes are reflected to interface then render loading component
+
         console.log(`tableData changed!`);
     }, [tableData]);
 
