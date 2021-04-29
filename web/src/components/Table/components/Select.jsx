@@ -1,6 +1,5 @@
 import React, { useState, useContext } from "react";
 import { makeStyles } from "@material-ui/core/styles";
-import InputLabel from "@material-ui/core/InputLabel";
 import MenuItem from "@material-ui/core/MenuItem";
 import FormControl from "@material-ui/core/FormControl";
 import Select from "@material-ui/core/Select";
@@ -14,9 +13,14 @@ const useStyles = makeStyles(theme => ({
     selectEmpty: {
         marginTop: theme.spacing(2),
     },
+    disabledSelect: {
+        "& .MuiInputBase-root.Mui-disabled": {
+            color: "black",
+        },
+    },
 }));
 
-export default function SimpleSelect({ value, add, id }) {
+export default function SimpleSelect({ value, id }) {
     const { editCell } = useContext(FinancialContext);
 
     const classes = useStyles();
@@ -35,39 +39,24 @@ export default function SimpleSelect({ value, add, id }) {
     };
 
     return (
-        <>
-            {add ? (
-                <FormControl required variant="outlined" className={classes.formControl}>
-                    <InputLabel id="addCategory">Category</InputLabel>
-                    <Select
-                        style={{ fontFamily: '"Montserrat", sans-serif', marginTop: "8px" }}
-                        margin="dense"
-                        labelId="addCategory"
-                        value={addCategory}
-                        onChange={handleAddCategory}
-                    >
-                        <MenuItem value="needs">Needs</MenuItem>
-                        <MenuItem value="wants">Wants</MenuItem>
-                        <MenuItem value="savings">Savings</MenuItem>
-                    </Select>
-                </FormControl>
-            ) : (
-                <FormControl variant="outlined" className={classes.formControl}>
-                    <Select
-                        // style={{ padding: "8px 8px 9px 0" }}
-                        // style={{ padding: "1.2em 1.5em 1.1em 0" }}
-                        className={category === "needs" ? "needs" : "savings"}
-                        labelId="demo-simple-select-outlined-label"
-                        id="demo-simple-select-outlined"
-                        value={category}
-                        onChange={handleChange}
-                    >
-                        <MenuItem value="needs">Needs</MenuItem>
-                        <MenuItem value="wants">Wants</MenuItem>
-                        <MenuItem value="savings">Savings</MenuItem>
-                    </Select>
-                </FormControl>
-            )}
-        </>
+        <FormControl
+            variant="outlined"
+            className={`${classes.formControl} ${classes.disabledSelect}`}
+        >
+            <Select
+                // style={{ padding: "8px 8px 9px 0" }}
+                // style={{ padding: "1.2em 1.5em 1.1em 0" }}
+                className={category === "needs" ? "needs" : "savings"}
+                labelId="demo-simple-select-outlined-label"
+                id="demo-simple-select-outlined"
+                value={category}
+                onChange={handleChange}
+                disabled={id === "leftoverWants"}
+            >
+                <MenuItem value="needs">Needs</MenuItem>
+                <MenuItem value="wants">Wants</MenuItem>
+                <MenuItem value="savings">Savings</MenuItem>
+            </Select>
+        </FormControl>
     );
 }

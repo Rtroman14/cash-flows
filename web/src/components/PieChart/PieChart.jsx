@@ -57,9 +57,7 @@ const options = (needs, wants, savings, filterByCategory) => {
                 //     duration: 1000,
                 // },
                 events: {
-                    click: function (event) {
-                        filterByCategory(event.point.name.toLowerCase());
-                    },
+                    click: event => filterByCategory(event.point.name.toLowerCase()),
                 },
             },
         },
@@ -82,8 +80,12 @@ const options = (needs, wants, savings, filterByCategory) => {
     };
 };
 
-export default function PieChart({ needs, wants, savings }) {
-    const { filterByCategory } = useContext(FinancialContext);
+export default function PieChart() {
+    const { filterByCategory, categories, income } = useContext(FinancialContext);
+
+    const needs = categories.needs / income.net;
+    const wants = categories.wants / income.net;
+    const savings = categories.savings / income.net;
 
     return (
         <HighchartsReact

@@ -11,6 +11,8 @@ import TableHead from "@material-ui/core/TableHead";
 import Paper from "@material-ui/core/Paper";
 import Chip from "@material-ui/core/Chip";
 
+import Switches from "../Switch/Switch";
+
 import { HiOutlineArrowUp } from "@react-icons/all-files/hi/HiOutlineArrowUp";
 import { HiOutlineArrowDown } from "@react-icons/all-files/hi/HiOutlineArrowDown";
 
@@ -26,7 +28,7 @@ const useStyles = makeStyles({
 });
 
 export default function BudgetTable() {
-    const { tableData, filterByCategory, sortRows } = useContext(FinancialContext);
+    const { tableData, userData, filterByCategory, sortRows } = useContext(FinancialContext);
 
     const classes = useStyles();
 
@@ -54,7 +56,9 @@ export default function BudgetTable() {
                         <TableCell align="center">Category</TableCell>
                         <TableCell align="center">% of Income</TableCell>
                         <TableCell align="center">% of Category</TableCell>
-                        <TableCell align="center"></TableCell>
+                        <TableCell align="center">
+                            <Switches />
+                        </TableCell>
                     </TableRow>
                 </TableHead>
                 <TableBody>
@@ -71,7 +75,7 @@ export default function BudgetTable() {
                             {["All", "Needs", "Wants", "Savings"].map(category => (
                                 <Chip
                                     className={
-                                        tableData.category === category.toLowerCase() &&
+                                        userData.category === category.toLowerCase() &&
                                         "chip-selected"
                                     }
                                     label={category}

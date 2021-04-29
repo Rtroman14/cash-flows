@@ -88,8 +88,13 @@ export default function FormDialog() {
     return (
         <div>
             <Tooltip title="Add Row" placement="bottom" arrow>
-                <Fab onClick={handleClickOpen} size="small" color="primary" aria-label="add">
-                    <AddIcon />
+                <Fab
+                    onClick={handleClickOpen}
+                    size="small"
+                    style={{ backgroundColor: "#121a27" }}
+                    aria-label="add"
+                >
+                    <AddIcon style={{ color: "white" }} />
                 </Fab>
             </Tooltip>
             <Dialog
@@ -103,10 +108,10 @@ export default function FormDialog() {
                     validationSchema={validationSchema}
                     onSubmit={(values, { setSubmitting }) => {
                         setTimeout(() => {
-                            alert(JSON.stringify(values, null, 2));
+                            // alert(JSON.stringify(values, null, 2));
                             setSubmitting(false);
                             addRow(values.expense, values.cost, values.category);
-                        }, 400);
+                        }, 0);
                     }}
                 >
                     {({ values, handleSubmit, setFieldValue }) => (
@@ -154,12 +159,12 @@ export default function FormDialog() {
                                 </Field>
                             </DialogContent>
                             <DialogActions>
-                                <Button onClick={handleClose} color="primary">
+                                <Button onClick={handleClose} color="#121a27">
                                     Cancel
                                 </Button>
                                 <Button
                                     onClick={handleClose}
-                                    color="primary"
+                                    color="#121a27"
                                     type="submit"
                                     disabled={
                                         values.expense === "" ||

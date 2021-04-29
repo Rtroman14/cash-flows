@@ -34,8 +34,8 @@ NumberFormatCustom.propTypes = {
     onChange: PropTypes.func.isRequired,
 };
 
-export default function Cell({ value, add, id }) {
-    const { editCell } = useContext(FinancialContext);
+export default function Cell({ value, id, classes }) {
+    const { editCell, isBlur } = useContext(FinancialContext);
 
     const [values, setValues] = useState({
         numberformat: value,
@@ -48,34 +48,29 @@ export default function Cell({ value, add, id }) {
         });
     };
 
+    let blur = {
+        filter: "blur(0px)",
+    };
+
+    if (isBlur) {
+        blur = {
+            filter: "blur(5px)",
+        };
+    }
+
     return (
-        <>
-            {add ? (
-                <TextField
-                    variant="outlined"
-                    onChange={handleChange}
-                    margin="dense"
-                    fullWidth
-                    autoFocus
-                    label="Cost"
-                    name="numberformat"
-                    required
-                    InputProps={{
-                        inputComponent: NumberFormatCustom,
-                    }}
-                />
-            ) : (
-                <TextField
-                    variant="outlined"
-                    value={values.numberformat}
-                    onChange={handleChange}
-                    onBlur={() => editCell(id, "cost", values.numberformat)}
-                    name="numberformat"
-                    InputProps={{
-                        inputComponent: NumberFormatCustom,
-                    }}
-                />
-            )}
-        </>
+        <TextField
+            className={classes}
+            style={blur}
+            variant="outlined"
+            value={values.numberformat}
+            onChange={handleChange}
+            disabled={id === "leftoverWants"}
+            onBlur={() => editCell(id, "cost", values.numberformat)}
+            name="numberformat"
+            InputProps={{
+                inputComponent: NumberFormatCustom,
+            }}
+        />
     );
 }

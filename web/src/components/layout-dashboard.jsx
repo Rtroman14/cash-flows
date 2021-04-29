@@ -32,11 +32,6 @@ const theme = createMuiTheme({
                 width: "100%",
             },
         },
-        // MuiOutlinedInput: {
-        //     input: {
-        //         padding: "0",
-        //     },
-        // },
         MuiSelect: {
             select: {
                 paddingRight: "0",
@@ -51,11 +46,6 @@ const theme = createMuiTheme({
                 fontSize: "15px",
             },
         },
-        // MuiInputBase: {
-        //     base: {
-        //         fontFamily: '"Montserrat", sans-serif',
-        //     },
-        // },
         MuiChip: {
             label: {
                 fontFamily: '"Montserrat", sans-serif',

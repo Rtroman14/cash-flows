@@ -13,6 +13,10 @@
         font-size: 15px;
     }
 
+    & .MuiTableCell-head {
+        color: white;
+    }
+
     & .MuiTableCell-head:nth-child(2) {
         width: 8em;
     }
@@ -26,7 +30,8 @@
     }
 
     & .MuiTableHead-root {
-        background-color: $color-grey;
+        // background-color: $color-grey;
+        background-color: #121a27;
     }
 
     & .MuiOutlinedInput-input {
@@ -34,8 +39,9 @@
     }
 
     & tr {
-        &:hover {
-            background-color: $color-grey;
+        &:hover:not(:last-child) {
+            // background-color: $color-grey;
+            background-color: rgba(18, 26, 39, 0.1);
         }
     }
 
