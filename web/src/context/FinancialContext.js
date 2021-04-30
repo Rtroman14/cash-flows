@@ -27,10 +27,14 @@ export function FinancialProvider(props) {
         });
 
         updateCategories();
-        // updateWants();
+
+        setEmergencyFund(
+            userData.data.filter(row => row.category === "needs").reduce((a, b) => a + b.cost, 0) *
+                6
+        );
 
         console.log(`userData changed!`);
-    }, [userData]);
+    }, [userData, income]);
 
     const addRow = (expense, cost, category) => {
         const newRow = { id: uuidv4(), expense, cost: Number(cost), category };
@@ -92,28 +96,10 @@ export function FinancialProvider(props) {
         net: 3580,
         gross: 5000,
     });
-
     const handleIncomeChange = event => {
         setIncome({
             ...income,
             [event.target.name]: Number(event.target.value.replace(/[^0-9\.]+/g, "")),
-        });
-
-        updateWants();
-    };
-
-    const updateWants = () => {
-        const wantsSum = userData.data
-            .filter(row => row.id !== "leftoverWants")
-            .reduce((a, b) => a + b.cost, 0);
-
-        const updatedWants = userData.data.map(data =>
-            data.id === "leftoverWants" ? { ...data, cost: income.net - wantsSum } : data
-        );
-
-        setUserData({
-            ...userData,
-            data: updatedWants,
         });
     };
 
@@ -123,14 +109,7 @@ export function FinancialProvider(props) {
     const [retirementFund, setRetirementFund] = useState(income.gross * 0.1);
 
     useEffect(() => {
-        setEmergencyFund(
-            userData.data.filter(row => row.category === "needs").reduce((a, b) => a + b.cost, 0) *
-                6
-        );
-
         setRetirementFund(income.gross * 0.1);
-
-        updateWants();
 
         console.log("Update emergency fund");
     }, [income]);
@@ -166,6 +145,28 @@ export function FinancialProvider(props) {
 
     const toggleBlur = () => setIsBlur(!isBlur);
 
+    // ------------ WANTS ------------ //
+
+    const [wants, setWants] = useState({
+        id: "leftoverWants",
+        expense: "Wants",
+        cost:
+            income.net -
+            userData.data.filter(row => row.id !== "leftoverWants").reduce((a, b) => a + b.cost, 0),
+        category: "wants",
+    });
+
+    const updateWants = () => {
+        const wantsSum =
+            income.net -
+            userData.data.filter(row => row.id !== "leftoverWants").reduce((a, b) => a + b.cost, 0);
+
+        setWants({
+            ...wants,
+            cost: wantsSum,
+        });
+    };
+
     return (
         <FinancialContext.Provider
             value={{
@@ -193,3 +194,7 @@ export function FinancialProvider(props) {
 // ----- NOTES -----
 // remove wants from userData list and make into own state
 // on each update of userData, spread "wants" in
+
+// update income or userData
+// update wants
+// set table
