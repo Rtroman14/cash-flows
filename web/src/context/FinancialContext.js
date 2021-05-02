@@ -16,52 +16,74 @@ export function FinancialProvider(props) {
     });
 
     useEffect(() => {
-        const displayTable =
-            userData.category === "all"
-                ? userData.data
-                : userData.data.filter(row => row.category === userData.category);
+        const updatedWants = updateWants(userData.data);
 
-        setTableData({
-            ...tableData,
-            table: displayTable,
+        setUserData({
+            ...userData,
+            data: updatedWants,
         });
 
-        updateCategories();
-
-        setEmergencyFund(
-            userData.data.filter(row => row.category === "needs").reduce((a, b) => a + b.cost, 0) *
-                6
-        );
-
-        console.log(`userData changed!`);
-    }, [userData, income]);
+        updateTableData();
+    }, []);
 
     const addRow = (expense, cost, category) => {
         const newRow = { id: uuidv4(), expense, cost: Number(cost), category };
-        setUserData({
-            ...userData,
-            data: [...userData.data, newRow],
-        });
-    };
-
-    const editCell = (id, field, newValue) => {
-        let value = field === "cost" ? Number(newValue) : newValue;
-        const editedRow = userData.data.map(row =>
-            row.id === id ? { ...row, [field]: value } : row
-        );
+        const newUserData = [...userData.data, newRow];
+        const updatedWants = updateWants(newUserData);
 
         setUserData({
             ...userData,
-            data: editedRow,
+            data: updatedWants,
         });
+
+        updateTableData();
     };
 
     const deleteRow = id => {
         const removedRow = userData.data.filter(row => row.id !== id);
+        const updatedWants = updateWants(removedRow);
 
         setUserData({
             ...userData,
-            data: removedRow,
+            data: updatedWants,
+        });
+
+        updateTableData();
+    };
+
+    const editCell = (id, field, newValue) => {
+        const value = field === "cost" ? Number(newValue) : newValue;
+        const editedRow = userData.data.map(row =>
+            row.id === id ? { ...row, [field]: value } : row
+        );
+        const updatedWants = updateWants(editedRow);
+
+        setUserData({
+            ...userData,
+            data: updatedWants,
+        });
+
+        updateTableData();
+    };
+
+    const updateWants = newUserData => {
+        const wantsCost =
+            income.net -
+            newUserData.filter(row => row.id !== "leftoverWants").reduce((a, b) => a + b.cost, 0);
+
+        return newUserData.map(row =>
+            row.id === "leftoverWants" ? { ...row, cost: wantsCost } : row
+        );
+    };
+    const updateTableData = () => {
+        console.log("category", userData.category);
+        const filteredTable = userData.data.filter(data => data.category === userData.category);
+
+        console.log("filteredTable", filteredTable);
+
+        setTableData({
+            ...tableData,
+            table: filteredTable,
         });
     };
 
@@ -86,11 +108,19 @@ export function FinancialProvider(props) {
         });
     };
 
-    const filterByCategory = category =>
+    const filterByCategory = category => {
+        const filteredTable = userData.filter(data => data.category === category);
+
         setUserData({
             ...userData,
             category,
         });
+
+        setTableData({
+            ...tableData,
+            table: filteredTable,
+        });
+    };
 
     const [income, setIncome] = useState({
         net: 3580,
@@ -108,11 +138,11 @@ export function FinancialProvider(props) {
     );
     const [retirementFund, setRetirementFund] = useState(income.gross * 0.1);
 
-    useEffect(() => {
-        setRetirementFund(income.gross * 0.1);
+    // useEffect(() => {
+    //     setRetirementFund(income.gross * 0.1);
 
-        console.log("Update emergency fund");
-    }, [income]);
+    //     console.log("Update emergency fund");
+    // }, [income]);
 
     const [categories, setCategories] = useState({
         needs: userData.data
@@ -142,30 +172,7 @@ export function FinancialProvider(props) {
     // ------------ TOGGLE BLUR ------------ //
 
     const [isBlur, setIsBlur] = useState(false);
-
     const toggleBlur = () => setIsBlur(!isBlur);
-
-    // ------------ WANTS ------------ //
-
-    const [wants, setWants] = useState({
-        id: "leftoverWants",
-        expense: "Wants",
-        cost:
-            income.net -
-            userData.data.filter(row => row.id !== "leftoverWants").reduce((a, b) => a + b.cost, 0),
-        category: "wants",
-    });
-
-    const updateWants = () => {
-        const wantsSum =
-            income.net -
-            userData.data.filter(row => row.id !== "leftoverWants").reduce((a, b) => a + b.cost, 0);
-
-        setWants({
-            ...wants,
-            cost: wantsSum,
-        });
-    };
 
     return (
         <FinancialContext.Provider
