@@ -23,8 +23,12 @@ export function FinancialProvider(props) {
             data: updatedWants,
         });
 
-        updateTableData();
+        // updateTableData();
     }, []);
+
+    useEffect(() => {
+        updateTableData();
+    }, [userData]);
 
     const addRow = (expense, cost, category) => {
         const newRow = { id: uuidv4(), expense, cost: Number(cost), category };
@@ -36,7 +40,7 @@ export function FinancialProvider(props) {
             data: updatedWants,
         });
 
-        updateTableData();
+        // updateTableData();
     };
 
     const deleteRow = id => {
@@ -48,7 +52,7 @@ export function FinancialProvider(props) {
             data: updatedWants,
         });
 
-        updateTableData();
+        // updateTableData();
     };
 
     const editCell = (id, field, newValue) => {
@@ -63,7 +67,7 @@ export function FinancialProvider(props) {
             data: updatedWants,
         });
 
-        updateTableData();
+        // updateTableData();
     };
 
     const updateWants = newUserData => {
@@ -76,15 +80,19 @@ export function FinancialProvider(props) {
         );
     };
     const updateTableData = () => {
-        console.log("category", userData.category);
-        const filteredTable = userData.data.filter(data => data.category === userData.category);
-
-        console.log("filteredTable", filteredTable);
+        const filteredTable =
+            userData.category === "all"
+                ? userData.data
+                : userData.data.filter(row => row.category === userData.category);
 
         setTableData({
             ...tableData,
             table: filteredTable,
         });
+
+        updateCategories();
+
+        console.log("updateTableData ran");
     };
 
     const sortRows = () => {
@@ -109,17 +117,12 @@ export function FinancialProvider(props) {
     };
 
     const filterByCategory = category => {
-        const filteredTable = userData.filter(data => data.category === category);
-
         setUserData({
             ...userData,
             category,
         });
 
-        setTableData({
-            ...tableData,
-            table: filteredTable,
-        });
+        updateTableData();
     };
 
     const [income, setIncome] = useState({
