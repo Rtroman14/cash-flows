@@ -15,13 +15,14 @@ import DashboardLayout from "../../components/layout-dashboard";
 
 import { FinancialContext } from "../../context/FinancialContext";
 
-export default function BudgetPie(props) {
+export default function BudgetPie() {
     const { income, emergencyFund, retirementFund } = useContext(FinancialContext);
 
     return (
         <DashboardLayout>
             <div className="dashboard__graph-budget">
                 <Card
+                    key={income.gross}
                     name="gross"
                     title="Gross Income"
                     amount={income.gross}
@@ -30,6 +31,7 @@ export default function BudgetPie(props) {
                     edit
                 />
                 <Card
+                    key={income.net}
                     name="net"
                     title="Net Income"
                     amount={income.net}
@@ -38,6 +40,7 @@ export default function BudgetPie(props) {
                     edit
                 />
                 <Card
+                    key={emergencyFund}
                     name="fund"
                     title="Emergency Fund"
                     amount={emergencyFund}
@@ -46,6 +49,7 @@ export default function BudgetPie(props) {
                     edit={false}
                 />
                 <Card
+                    key={retirementFund}
                     name="retirement"
                     title="10% for Retirement"
                     amount={retirementFund}

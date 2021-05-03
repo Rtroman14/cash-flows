@@ -23,12 +23,21 @@ export function FinancialProvider(props) {
             data: updatedWants,
         });
 
-        // updateTableData();
+        console.log("useEffect []");
     }, []);
 
     useEffect(() => {
         updateTableData();
-    }, [userData]);
+
+        setEmergencyFund(
+            userData.data.filter(row => row.category === "needs").reduce((a, b) => a + b.cost, 0) *
+                6
+        );
+
+        updateCategories();
+
+        console.log("useEffect [userData]");
+    }, [userData, income]);
 
     const addRow = (expense, cost, category) => {
         const newRow = { id: uuidv4(), expense, cost: Number(cost), category };
@@ -39,8 +48,6 @@ export function FinancialProvider(props) {
             ...userData,
             data: updatedWants,
         });
-
-        // updateTableData();
     };
 
     const deleteRow = id => {
@@ -51,8 +58,6 @@ export function FinancialProvider(props) {
             ...userData,
             data: updatedWants,
         });
-
-        // updateTableData();
     };
 
     const editCell = (id, field, newValue) => {
@@ -66,8 +71,6 @@ export function FinancialProvider(props) {
             ...userData,
             data: updatedWants,
         });
-
-        // updateTableData();
     };
 
     const updateWants = newUserData => {
@@ -89,8 +92,6 @@ export function FinancialProvider(props) {
             ...tableData,
             table: filteredTable,
         });
-
-        updateCategories();
 
         console.log("updateTableData ran");
     };
@@ -121,8 +122,6 @@ export function FinancialProvider(props) {
             ...userData,
             category,
         });
-
-        updateTableData();
     };
 
     const [income, setIncome] = useState({
@@ -136,16 +135,14 @@ export function FinancialProvider(props) {
         });
     };
 
+    useEffect(() => {
+        setRetirementFund(income.gross * 0.1);
+    }, [income.gross]);
+
     const [emergencyFund, setEmergencyFund] = useState(
         userData.data.filter(row => row.category === "needs").reduce((a, b) => a + b.cost, 0) * 6
     );
     const [retirementFund, setRetirementFund] = useState(income.gross * 0.1);
-
-    // useEffect(() => {
-    //     setRetirementFund(income.gross * 0.1);
-
-    //     console.log("Update emergency fund");
-    // }, [income]);
 
     const [categories, setCategories] = useState({
         needs: userData.data
@@ -200,11 +197,3 @@ export function FinancialProvider(props) {
         </FinancialContext.Provider>
     );
 }
-
-// ----- NOTES -----
-// remove wants from userData list and make into own state
-// on each update of userData, spread "wants" in
-
-// update income or userData
-// update wants
-// set table

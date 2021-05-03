@@ -1,4 +1,4 @@
-import React, { useState, useContext } from "react";
+import React, { useState, useContext, useEffect } from "react";
 
 import TextField from "@material-ui/core/TextField";
 import PropTypes from "prop-types";
@@ -37,37 +37,26 @@ NumberFormatCustom.propTypes = {
 export default function Cell({ value, id, classes }) {
     const { editCell, isBlur } = useContext(FinancialContext);
 
-    const [values, setValues] = useState({
-        numberformat: value,
-    });
+    const [cost, setCost] = useState(value);
 
-    const handleChange = event => {
-        setValues({
-            ...values,
-            [event.target.name]: event.target.value,
-        });
-    };
-
-    let blur = {
-        filter: "blur(0px)",
-    };
-
-    if (isBlur) {
-        blur = {
-            filter: "blur(5px)",
-        };
-    }
+    let blur = isBlur
+        ? {
+              filter: "blur(5px)",
+          }
+        : {
+              filter: "blur(0px)",
+          };
 
     return (
         <TextField
             className={classes}
             style={blur}
             variant="outlined"
-            value={values.numberformat}
-            onChange={handleChange}
+            value={cost}
+            onChange={event => setCost(event.target.value)}
             disabled={id === "leftoverWants"}
-            onBlur={() => editCell(id, "cost", values.numberformat)}
-            name="numberformat"
+            onBlur={() => editCell(id, "cost", cost)}
+            name="cellCost"
             InputProps={{
                 inputComponent: NumberFormatCustom,
             }}

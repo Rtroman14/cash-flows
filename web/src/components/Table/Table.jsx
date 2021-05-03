@@ -11,7 +11,7 @@ import TableHead from "@material-ui/core/TableHead";
 import Paper from "@material-ui/core/Paper";
 import Chip from "@material-ui/core/Chip";
 
-import Switches from "../Switch/Switch";
+import Peak from "../Peak/Peak";
 
 import { HiOutlineArrowUp } from "@react-icons/all-files/hi/HiOutlineArrowUp";
 import { HiOutlineArrowDown } from "@react-icons/all-files/hi/HiOutlineArrowDown";
@@ -57,7 +57,7 @@ export default function BudgetTable() {
                         <TableCell align="center">% of Income</TableCell>
                         <TableCell align="center">% of Category</TableCell>
                         <TableCell align="center">
-                            <Switches />
+                            <Peak />
                         </TableCell>
                     </TableRow>
                 </TableHead>

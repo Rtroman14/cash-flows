@@ -38,34 +38,22 @@ NumberFormatCustom.propTypes = {
 export default function Input({ amount, name, edit }) {
     const { isBlur, handleIncomeChange } = useContext(FinancialContext);
 
-    const [values, setValues] = useState({ numberformat: amount });
+    const [value, setValue] = useState(amount);
 
-    const handleChange = event => {
-        setValues({
-            ...values,
-            // [event.target.name]: event.target.value,
-            numberformat: event.target.value,
-        });
-    };
-
-    const handleBlur = event => handleIncomeChange(event);
-
-    let blur = {
-        filter: "blur(0px)",
-    };
-
-    if (isBlur) {
-        blur = {
-            filter: "blur(8px)",
-        };
-    }
+    let blur = isBlur
+        ? {
+              filter: "blur(8px)",
+          }
+        : {
+              filter: "blur(0px)",
+          };
 
     return (
         <TextField
             variant="outlined"
-            value={values.numberformat}
-            onChange={handleChange}
-            onBlur={handleBlur}
+            value={value}
+            onChange={event => setValue(event.target.value)}
+            onBlur={handleIncomeChange}
             style={blur}
             disabled={!edit}
             name={name}
