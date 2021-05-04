@@ -110,7 +110,7 @@ export default function FormDialog() {
                         setTimeout(() => {
                             // alert(JSON.stringify(values, null, 2));
                             setSubmitting(false);
-                            addRow(values.expense, values.cost, values.category);
+                            addRow(values);
                         }, 0);
                     }}
                 >

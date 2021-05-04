@@ -39,8 +39,13 @@ export function FinancialProvider(props) {
         console.log("useEffect [userData]");
     }, [userData, income]);
 
-    const addRow = (expense, cost, category) => {
-        const newRow = { id: uuidv4(), expense, cost: Number(cost), category };
+    const addRow = row => {
+        const newRow = {
+            id: uuidv4(),
+            expense: row.expense,
+            cost: Number(row.cost),
+            category: row.category,
+        };
         const newUserData = [...userData.data, newRow];
         const updatedWants = updateWants(newUserData);
 
