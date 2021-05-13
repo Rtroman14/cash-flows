@@ -34,3 +34,14 @@ export default function Investing() {
 // investment amount? (monthly or annual) - start with amount from 50/30/20
 // age want to retire? give user monthly/annual investment amount needed
 // desired amount at retirement? give user retirement age based off investment amount
+
+// const initialAge = 25;
+// const monthlyInvestment = 500;
+// const retirementAge = 60;
+
+// for (let age = initialAge; age < retirementAge; age++) {
+
+//     for(let month = 1; month <= 12; month++) {
+
+//     }
+// }

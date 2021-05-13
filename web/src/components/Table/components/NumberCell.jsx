@@ -39,6 +39,12 @@ export default function Cell({ value, id, classes }) {
 
     const [cost, setCost] = useState(value);
 
+    // useMemo??
+    // useEffect(() => {
+    //     setCost(value);
+    //     console.log("Update value");
+    // }, [value]);
+
     let blur = isBlur
         ? {
               filter: "blur(5px)",
