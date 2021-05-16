@@ -8,7 +8,7 @@ import Author from "../Author/Author";
 
 import "./PostPreview.scss";
 
-import { PostContext } from "../../context/PostContext";
+import { PostContext } from "../../context/post/PostContext";
 
 export default function PostPreview({ post }) {
     const { handleClickCategory } = useContext(PostContext) || "";

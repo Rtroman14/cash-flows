@@ -1,7 +1,7 @@
 import React, { createContext } from "react";
 import { v4 as uuidv4 } from "uuid";
 
-import { data } from "./data";
+import { data } from "../data";
 
 export const FinancialContext = createContext();
 const initialState = {
@@ -63,3 +63,4 @@ export const userDataReducer = (state, action) => {
             return state;
     }
 };
+// https://youtu.be/zxP4oGejqpU?t=1438

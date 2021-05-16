@@ -7,7 +7,7 @@ import Tabs from "../components/Tabs/Tabs";
 import ShowMorePosts from "../components/ShowMorePosts/ShowMorePosts";
 import Subscribe from "../components/Subscribe/Subscribe";
 
-import { PostProvider } from "../context/PostContext";
+import { PostProvider } from "../context/post/PostContext";
 
 const BlogPage = ({ data }) => {
     const { nodes } = data.allSanityPost;

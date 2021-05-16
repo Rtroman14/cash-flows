@@ -1,7 +1,7 @@
 import React, { useContext } from "react";
 
 import PostPreview from "../PostPreview/PostPreview";
-import { PostContext } from "../../context/PostContext";
+import { PostContext } from "../../context/post/PostContext";
 
 import "./PostPreviewCollection.scss";
 
