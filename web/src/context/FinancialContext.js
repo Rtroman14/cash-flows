@@ -169,16 +169,16 @@ export function FinancialProvider(props) {
     const toggleBlur = () => setIsBlur(!isBlur);
 
     // ------------------ useEFFECT ------------------ //
-    // useEffect(() => {
-    //     const updatedWants = updateWants(userData.data);
+    useEffect(() => {
+        const updatedWants = updateWants(userData.data);
 
-    //     setUserData({
-    //         ...userData,
-    //         data: updatedWants,
-    //     });
+        dispatch({
+            type: ADD_ROW,
+            payload: updatedWants,
+        });
 
-    //     console.log("useEffect []");
-    // }, []);
+        console.log("useEffect []");
+    }, []);
 
     useEffect(() => {
         updateTableData();
