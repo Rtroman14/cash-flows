@@ -1,4 +1,4 @@
-import React, { createContext, useReducer } from "react";
+import React, { createContext, useReducer, useState, useEffect } from "react";
 import { v4 as uuidv4 } from "uuid";
 
 import { userDataReducer } from "./reducers";
@@ -6,9 +6,9 @@ import { ADD_ROW, DELETE_ROW, EDIT_CELL, FILTER_BY_CATEGORY } from "./actions";
 
 import { data } from "../data";
 
-export const FinanceContext = createContext();
+export const FinancialContext = createContext();
 
-export function FinanceProvider(props) {
+export function FinancialProvider(props) {
     // ------------------ USERDATA ------------------ //
     const initialState = {
         data,
@@ -198,7 +198,7 @@ export function FinanceProvider(props) {
     const toggleBlur = () => setIsBlur(!isBlur);
 
     return (
-        <FinanceContext.Provider
+        <FinancialContext.Provider
             value={{
                 addRow,
                 deleteRow,
@@ -217,6 +217,6 @@ export function FinanceProvider(props) {
             }}
         >
             {props.children}
-        </FinanceContext.Provider>
+        </FinancialContext.Provider>
     );
 }
