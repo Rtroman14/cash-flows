@@ -204,7 +204,7 @@ export function FinancialProvider(props) {
                 deleteRow,
                 editCell,
                 filterByCategory,
-                userDatÅa,
+                userData,
                 tableData,
                 income,
                 emergencyFund,
