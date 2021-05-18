@@ -72,11 +72,6 @@ export function FinancialProvider(props) {
     };
 
     const handleIncomeChange = event => {
-        // setIncome({
-        //     ...income,
-        //     [event.target.name]: Number(event.target.value.replace(/[^0-9\.]+/g, "")),
-        // });
-
         const newIncome = {
             ...userData.income,
             [event.target.name]: Number(event.target.value.replace(/[^0-9\.]+/g, "")),
@@ -139,12 +134,6 @@ export function FinancialProvider(props) {
             row.id === "leftoverWants" ? { ...row, cost: wantsCost } : row
         );
     };
-
-    // ------------------ INCOME ------------------ //
-    // const [income, setIncome] = useState({
-    //     net: 3580,
-    //     gross: 5000,
-    // });
 
     // ------------------ EMERGENCY FUND ------------------ //
     const [emergencyFund, setEmergencyFund] = useState(
