@@ -2,59 +2,53 @@ import { v4 as uuidv4 } from "uuid";
 
 import { ADD_ROW, DELETE_ROW, EDIT_CELL, FILTER_BY_CATEGORY, UPDATE_INCOME } from "./actions";
 
-// // add row
-// const addRow = (row, userData) => {
-//     const newRow = {
-//         id: uuidv4(),
-//         expense: row.expense,
-//         cost: Number(row.cost),
-//         category: row.category,
-//     };
-//     const newUserData = [...userData.data, newRow];
-//     const updatedWants = updateWants(newUserData);
+// add row
+const addRow = (row, userData) => {
+    const newRow = {
+        id: uuidv4(),
+        expense: row.expense,
+        cost: Number(row.cost),
+        category: row.category,
+    };
+    const newUserData = [...userData.data, newRow];
+    const updatedWants = updateWants(newUserData, userData);
 
-//     dispatch({
-//         type: ADD_ROW,
-//         payload: updatedWants,
-//     });
+    return { ...userData, data: updatedWants };
+};
 
-//     return { ...state, data: updatedWants };
-// };
+// delete row
+const deleteRow = (id, userData) => {
+    const removedRow = userData.data.filter(row => row.id !== id);
+    const updatedWants = updateWants(removedRow, userData);
 
-// // delete row
-// const deleteRow = (id, userData) => {
-//     const removedRow = userData.data.filter(row => row.id !== id);
-//     const updatedWants = updateWants(removedRow);
+    return { ...userData, data: updatedWants };
+};
 
-//     dispatch({
-//         type: DELETE_ROW,
-//         payload: updatedWants,
-//     });
+// edit cell
+const editCell = (id, field, newValue, userData) => {
+    const value = field === "cost" ? Number(newValue) : newValue;
+    const editedRow = userData.data.map(row => (row.id === id ? { ...row, [field]: value } : row));
+    const updatedWants = updateWants(editedRow, userData);
 
-//     return { ...state, data: updatedWants };
-// };
+    return { ...userData, data: updatedWants };
+};
 
-// // edit cell
-// const editCell = (id, field, newValue) => {
-//     const value = field === "cost" ? Number(newValue) : newValue;
-//     const editedRow = userData.data.map(row => (row.id === id ? { ...row, [field]: value } : row));
-//     const updatedWants = updateWants(editedRow);
+const handleIncomeChange = (event, userData) => {
+    const newIncome = {
+        ...userData.income,
+        [event.target.name]: Number(event.target.value.replace(/[^0-9\.]+/g, "")),
+    };
 
-//     dispatch({
-//         type: EDIT_CELL,
-//         payload: updatedWants,
-//     });
+    return { ...userData, income: newIncome };
+};
 
-//     return { ...state, data: updatedWants };
-// };
+const updateWants = (newUserData, userData) => {
+    const wantsCost =
+        userData.income.net -
+        newUserData.filter(row => row.id !== "leftoverWants").reduce((a, b) => a + b.cost, 0);
 
-// const updateWants = newUserData => {
-//     const wantsCost =
-//         income.net -
-//         newUserData.filter(row => row.id !== "leftoverWants").reduce((a, b) => a + b.cost, 0);
-
-//     return newUserData.map(row => (row.id === "leftoverWants" ? { ...row, cost: wantsCost } : row));
-// };
+    return newUserData.map(row => (row.id === "leftoverWants" ? { ...row, cost: wantsCost } : row));
+};
 
 // export const userDataReducer = (state, action) => {
 //     switch (action.type) {
@@ -66,6 +60,8 @@ import { ADD_ROW, DELETE_ROW, EDIT_CELL, FILTER_BY_CATEGORY, UPDATE_INCOME } fro
 //             return editCell(action.payload, state);
 //         case FILTER_BY_CATEGORY:
 //             return { ...state, category: action.payload };
+//         case UPDATE_INCOME:
+//             return handleIncomeChange(action.payload, state);
 //         default:
 //             return state;
 //     }
