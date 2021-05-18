@@ -134,6 +134,8 @@ export function FinancialProvider(props) {
 
     useEffect(() => {
         setRetirementFund(income.gross * 0.1);
+
+        alert("Gross income changed!");
     }, [income.gross]);
 
     // ------------------ HELPER ------------------ //

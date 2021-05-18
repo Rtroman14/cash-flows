@@ -34,9 +34,9 @@ export default function BudgetTable() {
 
     return (
         <TableContainer component={Paper}>
-            <Table className={classes.table} aria-label="simple table" dense>
+            <Table className={classes.table} aria-label="simple table">
                 <TableHead>
-                    <TableRow>
+                    <TableRow key="headerRow">
                         <TableCell>Expense</TableCell>
                         <TableCell align="center">
                             <div
@@ -74,6 +74,7 @@ export default function BudgetTable() {
                         <TableCell colSpan="2" style={{ textAlign: "center" }}>
                             {["All", "Needs", "Wants", "Savings"].map(category => (
                                 <Chip
+                                    key={category}
                                     className={
                                         userData.category === category.toLowerCase() &&
                                         "chip-selected"

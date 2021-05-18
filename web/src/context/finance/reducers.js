@@ -89,3 +89,6 @@ export const userDataReducer = (state, action) => {
 // trying to keep all userReducer / userData logic in this file
 // but tricky b/c I need "updateWants" function which requires "income"
 // trying to just send "dispatch" as context value
+
+// https://github.com/academind/react-redux-vs-context/blob/context-hooks/src/context/GlobalState.js
+// https://github.com/LloydJanseVanRensburg/Todo-List-Context-Project-/blob/master/src/context/todo-reducer.js
