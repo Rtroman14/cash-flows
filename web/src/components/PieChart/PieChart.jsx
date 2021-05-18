@@ -5,7 +5,7 @@ import HighchartsReact from "highcharts-react-official";
 
 require("highcharts/modules/exporting")(Highcharts);
 
-import { FinancialContext } from "../../context/FinancialContext";
+import { FinancialContext } from "../../context/finance/FinancialContext";
 
 const options = (needs, wants, savings, filterByCategory) => {
     return {

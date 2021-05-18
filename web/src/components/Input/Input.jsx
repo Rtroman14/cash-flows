@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 import NumberFormat from "react-number-format";
 import TextField from "@material-ui/core/TextField";
 
-import { FinancialContext } from "../../context/FinancialContext";
+import { FinancialContext } from "../../context/finance/FinancialContext";
 
 import "./Input.scss";
 

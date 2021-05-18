@@ -1,10 +1,10 @@
 import React, { createContext, useReducer, useState, useEffect } from "react";
 import { v4 as uuidv4 } from "uuid";
 
-import { userDataReducer } from "./finance/reducers";
-import { ADD_ROW, DELETE_ROW, EDIT_CELL, FILTER_BY_CATEGORY } from "./finance/actions";
+import { userDataReducer } from "./reducers";
+import { ADD_ROW, DELETE_ROW, EDIT_CELL, FILTER_BY_CATEGORY } from "./actions";
 
-import { data } from "./data";
+import { data } from "../data";
 
 export const FinancialContext = createContext();
 

@@ -4,7 +4,7 @@ import MenuItem from "@material-ui/core/MenuItem";
 import FormControl from "@material-ui/core/FormControl";
 import Select from "@material-ui/core/Select";
 
-import { FinancialContext } from "../../../context/FinancialContext";
+import { FinancialContext } from "../../../context/finance/FinancialContext";
 
 const useStyles = makeStyles(theme => ({
     formControl: {

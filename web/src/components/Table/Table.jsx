@@ -19,7 +19,7 @@ import { HiOutlineArrowDown } from "@react-icons/all-files/hi/HiOutlineArrowDown
 import Row from "./components/Row";
 import Dialog from "./components/Dialog";
 
-import { FinancialContext } from "../../context/FinancialContext";
+import { FinancialContext } from "../../context/finance/FinancialContext";
 
 const useStyles = makeStyles({
     table: {

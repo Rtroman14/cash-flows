@@ -4,7 +4,7 @@ import TextField from "@material-ui/core/TextField";
 import PropTypes from "prop-types";
 import NumberFormat from "react-number-format";
 
-import { FinancialContext } from "../../../context/FinancialContext";
+import { FinancialContext } from "../../../context/finance/FinancialContext";
 
 function NumberFormatCustom(props) {
     const { inputRef, onChange, ...other } = props;

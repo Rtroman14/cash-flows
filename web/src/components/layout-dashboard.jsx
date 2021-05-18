@@ -10,7 +10,7 @@ import { BsFillHouseDoorFill } from "@react-icons/all-files/bs/BsFillHouseDoorFi
 import "../styles/dashboard.scss";
 import "../styles/global.scss";
 
-import { FinancialProvider } from "../context/FinancialContext";
+import { FinancialProvider } from "../context/finance/FinancialContext";
 
 import { createMuiTheme, ThemeProvider } from "@material-ui/core/styles";
 

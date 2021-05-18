@@ -107,37 +107,6 @@ export function FinancialProvider(props) {
         });
     };
 
-    // ------------------ USEEFFECT ------------------ //
-    useEffect(() => {
-        const updatedWants = updateWants(userData.data);
-
-        setUserData({
-            ...userData,
-            data: updatedWants,
-        });
-
-        console.log("useEffect []");
-    }, []);
-
-    useEffect(() => {
-        updateTableData();
-
-        setEmergencyFund(
-            userData.data.filter(row => row.category === "needs").reduce((a, b) => a + b.cost, 0) *
-                6
-        );
-
-        updateCategories();
-
-        console.log("useEffect [userData]");
-    }, [userData, income.net]);
-
-    useEffect(() => {
-        setRetirementFund(income.gross * 0.1);
-
-        alert("Gross income changed!");
-    }, [income.gross]);
-
     // ------------------ HELPER ------------------ //
     const updateWants = newUserData => {
         const wantsCost =
@@ -198,6 +167,35 @@ export function FinancialProvider(props) {
     // ------------------ BLUR ------------------ //
     const [isBlur, setIsBlur] = useState(false);
     const toggleBlur = () => setIsBlur(!isBlur);
+
+    // ------------------ useEFFECT ------------------ //
+    useEffect(() => {
+        const updatedWants = updateWants(userData.data);
+
+        dispatch({
+            type: ADD_ROW,
+            payload: updatedWants,
+        });
+
+        console.log("useEffect []");
+    }, []);
+
+    useEffect(() => {
+        updateTableData();
+
+        setEmergencyFund(
+            userData.data.filter(row => row.category === "needs").reduce((a, b) => a + b.cost, 0) *
+                6
+        );
+
+        updateCategories();
+
+        console.log("useEffect [userData]");
+    }, [userData, income.net]);
+
+    useEffect(() => {
+        setRetirementFund(income.gross * 0.1);
+    }, [income.gross]);
 
     return (
         <FinancialContext.Provider

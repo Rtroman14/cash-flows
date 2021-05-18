@@ -11,7 +11,7 @@ import Select from "./Select";
 
 import "./Row.scss";
 
-import { FinancialContext } from "../../../context/FinancialContext";
+import { FinancialContext } from "../../../context/finance/FinancialContext";
 
 import { makeStyles } from "@material-ui/core/styles";
 

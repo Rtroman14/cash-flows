@@ -17,7 +17,7 @@ import * as yup from "yup";
 import PropTypes from "prop-types";
 import NumberFormat from "react-number-format";
 
-import { FinancialContext } from "../../../context/FinancialContext";
+import { FinancialContext } from "../../../context/finance/FinancialContext";
 
 const Transition = React.forwardRef(function Transition(props, ref) {
     return <Slide direction="up" ref={ref} {...props} />;

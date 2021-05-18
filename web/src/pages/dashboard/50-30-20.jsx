@@ -13,7 +13,7 @@ import Table from "../../components/Table/Table";
 import "../../styles/dashboard.scss";
 import DashboardLayout from "../../components/layout-dashboard";
 
-import { FinancialContext } from "../../context/FinancialContext";
+import { FinancialContext } from "../../context/finance/FinancialContext";
 
 export default function BudgetPie() {
     const { income, emergencyFund, retirementFund } = useContext(FinancialContext);

@@ -14,6 +14,6 @@ import "fontsource-montserrat/600.css"; // Defaults to weight 400 with all style
 
 import React from "react";
 
-import { FinancialProvider } from "./src/context/FinancialContext";
+import { FinancialProvider } from "./src/context/finance/FinancialContext";
 
 export const wrapRootElement = ({ element }) => <FinancialProvider>{element}</FinancialProvider>;
