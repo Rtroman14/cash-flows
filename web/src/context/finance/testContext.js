@@ -13,6 +13,11 @@ export function FinancialProvider(props) {
     const initialState = {
         data,
         category: "all",
+        sortCost: "",
+        income: {
+            net: 3580,
+            gross: 5000,
+        },
     };
 
     const [userData, dispatch] = useReducer(userDataReducer, initialState);
@@ -66,6 +71,23 @@ export function FinancialProvider(props) {
         });
     };
 
+    const handleIncomeChange = event => {
+        // setIncome({
+        //     ...income,
+        //     [event.target.name]: Number(event.target.value.replace(/[^0-9\.]+/g, "")),
+        // });
+
+        const newIncome = {
+            ...userData.income,
+            [event.target.name]: Number(event.target.value.replace(/[^0-9\.]+/g, "")),
+        };
+
+        dispatch({
+            type: UPDATE_INCOME,
+            payload: newIncome,
+        });
+    };
+
     // ------------------ TABLEDATA ------------------ //
     const [tableData, setTableData] = useState({
         table: data,
@@ -110,7 +132,7 @@ export function FinancialProvider(props) {
     // ------------------ HELPER ------------------ //
     const updateWants = newUserData => {
         const wantsCost =
-            income.net -
+            userData.income.net -
             newUserData.filter(row => row.id !== "leftoverWants").reduce((a, b) => a + b.cost, 0);
 
         return newUserData.map(row =>
@@ -119,16 +141,10 @@ export function FinancialProvider(props) {
     };
 
     // ------------------ INCOME ------------------ //
-    const [income, setIncome] = useState({
-        net: 3580,
-        gross: 5000,
-    });
-    const handleIncomeChange = event => {
-        setIncome({
-            ...income,
-            [event.target.name]: Number(event.target.value.replace(/[^0-9\.]+/g, "")),
-        });
-    };
+    // const [income, setIncome] = useState({
+    //     net: 3580,
+    //     gross: 5000,
+    // });
 
     // ------------------ EMERGENCY FUND ------------------ //
     const [emergencyFund, setEmergencyFund] = useState(
@@ -136,7 +152,7 @@ export function FinancialProvider(props) {
     );
 
     // ------------------ RETIREMENT FUND ------------------ //
-    const [retirementFund, setRetirementFund] = useState(income.gross * 0.1);
+    const [retirementFund, setRetirementFund] = useState(userData.income.gross * 0.1);
 
     // ------------------ CATEGORIES ------------------ //
     const [categories, setCategories] = useState({
@@ -191,11 +207,11 @@ export function FinancialProvider(props) {
         updateCategories();
 
         console.log("useEffect [userData]");
-    }, [userData, income.net]);
+    }, [userData, userData.income.net]);
 
     useEffect(() => {
         setRetirementFund(income.gross * 0.1);
-    }, [income.gross]);
+    }, [userData.income.gross]);
 
     return (
         <FinancialContext.Provider
@@ -206,7 +222,7 @@ export function FinancialProvider(props) {
                 filterByCategory,
                 userData,
                 tableData,
-                income,
+                income: userData.income,
                 emergencyFund,
                 retirementFund,
                 categories,

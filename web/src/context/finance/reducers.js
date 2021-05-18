@@ -1,6 +1,6 @@
 import { v4 as uuidv4 } from "uuid";
 
-import { ADD_ROW, DELETE_ROW, EDIT_CELL, FILTER_BY_CATEGORY } from "./actions";
+import { ADD_ROW, DELETE_ROW, EDIT_CELL, FILTER_BY_CATEGORY, UPDATE_INCOME } from "./actions";
 
 // // add row
 // const addRow = (row, userData) => {
@@ -81,6 +81,8 @@ export const userDataReducer = (state, action) => {
             return { ...state, data: action.payload };
         case FILTER_BY_CATEGORY:
             return { ...state, category: action.payload };
+        case UPDATE_INCOME:
+            return { ...state, income: action.payload };
         default:
             return state;
     }
