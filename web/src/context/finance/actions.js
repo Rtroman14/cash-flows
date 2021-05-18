@@ -1,5 +1,3 @@
-export const ADD_ROW = "ADD_ROW";
-export const DELETE_ROW = "DELETE_ROW";
-export const EDIT_CELL = "EDIT_CELL";
+export const UPDATE_DATA = "UPDATE_DATA";
 export const FILTER_BY_CATEGORY = "FILTER_BY_CATEGORY";
 export const UPDATE_INCOME = "UPDATE_INCOME";

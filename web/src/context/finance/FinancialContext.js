@@ -1,8 +1,8 @@
 import React, { createContext, useReducer, useState, useEffect } from "react";
 import { v4 as uuidv4 } from "uuid";
 
-import { userDataReducer } from "./reducers";
-import { ADD_ROW, DELETE_ROW, EDIT_CELL, FILTER_BY_CATEGORY, UPDATE_INCOME } from "./actions";
+import { userDataReducer } from "./userDataReducer";
+import { UPDATE_DATA, FILTER_BY_CATEGORY, UPDATE_INCOME } from "./actions";
 
 import { data } from "../data";
 
@@ -22,7 +22,6 @@ export function FinancialProvider(props) {
 
     const [userData, dispatch] = useReducer(userDataReducer, initialState);
 
-    // add row
     const addRow = row => {
         const newRow = {
             id: uuidv4(),
@@ -34,23 +33,21 @@ export function FinancialProvider(props) {
         const updatedWants = updateWants(newUserData);
 
         dispatch({
-            type: ADD_ROW,
+            type: UPDATE_DATA,
             payload: updatedWants,
         });
     };
 
-    // delete row
     const deleteRow = id => {
         const removedRow = userData.data.filter(row => row.id !== id);
         const updatedWants = updateWants(removedRow);
 
         dispatch({
-            type: DELETE_ROW,
+            type: UPDATE_DATA,
             payload: updatedWants,
         });
     };
 
-    // edit cell
     const editCell = (id, field, newValue) => {
         const value = field === "cost" ? Number(newValue) : newValue;
         const editedRow = userData.data.map(row =>
@@ -59,7 +56,7 @@ export function FinancialProvider(props) {
         const updatedWants = updateWants(editedRow);
 
         dispatch({
-            type: EDIT_CELL,
+            type: UPDATE_DATA,
             payload: updatedWants,
         });
     };
@@ -178,7 +175,7 @@ export function FinancialProvider(props) {
         const updatedWants = updateWants(userData.data);
 
         dispatch({
-            type: ADD_ROW,
+            type: UPDATE_DATA,
             payload: updatedWants,
         });
 
@@ -195,11 +192,13 @@ export function FinancialProvider(props) {
 
         updateCategories();
 
-        console.log("useEffect [userData]");
+        console.log("useEffect [userData, userData.income.net]");
     }, [userData, userData.income.net]);
 
     useEffect(() => {
         setRetirementFund(userData.income.gross * 0.1);
+
+        console.log("userData.income.gross]");
     }, [userData.income.gross]);
 
     return (
@@ -209,6 +208,7 @@ export function FinancialProvider(props) {
                 deleteRow,
                 editCell,
                 filterByCategory,
+                handleIncomeChange,
                 userData,
                 tableData,
                 income: userData.income,
@@ -218,7 +218,6 @@ export function FinancialProvider(props) {
                 isBlur,
                 sortRows,
                 toggleBlur,
-                handleIncomeChange,
             }}
         >
             {props.children}
