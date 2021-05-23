@@ -38,7 +38,7 @@ export default function BudgetTable() {
                 <TableHead>
                     <TableRow key="headerRow">
                         <TableCell>Expense</TableCell>
-                        <TableCell align="center">
+                        <TableCell>
                             <div
                                 onClick={sortRows}
                                 style={{ display: "inline-block", cursor: "pointer" }}

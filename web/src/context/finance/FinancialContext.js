@@ -15,8 +15,8 @@ export function FinancialProvider(props) {
         category: "all",
         sortCost: "",
         income: {
-            net: 3580,
-            gross: 5000,
+            net: 4188,
+            gross: 5833,
         },
     };
 
@@ -138,7 +138,7 @@ export function FinancialProvider(props) {
     );
 
     // ------------------ RETIREMENT FUND ------------------ //
-    const [retirementFund, setRetirementFund] = useState(userData.income.gross * 0.1);
+    const [retirementFund, setRetirementFund] = useState((userData.income.gross * 0.1).toFixed());
 
     // ------------------ CATEGORIES ------------------ //
     const [categories, setCategories] = useState({
@@ -196,7 +196,7 @@ export function FinancialProvider(props) {
     }, [userData, userData.income.net]);
 
     useEffect(() => {
-        setRetirementFund(userData.income.gross * 0.1);
+        setRetirementFund((userData.income.gross * 0.1).toFixed());
 
         console.log("userData.income.gross]");
     }, [userData.income.gross]);

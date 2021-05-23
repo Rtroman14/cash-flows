@@ -1,4 +1,4 @@
-import React, { useState, useContext, useEffect } from "react";
+import React, { useState, useContext, useEffect, useMemo } from "react";
 
 import TextField from "@material-ui/core/TextField";
 import PropTypes from "prop-types";
@@ -41,9 +41,11 @@ export default function Cell({ value, id, classes }) {
 
     // useMemo??
     // useEffect(() => {
-    //     setCost(value);
+    //     memoizedValue;
     //     console.log("Update value");
     // }, [value]);
+
+    // const memoizedValue = useMemo(() => setCost(value), [cost]);
 
     let blur = isBlur
         ? {

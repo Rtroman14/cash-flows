@@ -53,7 +53,7 @@ export default function Row({ row }) {
             <TableCell align="center">{incomePercentage}%</TableCell>
             <TableCell align="center">
                 <IconButton
-                    // size="medium"
+                    size="medium"
                     color="default"
                     onClick={() => deleteRow(row.id)}
                     aria-label="delete"
