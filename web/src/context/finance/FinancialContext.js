@@ -30,21 +30,19 @@ export function FinancialProvider(props) {
             category: row.category,
         };
         const newUserData = [...userData.data, newRow];
-        const updatedWants = updateWants(newUserData);
 
         dispatch({
             type: UPDATE_DATA,
-            payload: updatedWants,
+            payload: newUserData,
         });
     };
 
     const deleteRow = id => {
         const removedRow = userData.data.filter(row => row.id !== id);
-        const updatedWants = updateWants(removedRow);
 
         dispatch({
             type: UPDATE_DATA,
-            payload: updatedWants,
+            payload: removedRow,
         });
     };
 
@@ -53,11 +51,10 @@ export function FinancialProvider(props) {
         const editedRow = userData.data.map(row =>
             row.id === id ? { ...row, [field]: value } : row
         );
-        const updatedWants = updateWants(editedRow);
 
         dispatch({
             type: UPDATE_DATA,
-            payload: updatedWants,
+            payload: editedRow,
         });
     };
 
@@ -79,6 +76,11 @@ export function FinancialProvider(props) {
             payload: newIncome,
         });
     };
+
+    // ------------------ WANTS ------------------ //
+    const [wants, setWants] = useState(
+        userData.income.net - userData.data.reduce((a, b) => a + b.cost, 0)
+    );
 
     // ------------------ TABLEDATA ------------------ //
     const [tableData, setTableData] = useState({
@@ -121,33 +123,17 @@ export function FinancialProvider(props) {
         });
     };
 
-    // ------------------ HELPER ------------------ //
-    const updateWants = newUserData => {
-        const wantsCost =
-            userData.income.net -
-            newUserData.filter(row => row.id !== "leftoverWants").reduce((a, b) => a + b.cost, 0);
-
-        return newUserData.map(row =>
-            row.id === "leftoverWants" ? { ...row, cost: wantsCost } : row
-        );
-    };
-
     // ------------------ EMERGENCY FUND ------------------ //
     const [emergencyFund, setEmergencyFund] = useState(
         userData.data.filter(row => row.category === "needs").reduce((a, b) => a + b.cost, 0) * 6
     );
-
-    // ------------------ RETIREMENT FUND ------------------ //
-    const [retirementFund, setRetirementFund] = useState((userData.income.gross * 0.1).toFixed());
 
     // ------------------ CATEGORIES ------------------ //
     const [categories, setCategories] = useState({
         needs: userData.data
             .filter(row => row.category === "needs")
             .reduce((a, b) => a + b.cost, 0),
-        wants: userData.data
-            .filter(row => row.category === "wants")
-            .reduce((a, b) => a + b.cost, 0),
+        wants,
         savings: userData.data
             .filter(row => row.category === "savings")
             .reduce((a, b) => a + b.cost, 0),
@@ -158,9 +144,7 @@ export function FinancialProvider(props) {
             needs: userData.data
                 .filter(row => row.category === "needs")
                 .reduce((a, b) => a + b.cost, 0),
-            wants: userData.data
-                .filter(row => row.category === "wants")
-                .reduce((a, b) => a + b.cost, 0),
+            wants,
             savings: userData.data
                 .filter(row => row.category === "savings")
                 .reduce((a, b) => a + b.cost, 0),
@@ -172,12 +156,7 @@ export function FinancialProvider(props) {
 
     // ------------------ useEFFECT ------------------ //
     useEffect(() => {
-        const updatedWants = updateWants(userData.data);
-
-        dispatch({
-            type: UPDATE_DATA,
-            payload: updatedWants,
-        });
+        setWants(userData.income.net - userData.data.reduce((a, b) => a + b.cost, 0));
 
         console.log("useEffect []");
     }, []);
@@ -190,16 +169,12 @@ export function FinancialProvider(props) {
                 6
         );
 
+        setWants(userData.income.net - userData.data.reduce((a, b) => a + b.cost, 0));
+
         updateCategories();
 
         console.log("useEffect [userData, userData.income.net]");
     }, [userData, userData.income.net]);
-
-    useEffect(() => {
-        setRetirementFund((userData.income.gross * 0.1).toFixed());
-
-        console.log("userData.income.gross]");
-    }, [userData.income.gross]);
 
     return (
         <FinancialContext.Provider
@@ -211,9 +186,9 @@ export function FinancialProvider(props) {
                 handleIncomeChange,
                 userData,
                 tableData,
+                wants,
                 income: userData.income,
                 emergencyFund,
-                retirementFund,
                 categories,
                 isBlur,
                 sortRows,

@@ -1,10 +1,10 @@
 export const data = [
-    {
-        id: "leftoverWants",
-        expense: "Wants",
-        cost: 0,
-        category: "wants",
-    },
+    // {
+    //     id: "leftoverWants",
+    //     expense: "Wants",
+    //     cost: 0,
+    //     category: "wants",
+    // },
     {
         id: 1,
         expense: "Rent",

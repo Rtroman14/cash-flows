@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useState, useContext } from "react";
 
 import Highcharts from "highcharts/highstock";
 import HighchartsReact from "highcharts-react-official";
@@ -8,6 +8,12 @@ require("highcharts/modules/exporting")(Highcharts);
 import { FinancialContext } from "../../context/finance/FinancialContext";
 
 const options = (needs, wants, savings, filterByCategory) => {
+    const [isSelected, setIsSelected] = useState({
+        needs: false,
+        wants: false,
+        savings: false,
+    });
+
     return {
         colors: Highcharts.map(Highcharts.getOptions().colors, function (color) {
             return {
@@ -57,7 +63,18 @@ const options = (needs, wants, savings, filterByCategory) => {
                 //     duration: 1000,
                 // },
                 events: {
-                    click: event => filterByCategory(event.point.name.toLowerCase()),
+                    click: event => {
+                        const name = event.point.name.toLowerCase();
+
+                        setIsSelected({
+                            ...isSelected,
+                            [name]: !isSelected[name],
+                        });
+
+                        isSelected[name] === false
+                            ? filterByCategory(name)
+                            : filterByCategory("all");
+                    },
                 },
             },
         },

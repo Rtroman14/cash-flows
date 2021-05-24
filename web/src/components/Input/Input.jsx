@@ -1,4 +1,4 @@
-import React, { useState, useContext } from "react";
+import React, { useState, useContext, useEffect } from "react";
 import PropTypes from "prop-types";
 import NumberFormat from "react-number-format";
 import TextField from "@material-ui/core/TextField";
@@ -36,7 +36,7 @@ NumberFormatCustom.propTypes = {
 };
 
 export default function Input({ amount, name, edit }) {
-    const { isBlur, handleIncomeChange } = useContext(FinancialContext);
+    const { isBlur, handleIncomeChange, wants } = useContext(FinancialContext);
 
     const [value, setValue] = useState(amount);
 
@@ -51,7 +51,7 @@ export default function Input({ amount, name, edit }) {
     return (
         <TextField
             variant="outlined"
-            value={value}
+            value={name === "wants" ? wants : value}
             onChange={event => setValue(event.target.value)}
             onBlur={handleIncomeChange}
             style={blur}

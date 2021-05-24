@@ -16,7 +16,7 @@ import DashboardLayout from "../../components/layout-dashboard";
 import { FinancialContext } from "../../context/finance/FinancialContext";
 
 export default function BudgetPie() {
-    const { income, emergencyFund, retirementFund } = useContext(FinancialContext);
+    const { income, emergencyFund, wants } = useContext(FinancialContext);
 
     return (
         <DashboardLayout>
@@ -49,12 +49,12 @@ export default function BudgetPie() {
                     edit={false}
                 />
                 <Card
-                    key={retirementFund}
-                    name="retirement"
-                    title="10% for Retirement"
-                    amount={retirementFund}
+                    key={wants}
+                    name="wants"
+                    title="Leftover Money"
+                    amount={wants}
                     icon={<AiOutlineAreaChart color="#121a27" size="3em" />}
-                    tooltip="You want to retire, don't you?"
+                    tooltip="Use this money to invest!"
                     edit={false}
                 />
                 <div className="dashboard__graph-piechart">

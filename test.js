@@ -79,8 +79,15 @@ const data = [
     },
 ];
 
-const newValue = "1300";
+const initialState = {
+    data,
+    wants: 0,
+    category: "all",
+    sortCost: "",
+    income: {
+        net: 4188,
+        gross: 5833,
+    },
+};
 
-let value = typeof newValue === "number" ? newValue : Number(newValue);
-
-console.log(typeof value);
+console.log(initialState.wants);
