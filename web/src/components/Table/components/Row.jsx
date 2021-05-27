@@ -1,50 +1,35 @@
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 
 import TableCell from "@material-ui/core/TableCell";
 import TableRow from "@material-ui/core/TableRow";
-import TextField from "@material-ui/core/TextField";
 import IconButton from "@material-ui/core/IconButton";
 import DeleteIcon from "@material-ui/icons/Delete";
 
-import NumberCell from "./NumberCell";
+import CostCell from "./CostCell";
 import Select from "./Select";
+import NameCell from "./NameCell";
 
 import "./Row.scss";
 
 import { FinancialContext } from "../../../context/finance/FinancialContext";
 
-import { makeStyles } from "@material-ui/core/styles";
-
-const useStyles = makeStyles(theme => ({
-    disabledInput: {
-        "& .MuiInputBase-root.Mui-disabled": {
-            color: "black",
-        },
-        "& .MuiOutlinedInput-root.Mui-disabled .MuiOutlinedInput-notchedOutline": {
-            border: "none",
-        },
-    },
-}));
-
 export default function Row({ row }) {
-    const { income, deleteRow, editCell } = useContext(FinancialContext);
-    const classes = useStyles();
+    const { income, deleteRow } = useContext(FinancialContext);
+
+    const [isHover, setIsHover] = useState(false);
+    const setHover = () => {
+        setIsHover(true);
+    };
 
     const incomePercentage = Number((row.cost / income.net) * 100).toFixed(1);
 
     return (
-        <TableRow key={row.id}>
+        <TableRow key={row.id} className={isHover && "row-hovered"}>
             <TableCell scope="row">
-                <TextField
-                    className={classes.disabledInput}
-                    onBlur={event => editCell(row.id, "expense", event.target.value)}
-                    variant="outlined"
-                    defaultValue={row.expense}
-                    disabled={row.id === "leftoverWants"}
-                />
+                <NameCell id={row.id} name={row.expense} hover={setHover} />
             </TableCell>
             <TableCell align="center">
-                <NumberCell id={row.id} value={row.cost} classes={classes.disabledInput} />
+                <CostCell id={row.id} value={row.cost} />
             </TableCell>
             <TableCell align="center">
                 <Select id={row.id} value={row.category} />
@@ -57,7 +42,7 @@ export default function Row({ row }) {
                     color="default"
                     onClick={() => deleteRow(row.id)}
                     aria-label="delete"
-                    disabled={row.id === "leftoverWants"}
+                    // disabled={row.id === "leftoverWants"}
                 >
                     {/* <DeleteIcon fontSize="small" /> */}
                     <DeleteIcon />

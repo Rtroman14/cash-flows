@@ -37,7 +37,7 @@ export default function BudgetTable() {
             <Table className={classes.table} aria-label="simple table">
                 <TableHead>
                     <TableRow key="headerRow">
-                        <TableCell>Expense</TableCell>
+                        <TableCell>Name</TableCell>
                         <TableCell>
                             <div
                                 onClick={sortRows}

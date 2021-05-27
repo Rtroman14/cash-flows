@@ -1,4 +1,4 @@
-import React, { useState, useContext, useEffect, useMemo } from "react";
+import React, { useState, useContext } from "react";
 
 import TextField from "@material-ui/core/TextField";
 import PropTypes from "prop-types";
@@ -34,18 +34,10 @@ NumberFormatCustom.propTypes = {
     onChange: PropTypes.func.isRequired,
 };
 
-export default function Cell({ value, id, classes }) {
+export default function Cell({ value, id }) {
     const { editCell, isBlur } = useContext(FinancialContext);
 
     const [cost, setCost] = useState(value);
-
-    // useMemo??
-    // useEffect(() => {
-    //     memoizedValue;
-    //     console.log("Update value");
-    // }, [value]);
-
-    // const memoizedValue = useMemo(() => setCost(value), [cost]);
 
     let blur = isBlur
         ? {
@@ -57,7 +49,6 @@ export default function Cell({ value, id, classes }) {
 
     return (
         <TextField
-            className={classes}
             style={blur}
             variant="outlined"
             value={cost}

@@ -132,7 +132,7 @@ export default function DashboardLayout({ children }) {
                             />
                         </ListItem>
                     </Link>
-                    <Link style={{ textDecoration: "none" }} to="/dashboard/">
+                    <Link style={{ textDecoration: "none" }} to="/dashboard/car-buying/">
                         <ListItem
                             className={location.pathname.includes("car-buying") && "selected"}
                             button
