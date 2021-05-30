@@ -36,7 +36,7 @@ NumberFormatCustom.propTypes = {
 };
 
 export default function Input({ amount, name, edit }) {
-    const { isBlur, handleIncomeChange, wants } = useContext(FinancialContext);
+    const { isBlur, handleIncomeChange, leftoverMoney } = useContext(FinancialContext);
 
     const [value, setValue] = useState(amount);
 
@@ -51,7 +51,7 @@ export default function Input({ amount, name, edit }) {
     return (
         <TextField
             variant="outlined"
-            value={name === "wants" ? wants : value}
+            value={name === "leftoverMoney" ? leftoverMoney : value}
             onChange={event => setValue(event.target.value)}
             onBlur={handleIncomeChange}
             style={blur}

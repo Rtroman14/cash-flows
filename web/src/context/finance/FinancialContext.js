@@ -77,8 +77,8 @@ export function FinancialProvider(props) {
         });
     };
 
-    // ------------------ WANTS ------------------ //
-    const [wants, setWants] = useState(
+    // ------------------ LEFTOVER MONEY ------------------ //
+    const [leftoverMoney, setLeftoverMoney] = useState(
         userData.income.net - userData.data.reduce((a, b) => a + b.cost, 0)
     );
 
@@ -98,8 +98,6 @@ export function FinancialProvider(props) {
             ...tableData,
             table: filteredTable,
         });
-
-        console.log("updateTableData ran");
     };
 
     const sortRows = () => {
@@ -133,7 +131,9 @@ export function FinancialProvider(props) {
         needs: userData.data
             .filter(row => row.category === "needs")
             .reduce((a, b) => a + b.cost, 0),
-        wants,
+        wants:
+            userData.data.filter(row => row.category === "wants").reduce((a, b) => a + b.cost, 0) +
+            leftoverMoney,
         savings: userData.data
             .filter(row => row.category === "savings")
             .reduce((a, b) => a + b.cost, 0),
@@ -144,7 +144,10 @@ export function FinancialProvider(props) {
             needs: userData.data
                 .filter(row => row.category === "needs")
                 .reduce((a, b) => a + b.cost, 0),
-            wants,
+            wants:
+                userData.data
+                    .filter(row => row.category === "wants")
+                    .reduce((a, b) => a + b.cost, 0) + leftoverMoney,
             savings: userData.data
                 .filter(row => row.category === "savings")
                 .reduce((a, b) => a + b.cost, 0),
@@ -156,7 +159,7 @@ export function FinancialProvider(props) {
 
     // ------------------ useEFFECT ------------------ //
     useEffect(() => {
-        setWants(userData.income.net - userData.data.reduce((a, b) => a + b.cost, 0));
+        setLeftoverMoney(userData.income.net - userData.data.reduce((a, b) => a + b.cost, 0));
 
         console.log("useEffect []");
     }, []);
@@ -169,9 +172,8 @@ export function FinancialProvider(props) {
                 6
         );
 
-        setWants(userData.income.net - userData.data.reduce((a, b) => a + b.cost, 0));
-
         updateCategories();
+        setLeftoverMoney(userData.income.net - userData.data.reduce((a, b) => a + b.cost, 0));
 
         console.log("useEffect [userData, userData.income.net]");
     }, [userData, userData.income.net]);
@@ -186,7 +188,7 @@ export function FinancialProvider(props) {
                 handleIncomeChange,
                 userData,
                 tableData,
-                wants,
+                leftoverMoney,
                 income: userData.income,
                 emergencyFund,
                 categories,
