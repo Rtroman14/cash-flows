@@ -1,10 +1,8 @@
-import React, { useState, useContext } from "react";
+import React, { useState, useContext, useRef } from "react";
 
 import { FinancialContext } from "../../../context/finance/FinancialContext";
 
 import TextField from "@material-ui/core/TextField";
-
-// FOCUS ON CLICK. BORDER STAYS. UNFOCUS ON CLICK OUTSIDE. BORDER DISAPPEARS
 
 import { makeStyles } from "@material-ui/core/styles";
 
@@ -20,43 +18,60 @@ const useStyles = makeStyles(theme => ({
     inputBorder: {
         "& .MuiOutlinedInput-root .MuiOutlinedInput-notchedOutline": {
             borderColor: "black",
-            // borderColor: "transparent",
         },
-        // "& .MuiOutlinedInput-root:hover .MuiOutlinedInput-notchedOutline": {
-        //     borderColor: "black",
-        //     // borderColor: "transparent",
-        // },
     },
 }));
 
-const NameCell = ({ name, id, hover }) => {
-    const { editCell } = useContext(FinancialContext);
+const NameCell = ({ name, id, setIsHover }) => {
+    const [value, setName] = useState(name);
 
     const classes = useStyles();
 
-    const [select, setSelect] = useState(false);
-    const [focus, setFocus] = useState(false);
+    const { editCell } = useContext(FinancialContext);
+    const [isSelect, setIsSelect] = useState(false);
+    const node = useRef();
 
-    const handleClickOutside = event => {
-        console.log("onClickOutside() method called");
-        console.log(event);
+    const handleClick = event => {
+        if (node.current.contains(event.target)) {
+            // inside click
+            return;
+        }
+        // outside click
+        setIsSelect(false);
+        setIsHover(false);
+        document.removeEventListener("mousedown", handleClick);
+
+        event.target.value !== value && editCell(id, "expense", value);
+    };
+
+    const handleSelect = () => {
+        setIsSelect(true);
+
+        document.addEventListener("mousedown", handleClick);
+        return () => {
+            document.removeEventListener("mousedown", handleClick);
+        };
     };
 
     return (
         <TextField
-            className={`${classes.disabledInput} ${select && classes.inputBorder}`}
-            onBlur={event => {
-                event.target.value !== name && editCell(id, "expense", event.target.value);
-            }}
+            ref={node}
+            className={`${classes.disabledInput} ${isSelect && classes.inputBorder}`}
+            // onBlur={event => {
+            //     event.target.value !== value && editCell(id, "expense", value);
+            // }}
+            // onBlur={event => {
+            //     event.target.value !== name && editCell(id, "expense", event.target.value);
+            // }}
             variant="outlined"
-            defaultValue={name}
-            disabled={!select}
+            onChange={event => setName(event.target.value)}
+            value={value}
+            // defaultValue={name}
+            disabled={!isSelect}
             onClick={() => {
-                setSelect(true);
-                hover();
+                setIsHover(true);
+                handleSelect();
             }}
-            // inputRef={focus && (input => input && input.focus())}
-            // autoFocus={focus}
         />
     );
 };

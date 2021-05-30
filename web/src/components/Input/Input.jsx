@@ -1,4 +1,4 @@
-import React, { useState, useContext, useEffect } from "react";
+import React, { useState, useContext } from "react";
 import PropTypes from "prop-types";
 import NumberFormat from "react-number-format";
 import TextField from "@material-ui/core/TextField";

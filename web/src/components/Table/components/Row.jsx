@@ -17,19 +17,19 @@ export default function Row({ row }) {
     const { income, deleteRow } = useContext(FinancialContext);
 
     const [isHover, setIsHover] = useState(false);
-    const setHover = () => {
-        setIsHover(true);
-    };
+    // const setHover = () => {
+    //     setIsHover(!isHover);
+    // };
 
     const incomePercentage = Number((row.cost / income.net) * 100).toFixed(1);
 
     return (
         <TableRow key={row.id} className={isHover && "row-hovered"}>
             <TableCell scope="row">
-                <NameCell id={row.id} name={row.expense} hover={setHover} />
+                <NameCell id={row.id} name={row.expense} setIsHover={setIsHover} />
             </TableCell>
             <TableCell align="center">
-                <CostCell id={row.id} value={row.cost} />
+                <CostCell id={row.id} value={row.cost} setIsHover={setIsHover} />
             </TableCell>
             <TableCell align="center">
                 <Select id={row.id} value={row.category} />

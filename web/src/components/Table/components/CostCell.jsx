@@ -1,4 +1,4 @@
-import React, { useState, useContext } from "react";
+import React, { useState, useContext, useRef } from "react";
 
 import TextField from "@material-ui/core/TextField";
 import PropTypes from "prop-types";
@@ -34,28 +34,48 @@ NumberFormatCustom.propTypes = {
     onChange: PropTypes.func.isRequired,
 };
 
-export default function Cell({ value, id }) {
+export default function Cell({ value, id, setIsHover }) {
     const { editCell, isBlur } = useContext(FinancialContext);
 
     const [cost, setCost] = useState(value);
 
-    let blur = isBlur
-        ? {
-              filter: "blur(5px)",
-          }
-        : {
-              filter: "blur(0px)",
-          };
+    const [isSelect, setIsSelect] = useState(false);
+    const node = useRef();
+
+    const handleClick = e => {
+        if (node.current.contains(e.target)) {
+            // inside click
+            return;
+        }
+        // outside click
+        setIsSelect(false);
+        setIsHover(false);
+        document.removeEventListener("mousedown", handleClick);
+    };
+
+    const handleSelect = () => {
+        setIsSelect(true);
+
+        document.addEventListener("mousedown", handleClick);
+        return () => {
+            document.removeEventListener("mousedown", handleClick);
+        };
+    };
 
     return (
         <TextField
-            style={blur}
+            ref={node}
+            className={isBlur && "blur"}
             variant="outlined"
             value={cost}
             onChange={event => setCost(event.target.value)}
-            disabled={id === "leftoverWants"}
+            // disabled={!isSelect}
             onBlur={() => editCell(id, "cost", cost)}
             name="cellCost"
+            onClick={() => {
+                setIsHover(true);
+                handleSelect();
+            }}
             InputProps={{
                 inputComponent: NumberFormatCustom,
             }}
