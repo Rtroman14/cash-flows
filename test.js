@@ -1,87 +1,86 @@
 const data = [
     {
         id: 1,
-        expense: "Rent",
-        cost: 825,
-        category: "Needs",
+        name: "Rent",
+        cost: 1000,
+        category: "needs",
     },
     {
         id: 2,
-        expense: "Renters Insurance",
+        name: "Renters Insurance",
         cost: 15,
-        category: "Needs",
+        category: "needs",
     },
     {
         id: 3,
-        expense: "Car Loan",
+        name: "Car Loan",
         cost: 230,
-        category: "Needs",
+        category: "needs",
     },
     {
         id: 4,
-        expense: "Car Insurance",
+        name: "Car Insurance",
         cost: 130,
-        category: "Needs",
+        category: "needs",
     },
     {
         id: 5,
-        expense: "Life Insurance",
+        name: "Life Insurance",
         cost: 19,
-        category: "Needs",
+        category: "needs",
     },
     {
         id: 6,
-        expense: "Internet",
+        name: "Internet",
         cost: 25,
-        category: "Needs",
+        category: "needs",
     },
     {
         id: 7,
-        expense: "Utils",
+        name: "Utils",
         cost: 60,
-        category: "Needs",
+        category: "needs",
     },
     {
         id: 8,
-        expense: "Haircut",
+        name: "Haircut",
         cost: 40,
-        category: "Needs",
+        category: "needs",
     },
     {
         id: 9,
-        expense: "Phone",
+        name: "Phone",
         cost: 75,
-        category: "Needs",
+        category: "needs",
     },
     {
         id: 10,
-        expense: "Gas",
+        name: "Gas",
         cost: 100,
-        category: "Needs",
+        category: "needs",
     },
     {
         id: 11,
-        expense: "Food",
+        name: "Food",
         cost: 300,
-        category: "Needs",
+        category: "needs",
     },
     {
         id: 12,
-        expense: "Roth IRA",
+        name: "Roth IRA",
         cost: 500,
-        category: "Savings",
+        category: "savings",
     },
     {
         id: 13,
-        expense: "Emergency Fund",
+        name: "Emergency Fund",
         cost: 200,
-        category: "Savings",
+        category: "savings",
     },
 ];
 
-const initialState = {
+const userData = {
     data,
-    wants: 0,
     category: "all",
     sortCost: "",
     income: {
@@ -90,4 +89,7 @@ const initialState = {
     },
 };
 
-console.log(initialState.wants);
+const wants =
+    userData.income.net - userData.data.reduce((a, b) => a + b.cost, 0);
+
+console.log(wants);

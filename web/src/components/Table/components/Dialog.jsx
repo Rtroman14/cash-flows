@@ -24,8 +24,8 @@ const Transition = React.forwardRef(function Transition(props, ref) {
 });
 
 const validationSchema = yup.object({
-    expense: yup.string().min(2, "Too Short!").max(50, "Too Long!").required("Expense is required"),
-    cost: yup.number().required("Nothing is free in this world").positive().integer(),
+    name: yup.string().min(2, "Too Short!").max(50, "Too Long!").required("Name is required"),
+    cost: yup.number().required("Nothing in this world is free").positive().integer(),
     // category: yup.required("Required"),
 });
 
@@ -104,7 +104,7 @@ export default function FormDialog() {
                 TransitionComponent={Transition}
             >
                 <Formik
-                    initialValues={{ expense: "", cost: "", category: "" }}
+                    initialValues={{ name: "", cost: "", category: "" }}
                     validationSchema={validationSchema}
                     onSubmit={(values, { setSubmitting }) => {
                         setTimeout(() => {
@@ -116,17 +116,17 @@ export default function FormDialog() {
                 >
                     {({ values, handleSubmit, setFieldValue }) => (
                         <form onSubmit={handleSubmit}>
-                            <DialogTitle id="form-dialog-title">Add Expense</DialogTitle>
+                            <DialogTitle id="form-dialog-title">Add New Row</DialogTitle>
                             <DialogContent>
                                 <Field
                                     component={TextField}
                                     type="text"
                                     variant="outlined"
-                                    name="expense"
-                                    label="Expense"
+                                    name="name"
+                                    label="Name"
                                     required
                                     margin="dense"
-                                    // autoFocus
+                                    autoFocus
                                 />
                                 <Field
                                     component={TextField}
@@ -167,7 +167,7 @@ export default function FormDialog() {
                                     color="#121a27"
                                     type="submit"
                                     disabled={
-                                        values.expense === "" ||
+                                        values.name === "" ||
                                         values.cost === "" ||
                                         values.category === ""
                                     }

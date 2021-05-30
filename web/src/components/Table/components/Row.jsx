@@ -26,7 +26,7 @@ export default function Row({ row }) {
     return (
         <TableRow key={row.id} className={isHover && "row-hovered"}>
             <TableCell scope="row">
-                <NameCell id={row.id} name={row.expense} setIsHover={setIsHover} />
+                <NameCell id={row.id} value={row.name} setIsHover={setIsHover} />
             </TableCell>
             <TableCell align="center">
                 <CostCell id={row.id} value={row.cost} setIsHover={setIsHover} />

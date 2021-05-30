@@ -22,13 +22,14 @@ const useStyles = makeStyles(theme => ({
     },
 }));
 
-const NameCell = ({ name, id, setIsHover }) => {
-    const [value, setName] = useState(name);
-
+export default function NameCell({ value, id, setIsHover }) {
     const classes = useStyles();
 
     const { editCell } = useContext(FinancialContext);
+
+    const [name, setName] = useState(value);
     const [isSelect, setIsSelect] = useState(false);
+
     const node = useRef();
 
     const handleClick = event => {
@@ -37,43 +38,37 @@ const NameCell = ({ name, id, setIsHover }) => {
             return;
         }
         // outside click
-        setIsSelect(false);
-        setIsHover(false);
+        const inputValue = node.current.querySelector("input").value;
+
         document.removeEventListener("mousedown", handleClick);
 
-        event.target.value !== value && editCell(id, "expense", value);
+        setIsHover(false);
+        setIsSelect(false);
+
+        inputValue !== name && editCell(id, "name", inputValue);
     };
 
     const handleSelect = () => {
-        setIsSelect(true);
+        if (!isSelect) {
+            setIsSelect(true);
+            setIsHover(true);
 
-        document.addEventListener("mousedown", handleClick);
-        return () => {
-            document.removeEventListener("mousedown", handleClick);
-        };
+            document.addEventListener("mousedown", handleClick);
+            return () => {
+                document.removeEventListener("mousedown", handleClick);
+            };
+        }
     };
 
     return (
         <TextField
             ref={node}
             className={`${classes.disabledInput} ${isSelect && classes.inputBorder}`}
-            // onBlur={event => {
-            //     event.target.value !== value && editCell(id, "expense", value);
-            // }}
-            // onBlur={event => {
-            //     event.target.value !== name && editCell(id, "expense", event.target.value);
-            // }}
             variant="outlined"
+            value={name}
             onChange={event => setName(event.target.value)}
-            value={value}
-            // defaultValue={name}
             disabled={!isSelect}
-            onClick={() => {
-                setIsHover(true);
-                handleSelect();
-            }}
+            onClick={() => handleSelect()}
         />
     );
-};
-
-export default NameCell;
+}

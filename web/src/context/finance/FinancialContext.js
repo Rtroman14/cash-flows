@@ -25,7 +25,7 @@ export function FinancialProvider(props) {
     const addRow = row => {
         const newRow = {
             id: uuidv4(),
-            expense: row.expense,
+            name: row.name,
             cost: Number(row.cost),
             category: row.category,
         };
