@@ -13,11 +13,11 @@ const useStyles = makeStyles(theme => ({
     selectEmpty: {
         marginTop: theme.spacing(2),
     },
-    disabledSelect: {
-        "& .MuiInputBase-root.Mui-disabled": {
-            color: "black",
-        },
-    },
+    // disabledSelect: {
+    //     "& .MuiInputBase-root.Mui-disabled": {
+    //         color: "black",
+    //     },
+    // },
 }));
 
 export default function SimpleSelect({ value, id }) {
@@ -40,7 +40,7 @@ export default function SimpleSelect({ value, id }) {
             <Select
                 // style={{ padding: "8px 8px 9px 0" }}
                 // style={{ padding: "1.2em 1.5em 1.1em 0" }}
-                className={category === "needs" ? "needs" : "savings"}
+                className={`category category-${category}`}
                 labelId="demo-simple-select-outlined-label"
                 id={`category-${id}`}
                 value={category}

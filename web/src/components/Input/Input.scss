@@ -3,7 +3,8 @@
 }
 
 .dashboard__graph fieldset.MuiOutlinedInput-notchedOutline {
-    border-color: rgba(0, 0, 0, 0);
+    border: none;
+    border: 1px solid transparent;
 }
 
 // fieldset.MuiOutlinedInput-root.Mui-disabled,

@@ -201,3 +201,5 @@ export function FinancialProvider(props) {
         </FinancialContext.Provider>
     );
 }
+
+// ADDING NEW ROW OF WANTS ADDS ONTO WANTS MAKING IT BIGGER THAN SHOULD BE

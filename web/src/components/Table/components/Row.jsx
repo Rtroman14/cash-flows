@@ -17,9 +17,6 @@ export default function Row({ row }) {
     const { income, deleteRow } = useContext(FinancialContext);
 
     const [isHover, setIsHover] = useState(false);
-    // const setHover = () => {
-    //     setIsHover(!isHover);
-    // };
 
     const incomePercentage = Number((row.cost / income.net) * 100).toFixed(1);
 
@@ -42,7 +39,6 @@ export default function Row({ row }) {
                     color="default"
                     onClick={() => deleteRow(row.id)}
                     aria-label="delete"
-                    // disabled={row.id === "leftoverWants"}
                 >
                     {/* <DeleteIcon fontSize="small" /> */}
                     <DeleteIcon />
