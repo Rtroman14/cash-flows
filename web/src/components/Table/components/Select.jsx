@@ -33,10 +33,7 @@ export default function SimpleSelect({ value, id }) {
     };
 
     return (
-        <FormControl
-            variant="outlined"
-            className={`${classes.formControl} ${classes.disabledSelect}`}
-        >
+        <FormControl variant="outlined" className={`${classes.formControl} form-select`}>
             <Select
                 // style={{ padding: "8px 8px 9px 0" }}
                 // style={{ padding: "1.2em 1.5em 1.1em 0" }}

@@ -7,7 +7,7 @@ export default function layout({ children }) {
 
     return (
         <div>
-            <Navbar height={height} />
+            <Navbar />
             <main style={{ marginTop: height }}>{children}</main>
             <Footer />
         </div>

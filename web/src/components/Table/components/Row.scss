@@ -52,12 +52,12 @@
         // color: white;
         border: 1px solid black;
     }
+
+    & .form-select .MuiOutlinedInput-root .MuiOutlinedInput-notchedOutline {
+        border: none;
+    }
 }
 
 .row-hovered {
     background-color: rgba(63, 81, 181, 0.08);
-}
-
-.blur {
-    filter: blur(5px);
 }

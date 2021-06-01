@@ -1,12 +1,11 @@
 import React, { useState, useContext, useRef } from "react";
 
 import TextField from "@material-ui/core/TextField";
-import PropTypes from "prop-types";
-import NumberFormat from "react-number-format";
+import { makeStyles } from "@material-ui/core/styles";
+
+import NumberFormatCustom from "../../NumberFormatCustom/NumberFormatCustom";
 
 import { FinancialContext } from "../../../context/finance/FinancialContext";
-
-import { makeStyles } from "@material-ui/core/styles";
 
 const useStyles = makeStyles(theme => ({
     disabledInput: {
@@ -23,34 +22,6 @@ const useStyles = makeStyles(theme => ({
         },
     },
 }));
-
-function NumberFormatCustom(props) {
-    const { inputRef, onChange, ...other } = props;
-
-    return (
-        <NumberFormat
-            {...other}
-            getInputRef={inputRef}
-            onValueChange={values => {
-                onChange({
-                    target: {
-                        name: props.name,
-                        value: values.value,
-                    },
-                });
-            }}
-            thousandSeparator
-            isNumericString
-            prefix="$"
-        />
-    );
-}
-
-NumberFormatCustom.propTypes = {
-    inputRef: PropTypes.func.isRequired,
-    name: PropTypes.string.isRequired,
-    onChange: PropTypes.func.isRequired,
-};
 
 export default function Cell({ value, id, setIsHover }) {
     const classes = useStyles();
@@ -98,7 +69,7 @@ export default function Cell({ value, id, setIsHover }) {
         <TextField
             ref={node}
             className={`${classes.disabledInput} ${isSelect && classes.inputBorder} ${
-                isBlur && "blur"
+                isBlur && "blur-small"
             }`}
             variant="outlined"
             value={cost}

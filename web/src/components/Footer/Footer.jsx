@@ -1,30 +1,17 @@
 import React from "react";
-import { Link, useStaticQuery, graphql } from "gatsby";
-import Img from "gatsby-image";
+import { Link } from "gatsby";
+
+import Logo from "../../assets/seedling.svg";
 
 import "./Footer.scss";
 
-const getImage = graphql`
-    {
-        fixed: file(relativePath: { eq: "seedling3.png" }) {
-            childImageSharp {
-                fixed(width: 80, height: 80) {
-                    ...GatsbyImageSharpFixed
-                }
-            }
-        }
-    }
-`;
-
 export default function Footer() {
-    const data = useStaticQuery(getImage);
-
     return (
         <footer className="footer">
             <div className="footer__nav">
                 <div>
                     <Link to="/">
-                        <Img fixed={data.fixed.childImageSharp.fixed} />
+                        <Logo style={{ width: "70px", height: "70px" }} />
                     </Link>
                 </div>
                 <div className="footer__nav-links">

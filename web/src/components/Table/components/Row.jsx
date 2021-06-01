@@ -8,17 +8,21 @@ import DeleteIcon from "@material-ui/icons/Delete";
 import CostCell from "./CostCell";
 import Select from "./Select";
 import NameCell from "./NameCell";
+import Filled from "./Filled";
 
 import "./Row.scss";
 
 import { FinancialContext } from "../../../context/finance/FinancialContext";
 
 export default function Row({ row }) {
-    const { income, deleteRow } = useContext(FinancialContext);
+    const { income, deleteRow, categories } = useContext(FinancialContext);
 
     const [isHover, setIsHover] = useState(false);
 
+    const categoryCost = categories[row.category];
+
     const incomePercentage = Number((row.cost / income.net) * 100).toFixed(1);
+    const categoryPercentage = Number((row.cost / categoryCost) * 100).toFixed(1);
 
     return (
         <TableRow key={row.id} className={isHover && "row-hovered"}>
@@ -31,8 +35,12 @@ export default function Row({ row }) {
             <TableCell align="center">
                 <Select id={row.id} value={row.category} />
             </TableCell>
-            <TableCell align="center">{incomePercentage}%</TableCell>
-            <TableCell align="center">{incomePercentage}%</TableCell>
+            <TableCell align="center">
+                <Filled value={categoryPercentage} category={row.category} />
+            </TableCell>
+            <TableCell align="center">
+                <Filled value={incomePercentage} category={row.category} />
+            </TableCell>
             <TableCell align="center">
                 <IconButton
                     size="medium"

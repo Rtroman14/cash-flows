@@ -54,8 +54,8 @@ export default function BudgetTable() {
                             </div>
                         </TableCell>
                         <TableCell align="center">Category</TableCell>
-                        <TableCell align="center">% of Income</TableCell>
                         <TableCell align="center">% of Category</TableCell>
+                        <TableCell align="center">% of Income</TableCell>
                         <TableCell align="center">
                             <Peak />
                         </TableCell>

@@ -114,7 +114,7 @@ export default function DashboardLayout({ children }) {
                     </Link>
                 </div>
                 <Divider light variant="middle" />
-                <List>
+                <List style={{ padding: "0 10px" }}>
                     <Link style={{ textDecoration: "none" }} to="/dashboard/50-30-20/">
                         <ListItem
                             className={location.pathname.includes("50-30-20") && "selected"}

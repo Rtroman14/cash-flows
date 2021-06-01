@@ -28,7 +28,7 @@ const Home = () => {
     return (
         <Layout>
             <section
-                className="section section-grey"
+                className="section"
                 style={{
                     display: "flex",
                 }}
@@ -53,10 +53,10 @@ const Home = () => {
                     <Investing style={{ width: "100%", height: "100%" }} />
                 </div>
             </section>
-            <section className="section">
+            <section className="section section-grey">
                 <h1>Second section</h1>
             </section>
-            <section className="section section-grey">
+            <section className="section">
                 <h1>Third section</h1>
             </section>
         </Layout>

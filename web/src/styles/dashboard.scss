@@ -29,7 +29,6 @@
 
             grid-template-areas:
                 "card-1 card-2 card-3 card-4"
-                // "pie-chart pie-chart pie-chart pie-chart"
                 ". pie-chart pie-chart ."
                 "table table table table";
         }
@@ -128,10 +127,23 @@ span.MuiTypography-body1 {
     transition: all 0.2s;
 }
 
-div.MuiListItem-root:hover {
-    background-color: rgba(255, 255, 255, 0.1);
+div.MuiListItem-root {
+    border-radius: 10px;
+    margin-bottom: 5px;
 
-    span.MuiTypography-body1 {
-        color: white;
+    &:hover {
+        background-color: rgba(255, 255, 255, 0.1);
+
+        span.MuiTypography-body1 {
+            color: white;
+        }
     }
+}
+
+.blur-small {
+    filter: blur(5px);
+}
+
+.blur-large {
+    filter: blur(8px);
 }

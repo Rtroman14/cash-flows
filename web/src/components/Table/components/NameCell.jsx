@@ -3,7 +3,6 @@ import React, { useState, useContext, useRef } from "react";
 import { FinancialContext } from "../../../context/finance/FinancialContext";
 
 import TextField from "@material-ui/core/TextField";
-
 import { makeStyles } from "@material-ui/core/styles";
 
 const useStyles = makeStyles(theme => ({
