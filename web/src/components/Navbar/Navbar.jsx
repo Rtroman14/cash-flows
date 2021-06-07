@@ -2,6 +2,8 @@ import React, { useState, useEffect } from "react";
 import { Link, useStaticQuery, graphql } from "gatsby";
 import Img from "gatsby-image";
 
+import { useLocation } from "@reach/router";
+
 import Button from "@material-ui/core/Button";
 
 import Logo from "../../assets/seedling.svg";
@@ -22,6 +24,8 @@ const getImage = graphql`
 
 export default function Navbar() {
     const data = useStaticQuery(getImage);
+
+    const { pathname } = useLocation();
 
     const [scroll, setScroll] = useState(false);
 
@@ -55,7 +59,11 @@ export default function Navbar() {
             </ul>
             <ul className="navbar__menu-items">
                 {pages.map(page => (
-                    <li className="navbar__menu-item">
+                    <li
+                        className={`navbar__menu-item ${
+                            pathname.includes(page.toLowerCase()) && "navbar__menu-item-active"
+                        }`}
+                    >
                         <Link to={`/${page.toLowerCase()}/`}>{page}</Link>
                     </li>
                 ))}

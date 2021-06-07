@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React from "react";
 import { useStaticQuery, graphql } from "gatsby";
 import Button from "@material-ui/core/Button";
 
@@ -55,6 +55,21 @@ const Home = () => {
             </section>
             <section className="section section-grey">
                 <h1>Second section</h1>
+                <div style={{ display: "grid", justifyContent: "center" }}>
+                    <span
+                        style={{
+                            height: "100px",
+                            width: "1px",
+                            backgroundColor: "green",
+                            alignSelf: "center",
+                        }}
+                    ></span>
+                    <div style={{ height: "50px", width: "50px", backgroundColor: "green" }}>1</div>
+                    <h3>Learn</h3>
+                    <div>
+                        <h4>Learn Where|Why|How to grow your money</h4>
+                    </div>
+                </div>
             </section>
             <section className="section">
                 <h1>Third section</h1>

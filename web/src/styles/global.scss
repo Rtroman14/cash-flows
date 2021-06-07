@@ -46,6 +46,9 @@ h4 {
 }
 
 .btn-cta {
+    font-family: "Montserrat", sans-serif !important;
+    font-weight: 700 !important;
+    text-transform: capitalize !important;
     background-color: $color-primary !important;
     // background-image: linear-gradient(to right, $color-primary, red);
     color: white !important;

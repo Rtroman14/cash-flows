@@ -94,7 +94,7 @@ const useStyles = makeStyles(theme => ({
 export default function DashboardLayout({ children }) {
     const classes = useStyles();
 
-    const location = useLocation();
+    const { pathname } = useLocation();
 
     return (
         <div className="dashboard">
@@ -117,72 +117,74 @@ export default function DashboardLayout({ children }) {
                 <List style={{ padding: "0 10px" }}>
                     <Link style={{ textDecoration: "none" }} to="/dashboard/50-30-20/">
                         <ListItem
-                            className={location.pathname.includes("50-30-20") && "selected"}
+                            className={pathname.includes("50-30-20") && "selected"}
                             button
                             key="50/30/20"
                         >
                             <ListItemIcon>
-                                <GiPieChart color="white" size="1.5em" />
+                                <GiPieChart
+                                    color={pathname.includes("50-30-20") ? "#fff" : "#adb5bd"}
+                                    size="1.5em"
+                                />
                             </ListItemIcon>
                             <ListItemText
-                                className={
-                                    location.pathname.includes("50-30-20") ? "active" : classes.font
-                                }
+                                className={pathname.includes("50-30-20") ? "active" : classes.font}
                                 primary="50/30/20"
                             />
                         </ListItem>
                     </Link>
                     <Link style={{ textDecoration: "none" }} to="/dashboard/car-buying/">
                         <ListItem
-                            className={location.pathname.includes("car-buying") && "selected"}
+                            className={pathname.includes("car-buying") && "selected"}
                             button
                             key="Car Buying"
                         >
                             <ListItemIcon>
-                                <MdDirectionsCar color="#adb5bd" size="1.5em" />
+                                <MdDirectionsCar
+                                    color={pathname.includes("car-buying") ? "#fff" : "#adb5bd"}
+                                    size="1.5em"
+                                />
                             </ListItemIcon>
                             <ListItemText
                                 className={
-                                    location.pathname.includes("car-buying")
-                                        ? "active"
-                                        : classes.font
+                                    pathname.includes("car-buying") ? "active" : classes.font
                                 }
                                 primary="Car Buying"
                             />
                         </ListItem>
                     </Link>
-                    <Link style={{ textDecoration: "none" }} to="/dashboard/">
+                    <Link style={{ textDecoration: "none" }} to="/dashboard/housing/">
                         <ListItem
-                            className={location.pathname.includes("housing") && "selected"}
+                            className={pathname.includes("housing") && "selected"}
                             button
                             key="Housing"
                         >
                             <ListItemIcon>
-                                <BsFillHouseDoorFill color="#adb5bd" size="1.5em" />
+                                <BsFillHouseDoorFill
+                                    color={pathname.includes("housing") ? "#fff" : "#adb5bd"}
+                                    size="1.5em"
+                                />
                             </ListItemIcon>
                             <ListItemText
-                                className={
-                                    location.pathname.includes("housing") ? "active" : classes.font
-                                }
+                                className={pathname.includes("housing") ? "active" : classes.font}
                                 primary="Housing"
                             />
                         </ListItem>
                     </Link>
                     <Link style={{ textDecoration: "none" }} to="/dashboard/investing/">
                         <ListItem
-                            className={location.pathname.includes("investing") && "selected"}
+                            className={pathname.includes("investing") && "selected"}
                             button
                             key="Investing"
                         >
                             <ListItemIcon>
-                                <AiOutlineAreaChart color="#adb5bd" size="1.5em" />
+                                <AiOutlineAreaChart
+                                    color={pathname.includes("investing") ? "#fff" : "#adb5bd"}
+                                    size="1.5em"
+                                />
                             </ListItemIcon>
                             <ListItemText
-                                className={
-                                    location.pathname.includes("investing")
-                                        ? "active"
-                                        : classes.font
-                                }
+                                className={pathname.includes("investing") ? "active" : classes.font}
                                 primary="Investing"
                             />
                         </ListItem>

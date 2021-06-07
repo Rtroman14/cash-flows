@@ -43,6 +43,7 @@ export default function Row({ row }) {
             </TableCell>
             <TableCell align="center">
                 <IconButton
+                    style={{ padding: "8px" }}
                     size="medium"
                     color="default"
                     onClick={() => deleteRow(row.id)}

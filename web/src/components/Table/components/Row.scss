@@ -3,8 +3,8 @@
 .dashboard__graph-table {
     & input.MuiInputBase-input,
     input.MuiOutlinedInput-input {
-        // padding: 9px !important;
-        padding: 17px !important;
+        padding: 14px !important;
+        // padding: 17px !important;
     }
 
     & .MuiInputBase-input,
@@ -15,6 +15,7 @@
 
     & .MuiTableCell-head {
         color: white;
+        font-size: 16px;
     }
 
     & .MuiTableCell-head:nth-child(2) {
