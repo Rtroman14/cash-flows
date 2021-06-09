@@ -8,7 +8,7 @@ export default function layout({ children }) {
     return (
         <div>
             <Navbar />
-            <main style={{ marginTop: height }}>{children}</main>
+            <main style={{ marginTop: height, padding: "0 7em" }}>{children}</main>
             <Footer />
         </div>
     );

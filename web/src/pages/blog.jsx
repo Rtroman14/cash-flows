@@ -14,7 +14,7 @@ const BlogPage = ({ data }) => {
 
     return (
         <Layout>
-            <div style={{ width: "1340px", margin: "0 auto" }}>
+            <div>
                 <div
                     style={{
                         display: "flex",

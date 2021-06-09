@@ -45,16 +45,6 @@ export default function Navbar() {
                         <Img fixed={data.fixed.childImageSharp.fixed} />
                         <h2 style={{ color: "#74c947", fontSize: "26px" }}>CashMoney</h2>
                     </Link>
-                    {/* <Link to="/">
-                        <Img fixed={data.fixed.childImageSharp.fixed} />
-                    </Link> */}
-                    {/* <Link to="/">
-                        <Logo style={{ width: "70px", height: "70px" }} />
-                    </Link> */}
-                    {/* <Link to="/" style={{ display: "flex", alignItems: "center" }}>
-                        <Logo style={{ width: "70px", height: "70px" }} />
-                        <h2>CashMoney</h2>
-                    </Link> */}
                 </li>
             </ul>
             <ul className="navbar__menu-items">
