@@ -83,4 +83,10 @@ export const data = [
         cost: 200,
         category: "savings",
     },
+    {
+        id: 14,
+        name: "Acorns",
+        cost: 100,
+        category: "savings",
+    },
 ];

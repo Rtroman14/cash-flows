@@ -15,7 +15,7 @@ export function FinancialProvider(props) {
         category: "all",
         sortCost: "",
         income: {
-            net: 4188,
+            net: 4095,
             gross: 5833,
         },
     };

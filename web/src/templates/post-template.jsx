@@ -16,7 +16,7 @@ export default function postTemplate({
 }) {
     const displayCategories = categories.map(category => <div>{category.title}</div>);
     return (
-        <Layout>
+        <Layout blog>
             <div>
                 <Img style={{ height: "75vh" }} fluid={mainImage.asset.fluid} />
             </div>

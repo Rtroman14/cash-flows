@@ -4,6 +4,7 @@ import Img from "gatsby-image";
 import Button from "@material-ui/core/Button";
 import Typical from "react-typical";
 
+import PostPreview from "../components/PostPreview/PostPreview";
 import Layout from "../components/layout";
 import Investing from "../assets/investing.svg";
 
@@ -24,11 +25,56 @@ const getData = graphql`
                 }
             }
         }
+        allSanityPost(
+            filter: {
+                _id: {
+                    in: [
+                        "0109f007-67b1-4c0f-8c56-4ce375c4d60b"
+                        "389d5816-2250-401a-a736-89592b6d2e52"
+                        "drafts.a72a6c41-4371-4cb9-94b6-10526c8c7cff"
+                    ]
+                }
+            }
+        ) {
+            nodes {
+                mainImage {
+                    asset {
+                        fluid {
+                            srcSet
+                        }
+                    }
+                }
+                title
+                _id
+                slug {
+                    current
+                }
+                categories {
+                    title
+                }
+                _createdAt(formatString: "MMMM DD, YYYY")
+                authors {
+                    author {
+                        name
+                        image {
+                            asset {
+                                fixed(height: 35, width: 35) {
+                                    srcSet
+                                }
+                            }
+                        }
+                    }
+                }
+                _rawExcerpt
+            }
+        }
     }
 `;
 
 const Home = () => {
-    const { site, file } = useStaticQuery(getData);
+    const { site, file, allSanityPost } = useStaticQuery(getData);
+
+    console.log(allSanityPost.nodes);
 
     return (
         <Layout>
@@ -98,18 +144,11 @@ const Home = () => {
                             </div>
                         </div>
                         <div className="lig__row-grid">
-                            <div>
-                                <Img fluid={file.childImageSharp.fluid} />
-                            </div>
-                            <div>
-                                <Img fluid={file.childImageSharp.fluid} />
-                            </div>
-                            <div>
-                                <Img fluid={file.childImageSharp.fluid} />
-                            </div>
-                            {/* <div>
-                                <Img fluid={file.childImageSharp.fluid} />
-                            </div> */}
+                            {allSanityPost.nodes.map(node => (
+                                <div>
+                                    <PostPreview key={node._id} post={node} />
+                                </div>
+                            ))}
                         </div>
                     </div>
                 </div>
