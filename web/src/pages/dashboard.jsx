@@ -1,25 +1,36 @@
 import React from "react";
-import Typical from "react-typical";
+import { useStaticQuery, graphql, Link } from "gatsby";
+import Img from "gatsby-image";
 
-import DashboardLayout from "../components/layout-dashboard";
+import "../styles/dashboard.scss";
+
+// import DashboardLayout from "../components/layout-dashboard";
+import Layout from "../components/layout";
+
+const getData = graphql`
+    {
+        file: file(relativePath: { eq: "dashboard.png" }) {
+            childImageSharp {
+                fluid(maxWidth: 800) {
+                    ...GatsbyImageSharpFluid
+                }
+            }
+        }
+    }
+`;
 
 export default function Dashboard() {
+    const { file } = useStaticQuery(getData);
+
     return (
-        <DashboardLayout>
-            <div
-                style={{
-                    display: "flex",
-                    justifyContent: "center",
-                    alignItems: "center",
-                    height: "70vh",
-                }}
-            >
-                <Typical
-                    steps={["Soon...", 1000, "Be Patient,", 1500, "It's coming... 😄", 2500]}
-                    loop={Infinity}
-                    wrapper="h1"
-                />
+        <Layout>
+            <div className="test">
+                <div className="test__test">
+                    <Img fluid={file.childImageSharp.fluid} />
+                </div>
+                <p>Copy this: https://www.drone.io/</p>
+                <p>Copy this: https://hlrlookup.flywheelsites.com/</p>
             </div>
-        </DashboardLayout>
+        </Layout>
     );
 }

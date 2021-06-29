@@ -1,0 +1,14 @@
+@import "../../styles//global.scss";
+
+.blurb {
+    display: grid;
+    gap: 8px;
+    width: 100%;
+    padding: 1em;
+    // box-shadow: $box-shadow;
+    // border-radius: $graph-radius;
+
+    &__title {
+        font-size: 25px;
+    }
+}

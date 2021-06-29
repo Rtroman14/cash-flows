@@ -14,7 +14,7 @@ const BlogPage = ({ data }) => {
 
     return (
         <Layout>
-            <div>
+            <section className="section">
                 <div
                     style={{
                         display: "flex",
@@ -38,7 +38,7 @@ const BlogPage = ({ data }) => {
                     <ShowMorePosts />
                 </PostProvider>
                 {/* SUBSCRIBE FOR MONTHLY NEWSLETTER WHICH SENDS YOU NEW POSTS YOU MISSED */}
-            </div>
+            </section>
         </Layout>
     );
 };

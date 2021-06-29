@@ -5,7 +5,7 @@
     width: 312px;
     overflow: hidden;
     box-shadow: $box-shadow;
-    border-radius: 2px;
+    border-radius: $graph-radius;
     align-self: start;
 
     &__image {
@@ -24,7 +24,7 @@
     }
 
     &__title {
-        line-height: 1.4;
+        line-height: 1.2;
         font-weight: 600;
         font-size: 18px;
     }

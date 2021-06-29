@@ -12,7 +12,7 @@ export default function Investing() {
         <DashboardLayout>
             <div className="dashboard__graph-investing">
                 <div className="dashboard__graph-chart">
-                    <AreaChart />
+                    <AreaChart title="Investing in the Market vs. Savings Account" />
                 </div>
                 <Card
                     name="age"

@@ -5,18 +5,20 @@ import HighchartsReact from "highcharts-react-official";
 
 require("highcharts/modules/exporting")(Highcharts);
 
+import "./AreaChart.scss";
+
 let categories = [];
 let savings = [0];
 let market = [0];
 
 const startAge = 25;
-const retireAge = 65;
+const retireAge = 60;
 const numYears = retireAge - startAge;
 const annualInvestment = 5000;
 const MARKET_GAIN = 0.02;
 const SAVINGS_GAIN = 0.005;
 
-for (let age = startAge; age < retireAge; age++) {
+for (let age = startAge; age <= retireAge; age++) {
     categories.push(age);
 }
 
@@ -42,7 +44,7 @@ Highcharts.setOptions({
     },
 });
 
-const options = () => {
+const options = title => {
     return {
         chart: {
             type: "areaspline",
@@ -50,7 +52,7 @@ const options = () => {
             zoomType: "x",
         },
         title: {
-            text: "Investing Money in The Market vs. Savings Account",
+            text: title,
         },
         subtitle: {
             text:
@@ -64,7 +66,7 @@ const options = () => {
         },
         yAxis: {
             title: {
-                text: "Investment Return",
+                text: "Return on Investment",
             },
             // labels: {
             //     formatter: function () {
@@ -109,8 +111,12 @@ const options = () => {
     };
 };
 
-export default function AreaChart() {
-    return <HighchartsReact highcharts={Highcharts} options={options()} />;
+export default function AreaChart({ title }) {
+    return (
+        <div className="areachart">
+            <HighchartsReact highcharts={Highcharts} options={options(title)} />
+        </div>
+    );
 }
 
 // https://signup.acorns.com/signup?tierPriceId=eb68d469-8bc2-4441-9f91-dbdc65013772&code=NB3R3H&s1=Referrals&referral_code=NB3R3H

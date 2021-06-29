@@ -6,20 +6,12 @@ import Layout from "../components/layout";
 export default function Dashboard() {
     return (
         <Layout>
-            <div
-                style={{
-                    display: "flex",
-                    justifyContent: "center",
-                    alignItems: "center",
-                    height: "70vh",
-                }}
-            >
-                <Typical
-                    steps={["Soon...", 1000, "Be Patient,", 1500, "It's coming... 😄", 2500]}
-                    loop={Infinity}
-                    wrapper="h1"
-                />
-            </div>
+            <section>
+                <h2>Our Mission</h2>
+            </section>
+            <section>
+                <h2>Our Mission</h2>
+            </section>
         </Layout>
     );
 }
